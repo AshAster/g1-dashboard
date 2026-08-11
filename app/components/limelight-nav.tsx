@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState, useRef, useLayoutEffect } from "react";
+import React, { useState, useRef, useLayoutEffect, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "motion/react";
 import {
   FiUser,
@@ -20,8 +20,12 @@ import {
   FiNavigation,
   FiMap,
   FiMapPin,
-  FiCamera
+  FiCamera,
+  FiBell,
+  FiMenu
 } from "react-icons/fi";
+import { ThemeToggle } from "./theme-toggle";
+import { Avatar, AvatarFallback, AvatarImage } from "@/app/components/ui/avatar";
 
 // --- Dropdown Contents ---
 const PersonaMenu = () => (
@@ -55,7 +59,6 @@ const RagMenu = () => (
   </div>
 );
 
-
 const GestureMenu = () => (
   <div className="w-[240px]">
     <h3 className="mb-3 text-sm font-semibold text-foreground border-b border-border pb-2">Gesture Settings</h3>
@@ -80,7 +83,6 @@ const InventoryMenu = () => (
     </div>
   </div>
 );
-
 
 export type NavItem = {
   id: string;
@@ -107,7 +109,6 @@ const NavigationMenu = () => (
   </div>
 );
 
-
 const defaultNavItems: NavItem[] = [
   { id: "persona",    icon: <FiUser />,       label: "Persona Manager",  href: "/persona",     dropdownComponent: PersonaMenu },
   { id: "rag",        icon: <FiDatabase />,   label: "Knowledge Hub",        href: "/rag",         dropdownComponent: RagMenu },
@@ -118,24 +119,28 @@ const defaultNavItems: NavItem[] = [
 
 export const LimelightNav = ({
   items = defaultNavItems,
-  role
-}: { items?: NavItem[], role?: string | null }) => {
+  role,
+  isLoggedIn = false,
+  tenant
+}: { items?: NavItem[], role?: string | null; isLoggedIn?: boolean; tenant?: any }) => {
   const pathname = usePathname();
+  const router = useRouter();
   const [activeIndex, setActiveIndex] = useState(0);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [dir, setDir] = useState<"l" | "r" | null>(null);
   const [isReady, setIsReady] = useState(false);
   const [limelightCenter, setLimelightCenter] = useState(0);
+  const [isVisible, setIsVisible] = useState(true);
   
   const navItemRefs = useRef<(HTMLAnchorElement | null)[]>([]);
   const limelightRef = useRef<HTMLDivElement | null>(null);
+  const lastScrollY = useRef(0);
 
   const isAdmin = role === "admin";
-  const isEditor = role === "editor" || isAdmin;
 
   // Filter items based on role
   const visibleItems = items.filter(item => {
-    if (item.id === "inventory" && !isAdmin) return false; // Only Admin sees Inventory
+    if (item.id === "inventory" && !isAdmin) return false;
     return true;
   });
 
@@ -176,79 +181,181 @@ export const LimelightNav = ({
     }
   }, [targetIndex, isReady, visibleItems]);
 
+  // Scroll detection to hide/show header
+  useEffect(() => {
+    const mainEl = document.querySelector("main");
+    const scrollTarget = mainEl || window;
+
+    const handleScroll = () => {
+      const currentScrollY = mainEl ? mainEl.scrollTop : window.scrollY;
+      
+      // Threshold to prevent jitter/flickering
+      if (Math.abs(currentScrollY - lastScrollY.current) < 5) return;
+
+      if (currentScrollY > lastScrollY.current && currentScrollY > 50) {
+        setIsVisible(false);
+      } else {
+        setIsVisible(true);
+      }
+      lastScrollY.current = currentScrollY;
+    };
+
+    scrollTarget.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      scrollTarget.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   if (visibleItems.length === 0 || pathname.startsWith("/auth")) {
     return null;
   }
 
   return (
-    <div 
-      className="z-40 flex justify-start md:justify-center w-full pt-20 md:pt-6 pb-2 px-4 md:px-0" 
-      onMouseLeave={() => handleSetHovered(null)}
-    >
-      <div className="relative">
-        <nav
-          className="relative flex items-center h-16 rounded-2xl bg-card/70 text-card-foreground border border-border/50 shadow-lg px-2 backdrop-blur-lg max-w-[95vw] overflow-x-auto sm:max-w-none no-scrollbar"
-          style={{ boxShadow: `0 10px 40px -10px var(--shadow-color)` }}
-        >
-        {visibleItems.map((item, index) => {
-          const isActive = activeIndex === index;
-          const isHovered = hoveredIndex === index;
-          const isHighlighted = isHovered || (hoveredIndex === null && isActive);
-
-          return (
-            <Link
-              key={item.id}
-              href={item.href}
-              ref={(el) => {
-                navItemRefs.current[index] = el;
-              }}
-              onMouseEnter={() => handleSetHovered(index)}
-              className="relative z-20 flex items-center justify-center gap-2 px-4 py-2 cursor-pointer group"
+    <>
+      <style dangerouslySetInnerHTML={{__html: `
+        .no-scrollbar::-webkit-scrollbar {
+          display: none !important;
+        }
+        .no-scrollbar {
+          -ms-overflow-style: none !important;
+          scrollbar-width: none !important;
+        }
+      `}} />
+      <header
+        className={`absolute top-0 left-0 right-0 z-40 w-full bg-background/80 backdrop-blur-md border-b border-border/40 transition-transform duration-300 ${
+          isVisible ? "translate-y-0" : "-translate-y-full"
+        }`}
+      >
+        <div className="flex items-center justify-between px-4 py-3 max-w-7xl mx-auto gap-4">
+          
+          {/* Left Side: Hamburger Menu Button on Mobile */}
+          <div className="flex md:hidden items-center shrink-0">
+            <button
+              onClick={() => window.dispatchEvent(new Event("open-sidebar"))}
+              className="p-2 -ml-2 rounded-xl text-foreground hover:bg-accent transition-colors"
+              aria-label="Open Sidebar"
+              title="Open Sidebar"
             >
-              {React.cloneElement(item.icon, {
-                className: `w-4 h-4 transition-all duration-300 ease-in-out ${
-                  isHighlighted
-                    ? "text-primary scale-110"
-                    : "text-muted-foreground group-hover:text-foreground"
-                }`,
-              } as any)}
-              <span
-                className={`text-xs font-semibold transition-all duration-300 ease-in-out ${
-                  isHighlighted
-                    ? "text-primary opacity-100"
-                    : "text-muted-foreground opacity-60 group-hover:text-foreground group-hover:opacity-100"
-                }`}
+              <FiMenu className="w-6 h-6" />
+            </button>
+          </div>
+
+          {/* Center Side: Limelight Navigation tabs (scrollable horizontally on mobile) */}
+          <div 
+            className="flex-1 flex justify-start md:justify-center overflow-x-auto no-scrollbar py-1"
+            onMouseLeave={() => handleSetHovered(null)}
+          >
+            <div className="relative">
+              <nav
+                className="relative flex items-center h-11 rounded-xl bg-card/40 text-card-foreground border border-border/40 px-1.5 backdrop-blur-md max-w-[80vw] md:max-w-[95vw] overflow-x-auto sm:max-w-none no-scrollbar flex-nowrap scroll-smooth"
               >
-                {item.label}
-              </span>
-            </Link>
-          );
-        })}
+                {visibleItems.map((item, index) => {
+                  const isActive = activeIndex === index;
+                  const isHovered = hoveredIndex === index;
+                  const isHighlighted = isHovered || (hoveredIndex === null && isActive);
 
-        {/* Limelight indicator line */}
-        <div
-          ref={limelightRef}
-          className={`absolute -top-[2px] z-10 w-12 h-[2px] rounded-full bg-primary shadow-[0_0_20px_var(--primary),0_0_40px_var(--primary)] ${
-            isReady ? "transition-all duration-300 ease-out" : ""
-          }`}
-          style={{ left: "-999px" }}
-        >
-          <div className="absolute left-[-50%] top-[2px] w-[200%] h-12 [clip-path:polygon(10%_100%,30%_0,70%_0,90%_100%)] bg-gradient-to-b from-primary/20 to-transparent pointer-events-none" />
+                  return (
+                    <Link
+                      key={item.id}
+                      href={item.href}
+                      ref={(el) => {
+                        navItemRefs.current[index] = el;
+                      }}
+                      onMouseEnter={() => handleSetHovered(index)}
+                      className="relative z-20 flex items-center justify-center gap-1.5 px-3 py-1.5 cursor-pointer group shrink-0"
+                    >
+                      {React.cloneElement(item.icon, {
+                        className: `w-3.5 h-3.5 transition-all duration-300 ease-in-out ${
+                          isHighlighted
+                            ? "text-primary scale-110"
+                            : "text-muted-foreground group-hover:text-foreground"
+                        }`,
+                      } as any)}
+                      <span
+                        className={`text-xs font-semibold whitespace-nowrap transition-all duration-300 ease-in-out ${
+                          isHighlighted
+                            ? "text-primary opacity-100"
+                            : "text-muted-foreground opacity-60 group-hover:text-foreground group-hover:opacity-100"
+                        }`}
+                      >
+                        {item.label}
+                      </span>
+                    </Link>
+                  );
+                })}
+
+                {/* Limelight indicator line */}
+                <div
+                  ref={limelightRef}
+                  className={`absolute -top-[1px] z-10 w-10 h-[1.5px] rounded-full bg-primary shadow-[0_0_15px_var(--primary)] ${
+                    isReady ? "transition-all duration-300 ease-out" : ""
+                  }`}
+                  style={{ left: "-999px" }}
+                >
+                  <div className="absolute left-[-50%] top-[1.5px] w-[200%] h-8 [clip-path:polygon(10%_100%,30%_0,70%_0,90%_100%)] bg-gradient-to-b from-primary/15 to-transparent pointer-events-none" />
+                </div>
+              </nav>
+
+              {/* Dropdown renders below the nav */}
+              <AnimatePresence>
+                {hoveredIndex !== null && visibleItems[hoveredIndex]?.dropdownComponent && (
+                  <DropdownContent 
+                    dir={dir} 
+                    selectedItem={visibleItems[hoveredIndex]} 
+                    center={limelightCenter}
+                  />
+                )}
+              </AnimatePresence>
+            </div>
+          </div>
+
+          {/* Right Side: Header Actions */}
+          <div className="flex items-center gap-2 scale-90 md:scale-100 origin-right shrink-0">
+            {/* Notification bell */}
+            {isLoggedIn && (
+              <button
+                onClick={() => {
+                  console.log("[HeaderActions] Navigating to Notifications page");
+                  router.push("/notifications");
+                }}
+                className="p-2 rounded-xl bg-card border border-border text-muted-foreground hover:text-foreground hover:bg-accent transition-colors relative shadow-sm"
+                title="Notifications"
+              >
+                <FiBell size={16} />
+                <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-primary rounded-full animate-pulse" />
+              </button>
+            )}
+
+            {/* Theme toggle */}
+            <ThemeToggle />
+
+            {/* Profile avatar (logged in) or Login button (logged out) */}
+            {isLoggedIn ? (
+              <Link
+                href="/profile"
+                className="rounded-full hover:ring-2 hover:ring-primary/40 transition-all"
+                title="Profile"
+              >
+                <Avatar className="h-9 w-9 rounded-full border border-border shadow-sm cursor-pointer hover:border-primary transition-colors">
+                  {tenant?.companyLogo ? <AvatarImage src={tenant.companyLogo} alt={tenant.name || "Profile"} className="object-cover rounded-full" /> : null}
+                  <AvatarFallback className="bg-primary text-primary-foreground font-semibold text-[13px] rounded-full">
+                    {tenant?.name ? tenant.name.charAt(0).toUpperCase() : "U"}
+                  </AvatarFallback>
+                </Avatar>
+              </Link>
+            ) : (
+              <Link
+                href="/sign-in"
+                className="px-3 py-1.5 text-xs bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-colors shadow-md shadow-primary/20"
+              >
+                Login
+              </Link>
+            )}
+          </div>
+
         </div>
-      </nav>
-
-      {/* Dropdown renders below the nav, inside the hover-tracking wrapper */}
-      <AnimatePresence>
-        {hoveredIndex !== null && visibleItems[hoveredIndex]?.dropdownComponent && (
-          <DropdownContent 
-            dir={dir} 
-            selectedItem={visibleItems[hoveredIndex]} 
-            center={limelightCenter}
-          />
-        )}
-      </AnimatePresence>
-      </div>
-    </div>
+      </header>
+    </>
   );
 };
 

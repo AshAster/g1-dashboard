@@ -13,6 +13,8 @@ interface ChatSidebarProps {
   onSelectSession: (id: string) => void;
   onNewChat: () => void;
   onDeleteSession: (id: string) => void;
+  isOpen?: boolean;
+  onClose?: () => void;
 }
 
 export function ChatSidebar({
@@ -21,9 +23,15 @@ export function ChatSidebar({
   onSelectSession,
   onNewChat,
   onDeleteSession,
+  isOpen = false,
+  onClose,
 }: ChatSidebarProps) {
   return (
-    <div className="w-full md:w-64 border-b md:border-b-0 md:border-r border-border bg-card flex flex-col h-48 md:h-full flex-shrink-0">
+    <div className={cn(
+      "border-r border-border bg-card flex flex-col h-full flex-shrink-0 transition-transform duration-300 ease-in-out",
+      "fixed inset-y-0 left-0 z-50 w-64 md:relative md:translate-x-0 md:z-auto",
+      isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
+    )}>
       <div className="p-4 border-b border-border">
         <button
           onClick={onNewChat}
@@ -37,9 +45,20 @@ export function ChatSidebar({
       </div>
       
       <div className="flex-1 overflow-y-auto p-2 space-y-1">
-        <h3 className="px-2 py-1 text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">
-          Previous Chats
-        </h3>
+        <div className="flex items-center justify-between px-2 mb-2">
+          <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+            Previous Chats
+          </h3>
+          <button
+            onClick={onClose}
+            className="md:hidden p-1 text-muted-foreground hover:text-foreground hover:bg-accent rounded-lg"
+            title="Close history"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
         
         {sessions.length === 0 ? (
           <div className="px-2 py-4 text-sm text-muted-foreground text-center">

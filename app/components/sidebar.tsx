@@ -42,6 +42,12 @@ export const Sidebar = ({
     setOpen,
   ] = useState(false);
 
+  React.useEffect(() => {
+    const handleOpen = () => setOpen(true);
+    window.addEventListener("open-sidebar", handleOpen);
+    return () => window.removeEventListener("open-sidebar", handleOpen);
+  }, []);
+
 
   const pathname = usePathname();
 

@@ -146,18 +146,18 @@ export function EmployeesModule() {
     <FeatureGate featureKey="frs">
       <div className="max-w-6xl mx-auto space-y-16 pb-32 pt-8">
         {/* Header */}
-        <div className="border-b border-border pb-6 flex items-center justify-between">
+        <div className="border-b border-border pb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-4xl font-bold tracking-tighter uppercase text-foreground">Employees</h1>
-            <p className="text-[10px] font-mono text-muted-foreground mt-2 uppercase tracking-widest">Manage employee face enrollment for robot recognition</p>
+            <h1 className="text-3xl sm:text-4xl font-bold tracking-tighter uppercase text-foreground">Employees</h1>
+            <p className="text-[10px] font-mono text-muted-foreground mt-1.5 uppercase tracking-widest">Manage employee face enrollment for robot recognition</p>
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-2 w-full sm:w-auto">
             <button onClick={() => { setShowBulk(true); setError(""); setBulkResult(null); }}
-              className="px-4 py-2 text-sm rounded-lg border border-border hover:bg-muted transition-colors">
-              Bulk Import (Excel)
+              className="flex-1 sm:flex-none px-4 py-2.5 text-xs sm:text-sm rounded-lg border border-border hover:bg-muted transition-colors text-center font-medium">
+              Bulk Import
             </button>
             <button onClick={() => { setShowForm(true); setError(""); setSuccess(""); }}
-              className="px-4 py-2 text-sm rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors">
+              className="flex-1 sm:flex-none px-4 py-2.5 text-xs sm:text-sm rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors text-center font-medium">
               + Add Employee
             </button>
           </div>
@@ -180,7 +180,7 @@ export function EmployeesModule() {
         )}
 
         {/* Table */}
-        <div className="rounded-xl border border-border bg-card overflow-hidden">
+        <div className="hidden md:block rounded-xl border border-border bg-card overflow-hidden">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-border bg-muted/40">
@@ -226,6 +226,63 @@ export function EmployeesModule() {
               ))}
             </tbody>
           </table>
+        </div>
+
+        {/* Mobile Card Grid */}
+        <div className="grid grid-cols-1 gap-4 md:hidden">
+          {loading ? (
+            <div className="text-center py-8 text-muted-foreground bg-card border border-border rounded-xl">Loading...</div>
+          ) : employees.length === 0 ? (
+            <div className="text-center py-8 text-muted-foreground bg-card border border-border rounded-xl">No employees enrolled yet.</div>
+          ) : (
+            employees.map(emp => (
+              <div key={emp.id} className="bg-card border border-border rounded-xl p-4 space-y-4 shadow-xs">
+                <div className="flex items-start justify-between gap-2">
+                  <div className="min-w-0">
+                    <h3 className="font-semibold text-sm text-foreground truncate">{emp.username.replace(/_/g, " ")}</h3>
+                    <p className="font-mono text-[10px] text-muted-foreground mt-0.5">{emp.employee_id}</p>
+                  </div>
+                  <div className="shrink-0">
+                    {emp.is_enrolled ? (
+                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] bg-green-500/10 text-green-400 border border-green-500/20 font-medium">✓ Enrolled</span>
+                    ) : (
+                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] bg-red-500/10 text-red-400 border border-red-500/20 font-medium">✗ Not Enrolled</span>
+                    )}
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-3 text-xs border-t border-b border-border/40 py-2.5">
+                  <div className="min-w-0">
+                    <span className="text-[10px] text-muted-foreground uppercase font-mono tracking-wider block">Email</span>
+                    <span className="truncate text-foreground font-medium block mt-0.5">{emp.email || "—"}</span>
+                  </div>
+                  <div className="min-w-0">
+                    <span className="text-[10px] text-muted-foreground uppercase font-mono tracking-wider block">Department</span>
+                    <span className="truncate text-foreground font-medium block mt-0.5">{emp.department || "—"}</span>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between gap-2">
+                  <PhotoBadge count={emp.photo_count} />
+                  
+                  <div className="flex items-center gap-2">
+                    <button 
+                      onClick={() => { setPhotoTarget(emp); setError(""); }}
+                      className="text-xs px-2.5 py-1.5 rounded-lg border border-border hover:bg-muted font-medium transition-colors"
+                    >
+                      + Photos
+                    </button>
+                    <button 
+                      onClick={() => handleDelete(emp)}
+                      className="text-xs px-2.5 py-1.5 rounded-lg border border-red-500/30 text-red-400 hover:bg-red-500/10 font-medium transition-colors"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))
+          )}
         </div>
       </div>
 

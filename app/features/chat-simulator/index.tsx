@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { FeatureGate } from "@/app/components/feature-gate";
 import { useChatState } from "./hooks/useChatState";
 import { ChatHeader } from "./components/ChatHeader";
@@ -12,25 +12,37 @@ export function ChatSimulatorModule() {
   const {
     messages, input, setInput, isLoading, showSources, setShowSources,
     selectedModel, setSelectedModel, availableModels, messagesEndRef,
-    showAdvancedOptions, setShowAdvancedOptions, sectionPath, setSectionPath,
-    parentSection, setParentSection, contentTypes, setContentTypes,
-    includeParentContext, setIncludeParentContext, contextStrategy, setContextStrategy,
-    enableQueryProcessing, setEnableQueryProcessing, useExtractedFilters, setUseExtractedFilters,
     sendMessage, clearChat, sessions, activeSessionId, handleSelectSession, handleNewChat, handleDeleteSession
   } = useChatState();
 
-  const hasActiveFilters = Boolean(sectionPath || parentSection || contentTypes.length > 0);
+  const [isHistoryOpen, setIsHistoryOpen] = useState(false);
 
   return (
     <FeatureGate featureKey="chatSimulator">
-      <div className="flex-1 flex flex-col md:flex-row bg-background h-[calc(100vh-7rem)] overflow-hidden">
+      <div className="flex-1 flex flex-col md:flex-row bg-background h-[calc(100vh-7rem)] overflow-hidden relative">
+        {isHistoryOpen && (
+          <div 
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 md:hidden animate-fade-in"
+            onClick={() => setIsHistoryOpen(false)}
+          />
+        )}
+
         <ChatSidebar 
           sessions={sessions}
           activeSessionId={activeSessionId}
-          onSelectSession={handleSelectSession}
-          onNewChat={handleNewChat}
+          onSelectSession={(id) => {
+            handleSelectSession(id);
+            setIsHistoryOpen(false);
+          }}
+          onNewChat={() => {
+            handleNewChat();
+            setIsHistoryOpen(false);
+          }}
           onDeleteSession={handleDeleteSession}
+          isOpen={isHistoryOpen}
+          onClose={() => setIsHistoryOpen(false)}
         />
+        
         <div className="flex-1 flex flex-col max-w-4xl mx-auto w-full border-x border-border">
           <ChatHeader
             selectedModel={selectedModel}
@@ -38,6 +50,7 @@ export function ChatSimulatorModule() {
             availableModels={availableModels}
             messages={messages}
             clearChat={clearChat}
+            onToggleSidebar={() => setIsHistoryOpen(!isHistoryOpen)}
           />
 
           <MessageList

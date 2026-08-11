@@ -7,37 +7,33 @@ interface ChatHeaderProps {
   availableModels: string[];
   messages: Message[];
   clearChat: () => void;
+  onToggleSidebar?: () => void;
 }
 
 export function ChatHeader({
-  selectedModel, setSelectedModel, availableModels, messages, clearChat
+  selectedModel, setSelectedModel, availableModels, messages, clearChat, onToggleSidebar
 }: ChatHeaderProps) {
   return (
     <>
       <div className="p-4 border-b border-border">
-        <div className="flex items-center justify-between mb-2">
-          <div>
-            <h1 className="text-xl font-semibold text-foreground flex items-center gap-2">
-              Chat with your robot
-              {selectedModel.startsWith("groq/") && (
-                <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-green-500/10 text-green-500 border border-green-500/20">
-                  Powered by Groq AI ⚡
-                </span>
-              )}
+        <div className="flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2 min-w-0">
+            {/* Mobile history toggle button */}
+            <button
+              onClick={onToggleSidebar}
+              className="md:hidden p-2 -ml-2 text-muted-foreground hover:text-foreground hover:bg-accent rounded-lg transition-colors flex-shrink-0"
+              title="View Previous Chats"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+
+            <h1 className="text-base md:text-xl font-semibold text-foreground flex items-center gap-2 truncate">
+              <span className="truncate">Chat with your robot</span>
             </h1>
           </div>
           <div className="flex items-center gap-3">
-            <select
-              value={selectedModel}
-              onChange={(e) => setSelectedModel(e.target.value)}
-              className="bg-background border border-border rounded-md px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 text-foreground"
-            >
-              {availableModels.map(model => (
-                <option key={model} value={model}>
-                  {model.startsWith("groq/") ? model.replace("groq/", "Groq: ") : model}
-                </option>
-              ))}
-            </select>
             {messages.length > 0 && (
               <button
                 onClick={clearChat}

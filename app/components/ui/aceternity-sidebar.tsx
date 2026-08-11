@@ -229,50 +229,7 @@ export const MobileSidebar = ({
 
 
   return (
-    <div
-      className={cn(
-        /*
-         * Mobile header
-         */
-        "h-10",
-        "px-4",
-        "py-4",
-
-        "flex",
-        "flex-row",
-        "items-center",
-        "justify-between",
-
-        "md:hidden",
-
-        "bg-sidebar",
-        "w-full"
-      )}
-      {...props}
-    >
-
-      {/* ======================================================
-          HAMBURGER
-      ======================================================= */}
-
-      <div
-        className="
-          flex
-          justify-end
-          z-20
-          w-full
-        "
-      >
-        <IconMenu2
-          className="
-            text-sidebar-foreground
-            cursor-pointer
-          "
-          onClick={() => setOpen(true)}
-        />
-      </div>
-
-
+    <div className="md:hidden" {...props}>
       {/* ======================================================
           MOBILE DRAWER
       ======================================================= */}
