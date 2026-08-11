@@ -28,11 +28,11 @@ export function DocumentList({ documents, onDelete, onReindex }: DocumentListPro
       <table className="w-full text-left border-collapse">
         <thead>
           <tr className="border-b border-border bg-secondary/20">
-            <th className="py-4 px-4 text-xs font-mono uppercase tracking-wider text-muted-foreground font-normal">Document Name</th>
-            <th className="py-4 px-4 text-xs font-mono uppercase tracking-wider text-muted-foreground font-normal">Type</th>
-            <th className="py-4 px-4 text-xs font-mono uppercase tracking-wider text-muted-foreground font-normal">Size</th>
-            <th className="py-4 px-4 text-xs font-mono uppercase tracking-wider text-muted-foreground font-normal">Status</th>
-            <th className="py-4 px-4 text-xs font-mono uppercase tracking-wider text-muted-foreground font-normal text-right">Actions</th>
+            <th className="py-4 px-4 text-xs font-mono uppercase tracking-wider text-muted-foreground font-normal whitespace-nowrap">Document Name</th>
+            <th className="py-4 px-4 text-xs font-mono uppercase tracking-wider text-muted-foreground font-normal whitespace-nowrap">Type</th>
+            <th className="py-4 px-4 text-xs font-mono uppercase tracking-wider text-muted-foreground font-normal whitespace-nowrap">Size</th>
+            <th className="py-4 px-4 text-xs font-mono uppercase tracking-wider text-muted-foreground font-normal whitespace-nowrap">Status</th>
+            <th className="py-4 px-4 text-xs font-mono uppercase tracking-wider text-muted-foreground font-normal text-right whitespace-nowrap">Actions</th>
           </tr>
         </thead>
         <tbody className="divide-y divide-border">
@@ -54,8 +54,8 @@ export function DocumentList({ documents, onDelete, onReindex }: DocumentListPro
               <td className="py-4 px-4">
                 <span className="text-xs font-mono bg-secondary px-2 py-1 uppercase tracking-wider">{doc.type}</span>
               </td>
-              <td className="py-4 px-4 text-sm font-mono">{doc.size}</td>
-              <td className="py-4 px-4">
+              <td className="py-4 px-4 text-sm font-mono whitespace-nowrap">{doc.size}</td>
+              <td className="py-4 px-4 whitespace-nowrap">
                 <div className="flex items-center gap-2">
                   <span className={`w-2 h-2 ${
                     doc.status === 'indexed' ? 'bg-green-500' :
@@ -65,7 +65,7 @@ export function DocumentList({ documents, onDelete, onReindex }: DocumentListPro
                   <span className="text-xs font-mono uppercase tracking-wider">{doc.status}</span>
                 </div>
               </td>
-              <td className="py-4 px-4 text-right">
+              <td className="py-4 px-4 text-right whitespace-nowrap">
                 <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                   <button onClick={() => onReindex(doc.id)} className="p-2 text-muted-foreground hover:text-primary transition-colors" title="Reindex">
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

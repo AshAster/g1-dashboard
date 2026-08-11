@@ -11,24 +11,26 @@ export const metadata = {
 
 export default function DocumentationPage() {
   return (
-    <div className="max-w-[1400px] mx-auto px-4 md:px-8 pt-4 pb-12">
+    <div className="max-w-[1400px] mx-auto px-4 md:px-8">
       
-      {/* Top Header Row */}
-      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-12">
-        <div>
-          <h1 className="text-3xl md:text-4xl font-bold text-foreground tracking-tight">Documentation</h1>
-          <p className="text-muted-foreground mt-2">Complete guide to the VEDA platform</p>
-        </div>
-        
-        {/* Search Bar at Top Right */}
-        <div className="w-full md:w-auto relative z-50">
-          <DocSearch />
+      {/* Top Header Row — sticky so it stays visible while scrolling */}
+      <div className="sticky top-0 z-30 bg-background pb-4 pt-4 border-b border-border/50 mb-8">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div>
+            <h1 className="text-3xl md:text-4xl font-bold text-foreground tracking-tight">Documentation</h1>
+            <p className="text-muted-foreground mt-1">Complete guide to the VEDA platform</p>
+          </div>
+          
+          {/* Search Bar at Top Right */}
+          <div className="w-full md:w-auto relative z-50">
+            <DocSearch />
+          </div>
         </div>
       </div>
       
-      <div className="flex gap-12 items-start relative">
+      <div className="flex flex-col lg:flex-row gap-12 items-start relative">
         
-        {/* Fixed Left Sidebar */}
+        {/* Left Sidebar */}
         <DocSidebar />
         
         {/* Main Content Area */}

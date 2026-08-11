@@ -1,33 +1,59 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { docCategories } from '../data/docs-content';
 
 export function DocSidebar() {
   const [activeId, setActiveId] = useState<string>("");
+  const navRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
+    // The actual scroll container is the <main> element from layout.tsx (overflow-y-auto),
+    // not window. We need to find it by walking up from our component.
+    const getScrollContainer = (): HTMLElement | null => {
+      let el = navRef.current?.parentElement;
+      while (el) {
+        const style = getComputedStyle(el);
+        if (style.overflowY === 'auto' || style.overflowY === 'scroll') {
+          return el;
+        }
+        el = el.parentElement;
+      }
+      return null;
+    };
+
+    const scrollContainer = getScrollContainer();
+    if (!scrollContainer) return;
+
     const handleScroll = () => {
       const sections = document.querySelectorAll('section[id]');
       let current = "";
-      
-      // Add offset to make highlighting feel more natural before the section reaches the exact top
-      const scrollPosition = window.scrollY + 200;
-      
+
+      // Use the scroll container's scrollTop + an offset for natural highlighting
+      const scrollPosition = scrollContainer.scrollTop + 250;
+
       sections.forEach((section) => {
-        const sectionTop = (section as HTMLElement).offsetTop;
-        if (scrollPosition >= sectionTop) {
+        const sectionEl = section as HTMLElement;
+        // offsetTop is relative to the offsetParent, so we need to calculate
+        // the position relative to the scroll container
+        let top = 0;
+        let el: HTMLElement | null = sectionEl;
+        while (el && el !== scrollContainer) {
+          top += el.offsetTop;
+          el = el.offsetParent as HTMLElement | null;
+        }
+        if (scrollPosition >= top) {
           current = section.getAttribute('id') || "";
         }
       });
-      
+
       setActiveId(current);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    // Trigger once on load in case URL has hash
+    scrollContainer.addEventListener('scroll', handleScroll, { passive: true });
+    // Trigger once on load
     handleScroll();
-    
+
     // Check hash on load
     if (window.location.hash) {
       const id = window.location.hash.substring(1);
@@ -36,8 +62,8 @@ export function DocSidebar() {
         setActiveId(id);
       }, 100);
     }
-    
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    return () => scrollContainer.removeEventListener('scroll', handleScroll);
   }, []);
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
@@ -48,7 +74,10 @@ export function DocSidebar() {
   };
 
   return (
-    <nav className="w-64 flex-shrink-0 hidden lg:block sticky top-32 h-[calc(100vh-8rem)] overflow-y-auto pr-6 pb-10">
+    <nav
+      ref={navRef}
+      className="w-full lg:w-64 flex-shrink-0 block static lg:sticky top-0 h-auto lg:max-h-[calc(100vh-12rem)] overflow-y-visible lg:overflow-y-auto lg:pr-6 pb-6 mb-6 lg:mb-0 pt-2"
+    >
       <div className="space-y-8">
         {docCategories.map((category) => (
           <div key={category.id} className="sidebar-group">
@@ -88,3 +117,4 @@ export function DocSidebar() {
     </nav>
   );
 }
+

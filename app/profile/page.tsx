@@ -18,13 +18,16 @@ export default async function ProfilePage() {
   }
 
   let tenant = null;
-  try {
-    const res = await fetch((process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api/v1") + "/tenant/profile", { cache: 'no-store' });
-    if (res.ok) {
-      tenant = await res.json();
+  const tenantApiBase = process.env.NEXT_PUBLIC_API_URL?.trim();
+  if (tenantApiBase) {
+    try {
+      const res = await fetch(`${tenantApiBase}/tenant/profile`, { cache: 'no-store' });
+      if (res.ok) {
+        tenant = await res.json();
+      }
+    } catch (e) {
+      console.warn("Tenant profile unavailable; continuing without tenant data.", e);
     }
-  } catch (e) {
-    console.error("Failed to fetch tenant profile:", e);
   }
 
   return (

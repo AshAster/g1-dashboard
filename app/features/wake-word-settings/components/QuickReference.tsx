@@ -4,7 +4,7 @@ export function QuickReference() {
   return (
     <section className="border-t border-border pt-8">
       <p className="text-[10px] font-mono text-muted-foreground uppercase mb-4">// sample count guide</p>
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {[
           { samples: "0 recordings", recall: "60-75%", note: "TTS only, US accent" },
           { samples: "20-50 recordings", recall: "85-90%", note: "Good for most sites" },

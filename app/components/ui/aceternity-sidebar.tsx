@@ -1,8 +1,28 @@
 "use client";
+
 import { cn } from "@/lib/utils";
-import React, { useState, createContext, useContext } from "react";
-import { AnimatePresence, motion } from "motion/react";
-import { IconMenu2, IconX } from "@tabler/icons-react";
+import React, {
+  useState,
+  createContext,
+  useContext,
+} from "react";
+
+import {
+  AnimatePresence,
+  motion,
+} from "motion/react";
+
+import {
+  IconMenu2,
+  IconX,
+} from "@tabler/icons-react";
+
+import Link from "next/link";
+
+
+// ============================================================
+// TYPES
+// ============================================================
 
 interface Links {
   label: string;
@@ -10,19 +30,38 @@ interface Links {
   icon: React.JSX.Element | React.ReactNode;
 }
 
+
 interface SidebarContextProps {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   animate: boolean;
 }
 
-const SidebarContext = createContext<SidebarContextProps | undefined>(undefined);
+
+// ============================================================
+// SIDEBAR CONTEXT
+// ============================================================
+
+const SidebarContext =
+  createContext<SidebarContextProps | undefined>(undefined);
+
 
 export const useSidebar = () => {
   const context = useContext(SidebarContext);
-  if (!context) throw new Error("useSidebar must be used within a SidebarProvider");
+
+  if (!context) {
+    throw new Error(
+      "useSidebar must be used within a SidebarProvider"
+    );
+  }
+
   return context;
 };
+
+
+// ============================================================
+// SIDEBAR PROVIDER
+// ============================================================
 
 export const SidebarProvider = ({
   children,
@@ -32,19 +71,43 @@ export const SidebarProvider = ({
 }: {
   children: React.ReactNode;
   open?: boolean;
-  setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+  setOpen?: React.Dispatch<
+    React.SetStateAction<boolean>
+  >;
   animate?: boolean;
 }) => {
-  const [openState, setOpenState] = useState(false);
-  const open = openProp !== undefined ? openProp : openState;
-  const setOpen = setOpenProp !== undefined ? setOpenProp : setOpenState;
+
+  const [openState, setOpenState] =
+    useState(false);
+
+  const open =
+    openProp !== undefined
+      ? openProp
+      : openState;
+
+  const setOpen =
+    setOpenProp !== undefined
+      ? setOpenProp
+      : setOpenState;
+
 
   return (
-    <SidebarContext.Provider value={{ open, setOpen, animate }}>
+    <SidebarContext.Provider
+      value={{
+        open,
+        setOpen,
+        animate,
+      }}
+    >
       {children}
     </SidebarContext.Provider>
   );
 };
+
+
+// ============================================================
+// ACETERNITY SIDEBAR
+// ============================================================
 
 export const AceternitySidebar = ({
   children,
@@ -54,96 +117,323 @@ export const AceternitySidebar = ({
 }: {
   children: React.ReactNode;
   open?: boolean;
-  setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+  setOpen?: React.Dispatch<
+    React.SetStateAction<boolean>
+  >;
   animate?: boolean;
 }) => {
+
   return (
-    <SidebarProvider open={open} setOpen={setOpen} animate={animate}>
+    <SidebarProvider
+      open={open}
+      setOpen={setOpen}
+      animate={animate}
+    >
       {children}
     </SidebarProvider>
   );
 };
 
-export const SidebarBody = (props: React.ComponentProps<typeof motion.div>) => {
+
+// ============================================================
+// SIDEBAR BODY
+// ============================================================
+
+export const SidebarBody = (
+  props: React.ComponentProps<"div">
+) => {
   return (
     <>
       <DesktopSidebar {...props} />
-      <MobileSidebar {...(props as React.ComponentProps<"div">)} />
+      <MobileSidebar {...props} />
     </>
   );
 };
 
-// Exact Aceternity DesktopSidebar — bg-neutral-100/800, animates width
+
+// ============================================================
+// DESKTOP SIDEBAR
+// ============================================================
+
 export const DesktopSidebar = ({
   className,
   children,
   ...props
-}: React.ComponentProps<typeof motion.div>) => {
-  const { open, setOpen, animate } = useSidebar();
+}: React.ComponentProps<"div">) => {
+
   return (
-    <motion.div
+    <div
       className={cn(
-        "h-full px-2 py-4 hidden md:flex md:flex-col bg-sidebar w-[300px] shrink-0",
+        /*
+         * Desktop only
+         */
+        "group/nav",
+        "hidden md:flex",
+        "h-full",
+        "flex-col",
+        "shrink-0",
+
+        /*
+         * Width
+         */
+        "w-[60px]",
+        "hover:w-[220px]",
+
+        /*
+         * Layout
+         */
+        "px-2",
+        "py-4",
+
+        /*
+         * Background
+         */
+        "bg-sidebar",
+
+        /*
+         * Animation
+         */
+        "transition-[width]",
+        "duration-300",
+        "ease-in-out",
+
+        /*
+         * Prevent content overflow
+         */
+        "overflow-hidden",
+
         className
       )}
-      animate={{
-        width: animate ? (open ? "300px" : "60px") : "300px",
-      }}
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
       {...props}
     >
       {children}
-    </motion.div>
+    </div>
   );
 };
+
+
+// ============================================================
+// MOBILE SIDEBAR
+// ============================================================
 
 export const MobileSidebar = ({
   className,
   children,
   ...props
 }: React.ComponentProps<"div">) => {
-  const { open, setOpen } = useSidebar();
+
+  const {
+    open,
+    setOpen,
+  } = useSidebar();
+
+
   return (
     <div
       className={cn(
-        "h-10 px-4 py-4 flex flex-row md:hidden items-center justify-between bg-sidebar w-full"
+        /*
+         * Mobile header
+         */
+        "h-10",
+        "px-4",
+        "py-4",
+
+        "flex",
+        "flex-row",
+        "items-center",
+        "justify-between",
+
+        "md:hidden",
+
+        "bg-sidebar",
+        "w-full"
       )}
       {...props}
     >
-      <div className="flex justify-end z-20 w-full">
+
+      {/* ======================================================
+          HAMBURGER
+      ======================================================= */}
+
+      <div
+        className="
+          flex
+          justify-end
+          z-20
+          w-full
+        "
+      >
         <IconMenu2
-          className="text-sidebar-foreground cursor-pointer"
-          onClick={() => setOpen(!open)}
+          className="
+            text-sidebar-foreground
+            cursor-pointer
+          "
+          onClick={() => setOpen(true)}
         />
       </div>
+
+
+      {/* ======================================================
+          MOBILE DRAWER
+      ======================================================= */}
+
       <AnimatePresence>
+
         {open && (
-          <motion.div
-            initial={{ x: "-100%", opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            exit={{ x: "-100%", opacity: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-            className={cn(
-              "fixed h-full w-full inset-0 bg-sidebar p-10 z-[100] flex flex-col justify-between",
-              className
-            )}
-          >
-            <div
-              className="absolute right-10 top-10 z-50 text-sidebar-foreground cursor-pointer"
-              onClick={() => setOpen(!open)}
+          <>
+
+            {/* =================================================
+                BACKDROP
+            ================================================== */}
+
+            <motion.div
+              initial={{
+                opacity: 0,
+              }}
+              animate={{
+                opacity: 1,
+              }}
+              exit={{
+                opacity: 0,
+              }}
+              onClick={() => setOpen(false)}
+              className="
+                fixed
+                inset-0
+                bg-black/60
+                backdrop-blur-sm
+                z-[90]
+              "
+            />
+
+
+            {/* =================================================
+                SIDEBAR PANEL
+            ================================================== */}
+
+            <motion.div
+              initial={{
+                x: "-100%",
+                opacity: 0,
+              }}
+              animate={{
+                x: 0,
+                opacity: 1,
+              }}
+              exit={{
+                x: "-100%",
+                opacity: 0,
+              }}
+              transition={{
+                duration: 0.3,
+                ease: "easeInOut",
+              }}
+              className={cn(
+                /*
+                 * IMPORTANT:
+                 * group/nav is retained for desktop-style
+                 * hover compatibility.
+                 */
+                "group/nav",
+
+                /*
+                 * Position
+                 */
+                "fixed",
+                "left-0",
+                "top-0",
+
+                /*
+                 * Size
+                 */
+                "h-full",
+                "w-[85%]",
+                "max-w-[320px]",
+
+                /*
+                 * Layout
+                 */
+                "flex",
+                "flex-col",
+                "justify-between",
+
+                /*
+                 * Spacing
+                 */
+                "p-6",
+
+                /*
+                 * Background
+                 */
+                "bg-sidebar",
+
+                /*
+                 * Layer
+                 */
+                "z-[100]",
+
+                /*
+                 * Effects
+                 */
+                "shadow-2xl",
+                "border-r",
+                "border-border",
+
+                className
+              )}
             >
-              <IconX />
-            </div>
-            {children}
-          </motion.div>
+
+              {/* =================================================
+                  CLOSE BUTTON
+              ================================================== */}
+
+              <div
+                className="
+                  absolute
+                  right-4
+                  top-4
+                  z-50
+
+                  text-sidebar-foreground
+
+                  cursor-pointer
+
+                  p-2
+
+                  hover:bg-sidebar-accent
+
+                  rounded-full
+
+                  transition-colors
+                "
+                onClick={() => setOpen(false)}
+              >
+                <IconX />
+              </div>
+
+
+              {/* =================================================
+                  SIDEBAR CONTENT
+              ================================================== */}
+
+              {children}
+
+            </motion.div>
+
+          </>
         )}
+
       </AnimatePresence>
+
     </div>
   );
 };
 
-// Exact Aceternity SidebarLink — gap-2, icon renders inline, label slides
+
+// ============================================================
+// SIDEBAR LINK
+// ============================================================
+
 export const SidebarLink = ({
   link,
   className,
@@ -154,34 +444,168 @@ export const SidebarLink = ({
   className?: string;
   selected?: boolean;
 }) => {
-  const { open, animate } = useSidebar();
+
+  /*
+   * IMPORTANT:
+   *
+   * We now get the actual sidebar `open` state.
+   *
+   * Desktop:
+   *   open normally doesn't matter.
+   *   Hover controls the text.
+   *
+   * Mobile:
+   *   open === true
+   *   Therefore text is explicitly visible.
+   */
+
+  const {
+    open,
+    setOpen,
+  } = useSidebar();
+
+
   return (
-    <a
+    <Link
       href={link.href}
+
+      /*
+       * Close mobile drawer after navigation.
+       */
+      onClick={() => setOpen(false)}
+
+
       className={cn(
-        "flex items-center justify-start gap-2 group/sidebar py-2 px-2 rounded-lg transition-colors",
+        /*
+         * Layout
+         */
+        "flex",
+        "items-center",
+        "justify-start",
+        "gap-2",
+
+        /*
+         * Group
+         */
+        "group/link",
+
+        /*
+         * Spacing
+         */
+        "py-2",
+        "px-2",
+
+        /*
+         * Shape
+         */
+        "rounded-lg",
+
+        /*
+         * Animation
+         */
+        "transition-colors",
+        "duration-150",
+
+        /*
+         * Selected state
+         */
         selected
           ? "bg-sidebar-accent text-primary"
           : "hover:bg-sidebar-accent",
+
         className
       )}
+
       {...props}
     >
-      {link.icon}
-      <motion.span
-        animate={{
-          display: animate ? (open ? "inline-block" : "none") : "inline-block",
-          opacity: animate ? (open ? 1 : 0) : 1,
-        }}
+
+      {/* ======================================================
+          ICON
+      ======================================================= */}
+
+      <span className="shrink-0">
+        {link.icon}
+      </span>
+
+
+      {/* ======================================================
+          LABEL
+      ======================================================= */}
+
+      <span
         className={cn(
-          "text-sm whitespace-pre inline-block !p-0 !m-0",
+
+          /*
+           * Basic text
+           */
+          "text-sm",
+          "whitespace-nowrap",
+          "overflow-hidden",
+
+          /*
+           * Animation
+           */
+          "transition-all",
+          "duration-300",
+          "ease-in-out",
+
+
+          /*
+           * ==================================================
+           * MOBILE BEHAVIOR
+           * ==================================================
+           *
+           * When mobile sidebar is open:
+           *
+           * open === true
+           *
+           * therefore:
+           *
+           * max-width = 180px
+           * opacity = 1
+           *
+           * This does NOT depend on hover.
+           */
+
+          open
+            ? "max-w-[180px] opacity-100"
+            : "max-w-0 opacity-0",
+
+
+          /*
+           * ==================================================
+           * DESKTOP BEHAVIOR
+           * ==================================================
+           *
+           * Desktop sidebar is controlled by CSS hover.
+           *
+           * When user hovers the 60px sidebar:
+           *
+           * width expands
+           * label becomes visible
+           */
+
+          "md:group-hover/nav:max-w-[180px]",
+          "md:group-hover/nav:opacity-100",
+
+          /*
+           * Slight animation delay
+           */
+          "md:group-hover/nav:delay-[30ms]",
+
+
+          /*
+           * Selected color
+           */
           selected
             ? "text-primary font-semibold"
-            : "text-sidebar-foreground group-hover/sidebar:translate-x-1 transition duration-150"
+            : "text-sidebar-foreground"
+
         )}
       >
         {link.label}
-      </motion.span>
-    </a>
+      </span>
+
+    </Link>
   );
 };

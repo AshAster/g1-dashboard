@@ -16,20 +16,22 @@ export function useRagState() {
     setIsLoading(true);
     try {
       const res = await api.getDocuments();
-      if (res.data) {
-        const docs = (res.data as any[]).map((doc: any) => ({
-          id: String(doc.id),
-          name: doc.name || doc.filename || "Unknown",
-          size: doc.size || formatFileSize(doc.file_size || 0),
-          type: doc.file_type?.toUpperCase() || "UNKNOWN",
-          status: doc.status as DocumentStatus,
-          uploadedAt: doc.created_at || doc.uploadedAt || "-",
-          chunks: doc.chunks_count || 0,
-        }));
-        setDocuments(docs);
-      }
+      const rawDocuments = Array.isArray(res.data) ? res.data : [];
+
+      const docs = rawDocuments.map((doc: any) => ({
+        id: String(doc.id ?? crypto.randomUUID?.() ?? Date.now()),
+        name: doc.name || doc.filename || "Unknown",
+        size: doc.size || formatFileSize(doc.file_size || 0),
+        type: doc.file_type?.toUpperCase() || "UNKNOWN",
+        status: (doc.status as DocumentStatus) || "uploaded",
+        uploadedAt: doc.created_at || doc.uploadedAt || "-",
+        chunks: doc.chunks_count || 0,
+      }));
+
+      setDocuments(docs);
     } catch (error) {
       console.error("Failed to fetch documents:", error);
+      setDocuments([]);
     } finally {
       setIsLoading(false);
     }

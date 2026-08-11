@@ -47,7 +47,8 @@ class ApiClient {
       "/auth/me",
       "/chat/stream",
       "/chat/models",
-      "/chat"
+      "/chat",
+      "/documents"
     ];
 
     if (endpoint.startsWith("/sessions")) {
@@ -63,7 +64,8 @@ class ApiClient {
 
     if (!implementedRoutes.some(route => endpoint.startsWith(route))) {
       // Return a safe mock response silently to prevent crashes
-      return { data: {} as T };
+      // Use [] instead of {} so list endpoints don't crash on .map()
+      return { data: [] as unknown as T };
     }
 
     try {

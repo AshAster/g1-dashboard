@@ -3,6 +3,16 @@ import { WakeWordJob, LocalStatus } from "../types";
 
 const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api/v1";
 
+async function safeFetchJson<T>(url: string, options?: RequestInit): Promise<T | null> {
+  try {
+    const response = await fetch(url, options);
+    if (!response.ok) return null;
+    return (await response.json()) as T;
+  } catch {
+    return null;
+  }
+}
+
 export function useWakeWordState() {
   const [phrase, setPhrase] = useState("");
   const [quality, setQuality] = useState<"draft" | "standard" | "production">("draft");
@@ -24,44 +34,32 @@ export function useWakeWordState() {
   const [logs, setLogs] = useState<string[]>([]);
 
   const fetchJobs = useCallback(async () => {
-    const r = await fetch(`${API}/wakeword/jobs`);
-    if (!r.ok) return;
-    const d = await r.json();
+    const d = await safeFetchJson<{ jobs?: WakeWordJob[]; active?: WakeWordJob | null }>(`${API}/wakeword/jobs`);
+    if (!d) return;
     setJobs(d.jobs ?? []);
     setActiveJob(d.active ?? null);
   }, []);
 
   const fetchPresets = useCallback(async () => {
-    try {
-      const r = await fetch(`${API}/wakeword/presets`);
-      if (r.ok) {
-        const d = await r.json();
-        // Backend/AGX IP come from the backend config
-        if (d.backend) setBackend(d.backend);
-        if (d.agx_ip) setAgxIp(d.agx_ip);
-      }
-    } catch { /* no op */ }
+    const d = await safeFetchJson<{ backend?: string; agx_ip?: string }>(`${API}/wakeword/presets`);
+    if (!d) return;
+    if (d.backend) setBackend(d.backend);
+    if (d.agx_ip) setAgxIp(d.agx_ip);
   }, []);
 
   const fetchMaintStatus = useCallback(async (ip: string) => {
     if (!ip) return;
-    try {
-      const r = await fetch(`${API}/wakeword/robot/${ip}/status`);
-      if (r.ok) setMaintStatus(await r.json());
-    } catch { setMaintStatus(null); }
+    const d = await safeFetchJson<{ maintenance_mode: boolean; pipeline_running: boolean }>(`${API}/wakeword/robot/${ip}/status`);
+    setMaintStatus(d ?? null);
   }, []);
 
   const fetchLocalStatus = useCallback(async (jobId: number) => {
-    try {
-      const r = await fetch(`${API}/wakeword/jobs/${jobId}/local-status`);
-      if (r.ok) {
-        const d: LocalStatus = await r.json();
-        setLocalStatus(d);
-        if (d.agx_live?.log_tail) {
-          setLogs(d.agx_live.log_tail);
-        }
-      }
-    } catch { /* no op */ }
+    const d = await safeFetchJson<LocalStatus>(`${API}/wakeword/jobs/${jobId}/local-status`);
+    if (!d) return;
+    setLocalStatus(d);
+    if (d.agx_live?.log_tail) {
+      setLogs(d.agx_live.log_tail);
+    }
   }, []);
 
   useEffect(() => {

@@ -63,7 +63,7 @@ export function EmployeesModule() {
     setLoading(true);
     const res = await api.listEmployees();
     if (res.data) {
-      setEmployees(res.data);
+      setEmployees(Array.isArray(res.data) ? res.data : []);
     } else if (res.error) {
       const errStr = typeof res.error === "string" ? res.error : "";
       if (errStr.includes("401") || errStr.toLowerCase().includes("unauthorized") || errStr.toLowerCase().includes("not authenticated")) {

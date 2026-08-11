@@ -28,15 +28,15 @@ const PersonaMenu = () => (
   <div className="w-[300px]">
     <h3 className="mb-3 text-sm font-semibold text-foreground border-b border-border pb-2">Persona Manager</h3>
     <div className="flex flex-col gap-1">
-      <a href="/persona#templates" className="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm text-muted-foreground hover:bg-accent hover:text-primary transition-colors">
+      <Link href="/persona#templates" className="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm text-muted-foreground hover:bg-accent hover:text-primary transition-colors">
         <FiBox className="text-lg" /> Persona Templates
-      </a>
-      <a href="/persona#generative" className="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm text-muted-foreground hover:bg-accent hover:text-primary transition-colors">
+      </Link>
+      <Link href="/persona#generative" className="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm text-muted-foreground hover:bg-accent hover:text-primary transition-colors">
         <FiSmile className="text-lg" /> Generative Persona
-      </a>
-      <a href="/persona#role-builder" className="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm text-muted-foreground hover:bg-accent hover:text-primary transition-colors">
+      </Link>
+      <Link href="/persona#role-builder" className="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm text-muted-foreground hover:bg-accent hover:text-primary transition-colors">
         <FiUser className="text-lg" /> Role Builder
-      </a>
+      </Link>
     </div>
   </div>
 );
@@ -45,12 +45,12 @@ const RagMenu = () => (
   <div className="w-[240px]">
     <h3 className="mb-3 text-sm font-semibold text-foreground border-b border-border pb-2">Knowledge Hub</h3>
     <div className="flex flex-col gap-1">
-      <a href="/rag#document" className="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm text-muted-foreground hover:bg-accent hover:text-primary transition-colors">
+      <Link href="/rag#document" className="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm text-muted-foreground hover:bg-accent hover:text-primary transition-colors">
         <FiDatabase className="text-lg" /> Document RAG
-      </a>
-      <a href="/rag#web" className="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm text-muted-foreground hover:bg-accent hover:text-primary transition-colors">
+      </Link>
+      <Link href="/rag#web" className="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm text-muted-foreground hover:bg-accent hover:text-primary transition-colors">
         <FiCpu className="text-lg" /> Web RAG
-      </a>
+      </Link>
     </div>
   </div>
 );
@@ -60,12 +60,12 @@ const GestureMenu = () => (
   <div className="w-[240px]">
     <h3 className="mb-3 text-sm font-semibold text-foreground border-b border-border pb-2">Gesture Settings</h3>
     <div className="flex flex-col gap-1">
-      <a href="/gesture#custom" className="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm text-muted-foreground hover:bg-accent hover:text-primary transition-colors">
+      <Link href="/gesture#custom" className="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm text-muted-foreground hover:bg-accent hover:text-primary transition-colors">
         <FiActivity className="text-lg" /> Custom Gesture
-      </a>
-      <a href="/gesture#add" className="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm text-muted-foreground hover:bg-accent hover:text-primary transition-colors">
+      </Link>
+      <Link href="/gesture#add" className="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm text-muted-foreground hover:bg-accent hover:text-primary transition-colors">
         <FiPlusCircle className="text-lg" /> Add Gesture
-      </a>
+      </Link>
     </div>
   </div>
 );
@@ -74,9 +74,9 @@ const InventoryMenu = () => (
   <div className="w-[240px]">
     <h3 className="mb-3 text-sm font-semibold text-foreground border-b border-border pb-2">Robot Inventory</h3>
     <div className="flex flex-col gap-1">
-      <a href="/inventory#health" className="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm text-muted-foreground hover:bg-accent hover:text-primary transition-colors">
+      <Link href="/inventory#health" className="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm text-muted-foreground hover:bg-accent hover:text-primary transition-colors">
         <FiHeart className="text-lg" /> Health Status
-      </a>
+      </Link>
     </div>
   </div>
 );
@@ -94,15 +94,15 @@ const NavigationMenu = () => (
   <div className="p-3 w-48">
     <h3 className="mb-3 text-sm font-semibold text-foreground border-b border-border pb-2">Navigation</h3>
     <div className="space-y-1">
-      <a href="/navigation#navigate" className="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm text-muted-foreground hover:bg-accent hover:text-primary transition-colors">
+      <Link href="/navigation#navigate" className="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm text-muted-foreground hover:bg-accent hover:text-primary transition-colors">
         <FiMapPin className="text-lg" /> Go to Location
-      </a>
-      <a href="/navigation#mapping" className="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm text-muted-foreground hover:bg-accent hover:text-primary transition-colors">
+      </Link>
+      <Link href="/navigation#mapping" className="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm text-muted-foreground hover:bg-accent hover:text-primary transition-colors">
         <FiMap className="text-lg" /> Mapping
-      </a>
-      <a href="/navigation#status" className="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm text-muted-foreground hover:bg-accent hover:text-primary transition-colors">
+      </Link>
+      <Link href="/navigation#status" className="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm text-muted-foreground hover:bg-accent hover:text-primary transition-colors">
         <FiNavigation className="text-lg" /> Status
-      </a>
+      </Link>
     </div>
   </div>
 );
@@ -182,12 +182,12 @@ export const LimelightNav = ({
 
   return (
     <div 
-      className="sticky top-6 z-50 flex justify-center w-full" 
+      className="z-40 flex justify-start md:justify-center w-full pt-20 md:pt-6 pb-2 px-4 md:px-0" 
       onMouseLeave={() => handleSetHovered(null)}
     >
       <div className="relative">
         <nav
-          className="relative flex items-center h-16 rounded-2xl bg-card/70 text-card-foreground border border-border/50 shadow-lg px-2 backdrop-blur-lg"
+          className="relative flex items-center h-16 rounded-2xl bg-card/70 text-card-foreground border border-border/50 shadow-lg px-2 backdrop-blur-lg max-w-[95vw] overflow-x-auto sm:max-w-none no-scrollbar"
           style={{ boxShadow: `0 10px 40px -10px var(--shadow-color)` }}
         >
         {visibleItems.map((item, index) => {

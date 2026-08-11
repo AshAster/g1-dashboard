@@ -36,14 +36,14 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
       role = session.role;
       requiresPasswordChange = session.requiresPasswordChange === true;
 
-      try {
-        const res = await fetch(
-          (process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api/v1") + "/tenant/profile",
-          { cache: "no-store" }
-        );
-        if (res.ok) tenantData = await res.json();
-      } catch (e) {
-        console.error("Failed to fetch tenant data:", e);
+      const tenantApiBase = process.env.NEXT_PUBLIC_API_URL?.trim();
+      if (tenantApiBase) {
+        try {
+          const res = await fetch(`${tenantApiBase}/tenant/profile`, { cache: "no-store" });
+          if (res.ok) tenantData = await res.json();
+        } catch (e) {
+          console.warn("Tenant profile unavailable; continuing without tenant data.", e);
+        }
       }
     }
   }
@@ -71,14 +71,29 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                  document.documentElement.classList.add('dark');
+                } else {
+                  document.documentElement.classList.remove('dark');
+                }
+              } catch (_) {}
+            `,
+          }}
+        />
+      </head>
       <body className="h-full bg-background text-foreground antialiased">
         <ThemeProvider>
           {showRagUi ? (
             /* Dashboard layout: grey tray → sidebar + curved content sheet */
-            <div className="flex h-screen overflow-hidden bg-sidebar">
+            <div className="flex flex-col md:flex-row h-screen overflow-hidden bg-sidebar">
               <Sidebar tenant={tenantData} role={role} />
 
-              <div className="flex flex-col flex-1 min-h-0 rounded-tl-2xl bg-background overflow-hidden">
+              <div className="flex flex-col flex-1 min-h-0 md:rounded-tl-2xl bg-background overflow-hidden relative">
                 <LimelightNav role={role} />
                 <HeaderActions isLoggedIn={isLoggedIn} tenant={tenantData} />
                 <main className="flex-1 overflow-y-auto p-6">
@@ -92,7 +107,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
             </div>
           ) : (
             /* Public pages: no sidebar, no tray, body bg-background shows through */
-            <div className="flex flex-col min-h-screen">
+            <div className="flex flex-col min-h-screen relative">
               <ScrollProgress />
               <HeaderActions isLoggedIn={isLoggedIn} tenant={tenantData} />
               <main className="flex-1">

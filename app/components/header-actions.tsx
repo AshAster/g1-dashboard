@@ -26,7 +26,7 @@ export function HeaderActions({ isLoggedIn = false, tenant }: { isLoggedIn?: boo
   const tenantName = tenant?.name || "User Profile";
 
   return (
-    <div className="fixed top-6 right-6 z-50 flex items-center gap-3">
+    <div className="absolute top-4 right-4 md:top-6 md:right-6 z-50 flex items-center gap-2 md:gap-3 scale-90 md:scale-100 origin-top-right">
       {/* Notification bell */}
       {!isAuthPage && isLoggedIn && (
         <button

@@ -1,0 +1,61 @@
+
+> g1-dashboard@0.1.0 build
+> next build
+
+⚠ turbopack.root should be absolute, using: D:\Bidyut\g1-dashboard
+▲ Next.js 16.2.4 (Turbopack)
+- Environments: .env.local
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 4.8s
+  Running TypeScript ...
+  Finished TypeScript in 7.5s ...
+  Collecting page data using 27 workers ...
+  Generating static pages using 27 workers (0/36) ...
+  Generating static pages using 27 workers (9/36) 
+  Generating static pages using 27 workers (18/36) 
+  Generating static pages using 27 workers (27/36) 
+✓ Generating static pages using 27 workers (36/36) in 272ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ƒ /
+├ ƒ /_not-found
+├ ƒ /about
+├ ƒ /api/auth/change-password
+├ ƒ /api/auth/login
+├ ƒ /api/auth/logout
+├ ƒ /api/auth/me
+├ ƒ /api/chat
+├ ƒ /api/chat/models
+├ ƒ /api/events
+├ ƒ /api/send
+├ ƒ /api/tickets
+├ ƒ /api/wakewords
+├ ƒ /audit-logs
+├ ƒ /auth/forgot-password
+├ ƒ /auth/login
+├ ƒ /auth/register
+├ ƒ /auth/reset-password
+├ ƒ /change-password
+├ ƒ /chat
+├ ƒ /dashboard
+├ ƒ /documentation
+├ ƒ /employees
+├ ƒ /gesture
+├ ƒ /inventory
+├ ƒ /library
+├ ƒ /mcp
+├ ƒ /navigation
+├ ƒ /notifications
+├ ƒ /persona
+├ ƒ /profile
+├ ƒ /rag
+├ ƒ /settings
+├ ƒ /sign-in
+├ ƒ /tickets
+└ ƒ /wake-word
+
+
+ƒ  (Dynamic)  server-rendered on demand
+

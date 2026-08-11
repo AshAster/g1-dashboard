@@ -4,151 +4,614 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "motion/react";
+
 import {
-  FiTerminal, FiMessageSquare, FiVolume2,
-  FiCamera, FiFileText, FiSettings,
-  FiBookOpen, FiInfo, FiLifeBuoy, FiLogOut,
+  FiTerminal,
+  FiMessageSquare,
+  FiVolume2,
+  FiCamera,
+  FiFileText,
+  FiSettings,
+  FiBookOpen,
+  FiInfo,
+  FiLifeBuoy,
+  FiLogOut,
 } from "react-icons/fi";
+
 import {
   AceternitySidebar,
   SidebarBody,
   SidebarLink,
 } from "@/app/components/ui/aceternity-sidebar";
-import { Avatar, AvatarFallback, AvatarImage } from "@/app/components/ui/avatar";
 
-export const Sidebar = ({ tenant, role }: { tenant?: any; role?: string | null }) => {
-  const [open, setOpen] = useState(false);
+
+// ============================================================
+// SIDEBAR
+// ============================================================
+
+export const Sidebar = ({
+  tenant,
+  role,
+}: {
+  tenant?: any;
+  role?: string | null;
+}) => {
+
+  const [
+    open,
+    setOpen,
+  ] = useState(false);
+
+
   const pathname = usePathname();
-  const isAdmin = role === "admin";
+
+  const isAdmin =
+    role === "admin";
+
+
+  // ==========================================================
+  // TOP LINKS
+  // ==========================================================
 
   const topLinks = [
-    { label: "Integrations",   href: "/mcp",           icon: <FiTerminal className="h-5 w-5 shrink-0 text-sidebar-foreground" /> },
-    { label: "Chat Simulator", href: "/chat",          icon: <FiMessageSquare className="h-5 w-5 shrink-0 text-sidebar-foreground" /> },
-    { label: "Wake Word",      href: "/wake-word",     icon: <FiVolume2 className="h-5 w-5 shrink-0 text-sidebar-foreground" /> },
-    { label: "FRS",            href: "/employees",     icon: <FiCamera className="h-5 w-5 shrink-0 text-sidebar-foreground" /> },
-    ...(isAdmin ? [{ label: "Audit Logs",   href: "/audit-logs",   icon: <FiFileText className="h-5 w-5 shrink-0 text-sidebar-foreground" /> }] : []),
-    { label: "Documentation",  href: "/documentation", icon: <FiBookOpen className="h-5 w-5 shrink-0 text-sidebar-foreground" /> },
-    { label: "About",          href: "/about",         icon: <FiInfo className="h-5 w-5 shrink-0 text-sidebar-foreground" /> },
+
+    {
+      label: "Integrations",
+      href: "/mcp",
+      icon: (
+        <FiTerminal
+          className="
+            h-5
+            w-5
+            shrink-0
+            text-sidebar-foreground
+          "
+        />
+      ),
+    },
+
+    {
+      label: "Chat Simulator",
+      href: "/chat",
+      icon: (
+        <FiMessageSquare
+          className="
+            h-5
+            w-5
+            shrink-0
+            text-sidebar-foreground
+          "
+        />
+      ),
+    },
+
+    {
+      label: "Wake Word",
+      href: "/wake-word",
+      icon: (
+        <FiVolume2
+          className="
+            h-5
+            w-5
+            shrink-0
+            text-sidebar-foreground
+          "
+        />
+      ),
+    },
+
+    {
+      label: "FRS",
+      href: "/employees",
+      icon: (
+        <FiCamera
+          className="
+            h-5
+            w-5
+            shrink-0
+            text-sidebar-foreground
+          "
+        />
+      ),
+    },
+
+
+    // ========================================================
+    // ADMIN ONLY
+    // ========================================================
+
+    ...(isAdmin
+      ? [
+          {
+            label: "Audit Logs",
+            href: "/audit-logs",
+            icon: (
+              <FiFileText
+                className="
+                  h-5
+                  w-5
+                  shrink-0
+                  text-sidebar-foreground
+                "
+              />
+            ),
+          },
+        ]
+      : []),
+
+
+    {
+      label: "Documentation",
+      href: "/documentation",
+      icon: (
+        <FiBookOpen
+          className="
+            h-5
+            w-5
+            shrink-0
+            text-sidebar-foreground
+          "
+        />
+      ),
+    },
+
+    {
+      label: "About",
+      href: "/about",
+      icon: (
+        <FiInfo
+          className="
+            h-5
+            w-5
+            shrink-0
+            text-sidebar-foreground
+          "
+        />
+      ),
+    },
+
   ];
+
+
+  // ==========================================================
+  // BOTTOM LINKS
+  // ==========================================================
 
   const bottomLinks = [
-    ...(isAdmin ? [{ label: "Settings", href: "/settings", icon: <FiSettings className="h-5 w-5 shrink-0 text-sidebar-foreground" /> }] : []),
+
+    ...(isAdmin
+      ? [
+          {
+            label: "Settings",
+            href: "/settings",
+            icon: (
+              <FiSettings
+                className="
+                  h-5
+                  w-5
+                  shrink-0
+                  text-sidebar-foreground
+                "
+              />
+            ),
+          },
+        ]
+      : []),
+
   ];
 
 
+  // ==========================================================
+  // RENDER
+  // ==========================================================
 
   return (
-    <AceternitySidebar open={open} setOpen={setOpen} animate={true}>
-      <SidebarBody className="justify-between gap-10">
 
-        {/* ── Top: Brand logo + Nav links ── */}
-        <div className="flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
-          {/* Brand mark — matches the reference image's rounded rectangle at top */}
-          <BrandLogo open={open} />
+    <AceternitySidebar
+      open={open}
+      setOpen={setOpen}
+      animate={true}
+    >
 
-          <div className="mt-8 flex flex-col gap-2">
-            {topLinks.map((link, idx) => (
-              <SidebarLink
-                key={idx}
-                link={link}
-                selected={pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href))}
-              />
-            ))}
+      <SidebarBody
+        className="
+          justify-between
+          gap-10
+        "
+      >
+
+        {/* ====================================================
+            TOP SECTION
+        ===================================================== */}
+
+        <div
+          className="
+            flex
+            flex-col
+            flex-1
+            overflow-y-auto
+            overflow-x-hidden
+          "
+        >
+
+          {/* Brand */}
+
+          <BrandLogo
+            open={open}
+          />
+
+
+          {/* Navigation */}
+
+          <div
+            className="
+              mt-8
+              flex
+              flex-col
+              gap-2
+            "
+          >
+
+            {topLinks.map(
+              (link, idx) => (
+
+                <SidebarLink
+                  key={idx}
+                  link={link}
+
+                  selected={
+                    pathname === link.href ||
+                    (
+                      link.href !== "/" &&
+                      pathname.startsWith(
+                        link.href
+                      )
+                    )
+                  }
+                />
+
+              )
+            )}
+
           </div>
+
         </div>
 
-        {/* ── Bottom: Raise Ticket + Settings + Profile Avatar ── */}
-        <div className="flex flex-col gap-2">
-          <RaiseTicketButton open={open} />
 
-          {bottomLinks.map((link, idx) => (
-            <SidebarLink
-              key={`b-${idx}`}
-              link={link}
-              selected={pathname === link.href}
-            />
-          ))}
+        {/* ====================================================
+            BOTTOM SECTION
+        ===================================================== */}
 
-          {/* Logout at the very bottom */}
-          <LogoutButton open={open} />
+        <div
+          className="
+            flex
+            flex-col
+            gap-2
+          "
+        >
+
+          {/* Raise Ticket */}
+
+          <RaiseTicketButton
+            open={open}
+          />
+
+
+          {/* Settings */}
+
+          {bottomLinks.map(
+            (link, idx) => (
+
+              <SidebarLink
+                key={`bottom-${idx}`}
+                link={link}
+
+                selected={
+                  pathname === link.href
+                }
+              />
+
+            )
+          )}
+
+
+          {/* Logout */}
+
+          <LogoutButton
+            open={open}
+          />
+
         </div>
 
       </SidebarBody>
+
     </AceternitySidebar>
+
   );
 };
 
-// ─── Brand Logo ───────────────────────────────────────────────────────────────
-// Small rounded-rectangle icon at top of sidebar (like the reference image)
-const BrandLogo = ({ open }: { open: boolean }) => {
+
+
+// ============================================================
+// BRAND LOGO
+// ============================================================
+
+const BrandLogo = ({
+  open,
+}: {
+  open: boolean;
+}) => {
+
   return (
+
     <Link
       href="/"
-      className="relative z-20 flex items-center space-x-2 py-1 px-2"
+      className="
+        relative
+        z-20
+        flex
+        items-center
+        gap-2
+        py-1
+        px-2
+      "
     >
-      <div className="h-6 w-7 shrink-0 rounded-tl-lg rounded-tr-sm rounded-br-lg rounded-bl-sm bg-sidebar-foreground" />
-      <motion.span
-        animate={{
-          display: open ? "inline-block" : "none",
-          opacity: open ? 1 : 0,
-        }}
-        className="font-semibold whitespace-pre text-sidebar-foreground text-sm !p-0 !m-0"
+
+      {/* Logo */}
+
+      <div
+        className="
+          h-6
+          w-7
+          shrink-0
+          rounded-tl-lg
+          rounded-tr-sm
+          rounded-br-lg
+          rounded-bl-sm
+          bg-sidebar-foreground
+        "
+      />
+
+
+      {/* Veda */}
+
+      <span
+        className={`
+          font-semibold
+          whitespace-nowrap
+          text-sidebar-foreground
+          text-sm
+          overflow-hidden
+          transition-all
+          duration-300
+          ease-in-out
+
+          ${
+            open
+              ? "max-w-[180px] opacity-100"
+              : "max-w-0 opacity-0"
+          }
+
+          md:group-hover/nav:max-w-[180px]
+          md:group-hover/nav:opacity-100
+        `}
       >
         Veda
-      </motion.span>
+      </span>
+
     </Link>
+
   );
 };
 
-// ─── Raise a Ticket Button ────────────────────────────────────────────────────
-const RaiseTicketButton = ({ open }: { open: boolean }) => {
+
+
+// ============================================================
+// RAISE TICKET
+// ============================================================
+
+const RaiseTicketButton = ({
+  open,
+}: {
+  open: boolean;
+}) => {
+
   return (
+
     <Link
       href="/tickets"
-      className="flex items-center justify-start gap-2 group/sidebar py-2 px-2 rounded-lg border border-primary/25 bg-primary/5 hover:bg-primary/10 transition-colors w-full relative overflow-hidden"
+      title="Raise a Ticket"
+
+      className="
+        flex
+        items-center
+        justify-start
+        gap-2
+        group/sidebar
+        py-2
+        px-2
+        rounded-lg
+
+        border
+        border-primary/25
+
+        bg-primary/5
+        hover:bg-primary/10
+
+        transition-colors
+
+        w-full
+
+        relative
+        overflow-hidden
+      "
     >
-      {/* Subtle pulse glow */}
+
+      {/* ====================================================
+          ANIMATION
+      ===================================================== */}
+
       <motion.div
-        className="absolute inset-0 bg-primary/10 pointer-events-none rounded-lg"
-        animate={{ opacity: [0.05, 0.3, 0.05] }}
-        transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
-      />
-      <FiLifeBuoy className="h-5 w-5 shrink-0 text-primary z-10" />
-      <motion.span
+        className="
+          absolute
+          inset-0
+          bg-primary/10
+          pointer-events-none
+          rounded-lg
+        "
         animate={{
-          display: open ? "inline-block" : "none",
-          opacity: open ? 1 : 0,
+          opacity: [
+            0.05,
+            0.3,
+            0.05,
+          ],
         }}
-        className="text-sm font-bold text-primary whitespace-pre !p-0 !m-0 z-10"
+        transition={{
+          repeat: Infinity,
+          duration: 3,
+          ease: "easeInOut",
+        }}
+      />
+
+
+      {/* ====================================================
+          ICON
+      ===================================================== */}
+
+      <FiLifeBuoy
+        className="
+          h-5
+          w-5
+          shrink-0
+          text-primary
+          z-10
+        "
+      />
+
+
+      {/* ====================================================
+          TEXT
+      ===================================================== */}
+
+      <span
+        className={`
+          text-sm
+          font-bold
+          text-primary
+          whitespace-nowrap
+          z-10
+          overflow-hidden
+          transition-all
+          duration-300
+          ease-in-out
+
+          ${
+            open
+              ? "max-w-[180px] opacity-100"
+              : "max-w-0 opacity-0"
+          }
+
+          md:group-hover/nav:max-w-[180px]
+          md:group-hover/nav:opacity-100
+        `}
       >
         Raise a Ticket
-      </motion.span>
+      </span>
+
     </Link>
+
   );
 };
 
-// ─── Logout Button ────────────────────────────────────────────────────────────
-const LogoutButton = ({ open }: { open: boolean }) => {
-  const handleLogout = async () => {
-    await fetch("/api/auth/logout", { method: "POST" });
-    window.location.href = "/sign-in";
-  };
+
+
+// ============================================================
+// LOGOUT
+// ============================================================
+
+const LogoutButton = ({
+  open,
+}: {
+  open: boolean;
+}) => {
+
+  const handleLogout =
+    async () => {
+
+      await fetch(
+        "/api/auth/logout",
+        {
+          method: "POST",
+        }
+      );
+
+      window.location.href =
+        "/sign-in";
+    };
+
 
   return (
+
     <button
       onClick={handleLogout}
-      className="flex items-center justify-start gap-2 group/sidebar py-2 px-2 rounded-lg transition-colors w-full text-destructive hover:bg-destructive/10"
+      title="Logout"
+
+      className="
+        flex
+        items-center
+        justify-start
+        gap-2
+        group/sidebar
+        py-2
+        px-2
+        rounded-lg
+        transition-colors
+        w-full
+
+        text-destructive
+
+        hover:bg-destructive/10
+      "
     >
-      <FiLogOut className="h-5 w-5 shrink-0" />
-      <motion.span
-        animate={{
-          display: open ? "inline-block" : "none",
-          opacity: open ? 1 : 0,
-        }}
-        className="text-sm font-medium whitespace-pre !p-0 !m-0"
+
+      {/* Icon */}
+
+      <FiLogOut
+        className="
+          h-5
+          w-5
+          shrink-0
+        "
+      />
+
+
+      {/* Text */}
+
+      <span
+        className={`
+          text-sm
+          font-medium
+          text-destructive
+          whitespace-nowrap
+          overflow-hidden
+          transition-all
+          duration-300
+          ease-in-out
+
+          ${
+            open
+              ? "max-w-[180px] opacity-100"
+              : "max-w-0 opacity-0"
+          }
+
+          md:group-hover/nav:max-w-[180px]
+          md:group-hover/nav:opacity-100
+        `}
       >
         Logout
-      </motion.span>
+      </span>
+
     </button>
+
   );
 };

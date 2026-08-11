@@ -70,7 +70,7 @@ export function ProfileForm({
         
         {/* Header / Logo section */}
         <div className="flex flex-col md:flex-row items-center gap-6 pb-6 border-b border-border">
-          <Avatar className="w-32 h-32 border-4 border-background shadow-lg rounded-full">
+          <Avatar className="w-24 h-24 md:w-32 md:h-32 border-4 border-background shadow-lg rounded-full flex-shrink-0">
             {logo ? <AvatarImage src={logo} className="object-cover rounded-full" /> : null}
             <AvatarFallback className="bg-primary/10 text-primary text-4xl font-semibold rounded-full">
               {initial}
@@ -79,7 +79,7 @@ export function ProfileForm({
           
           <div className="flex-1 w-full text-center md:text-left space-y-3">
             {isEditing ? (
-              <div className="space-y-3 max-w-sm mx-auto md:mx-0">
+              <div className="space-y-3 w-full max-w-sm mx-auto md:mx-0">
                 <div>
                   <label className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-1 block">Company Name</label>
                   <input 

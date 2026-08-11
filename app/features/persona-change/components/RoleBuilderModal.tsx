@@ -188,17 +188,17 @@ export function RoleBuilderModal({
           </section>
         </div>
         
-        <div className="sticky bottom-0 bg-background/95 backdrop-blur z-10 border-t border-border p-6 flex justify-end gap-4">
+        <div className="sticky bottom-0 bg-background/95 backdrop-blur z-10 border-t border-border p-4 sm:p-6 flex flex-col sm:flex-row justify-end gap-4">
           <button 
             onClick={closeRoleBuilder}
-            className="px-6 py-3 font-semibold uppercase tracking-wider text-sm hover:bg-secondary transition-colors"
+            className="w-full sm:w-auto px-6 py-3 font-semibold uppercase tracking-wider text-sm hover:bg-secondary transition-colors"
           >
             Cancel
           </button>
           <button 
             onClick={handleCreateOrUpdate}
             disabled={saving}
-            className="flex items-center gap-2 px-8 py-3 bg-primary text-primary-foreground font-semibold uppercase tracking-wider text-sm hover:opacity-90 transition-opacity disabled:opacity-50 shadow-lg hover:-translate-y-0.5"
+            className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-3 bg-primary text-primary-foreground font-semibold uppercase tracking-wider text-sm hover:opacity-90 transition-opacity disabled:opacity-50 shadow-lg hover:-translate-y-0.5"
           >
             {saving ? <FiRefreshCw className="animate-spin" /> : <FiSave />}
             {editForm.id ? "Save Changes" : "Create Persona"}
