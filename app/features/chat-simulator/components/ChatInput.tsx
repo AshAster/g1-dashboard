@@ -31,7 +31,7 @@ export function ChatInput({ input, setInput, isLoading, sendMessage }: ChatInput
         />
         <div className="flex items-center gap-2 flex-shrink-0">
           {input.length > 0 && (
-            <span className="text-[10px] text-muted-foreground hidden sm:block font-mono">{input.length} chars</span>
+            <span className="text-xs text-muted-foreground hidden sm:block font-mono">{input.length} chars</span>
           )}
           <button
             onClick={() => sendMessage()}

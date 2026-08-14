@@ -19,7 +19,7 @@ export function OtaUpdatesModule() {
               <FiCheckCircle size={150} />
             </div>
             <div className="relative z-10">
-              <div className="text-[10px] uppercase font-mono tracking-widest text-primary mb-2">Current Version</div>
+              <div className="text-xs uppercase font-mono tracking-widest text-primary mb-2">Current Version</div>
               <h4 className="text-3xl font-bold tracking-tighter">v2.4.1-stable</h4>
               <p className="text-sm text-muted-foreground mt-2">Your robot is up to date.</p>
               <div className="mt-6 text-xs font-mono text-muted-foreground">

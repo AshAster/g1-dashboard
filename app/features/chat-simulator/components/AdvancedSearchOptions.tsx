@@ -30,8 +30,8 @@ export function AdvancedSearchOptions({
     <div className="mx-4 mt-3 p-3 bg-accent/50 rounded-lg border border-border space-y-3">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         <div className="space-y-1">
-          <label className="text-xs font-medium text-muted-foreground">Section Path</label>
-          <input
+          <label className="text-xs font-medium text-muted-foreground" htmlFor="section-path">Section Path</label>
+          <input id="section-path"
             type="text"
             value={sectionPath}
             onChange={(e) => setSectionPath(e.target.value)}
@@ -40,8 +40,8 @@ export function AdvancedSearchOptions({
           />
         </div>
         <div className="space-y-1">
-          <label className="text-xs font-medium text-muted-foreground">Parent Section</label>
-          <input
+          <label className="text-xs font-medium text-muted-foreground" htmlFor="parent-section">Parent Section</label>
+          <input id="parent-section"
             type="text"
             value={parentSection}
             onChange={(e) => setParentSection(e.target.value)}
@@ -88,8 +88,8 @@ export function AdvancedSearchOptions({
       </div>
 
       <div className="pt-2">
-        <label className="text-xs font-medium text-muted-foreground mb-1 block">Context Strategy</label>
-        <select value={contextStrategy} onChange={(e) => setContextStrategy(e.target.value as any)} className="w-full px-3 py-1.5 bg-card border border-border rounded-lg text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20">
+        <label className="text-xs font-medium text-muted-foreground mb-1 block" htmlFor="context-strategy">Context Strategy</label>
+        <select id="context-strategy" value={contextStrategy} onChange={(e) => setContextStrategy(e.target.value as any)} className="w-full px-3 py-1.5 bg-card border border-border rounded-lg text-base text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20">
           <option value="hierarchy">Hierarchy (Maintains document structure)</option>
           <option value="relevance">Relevance (Highest semantic match first)</option>
           <option value="chronological">Chronological (Document order)</option>

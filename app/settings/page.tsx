@@ -30,7 +30,7 @@ function Toggle({ checked, onChange }: ToggleProps) {
     <button
       onClick={onChange}
       className={cn(
-        "w-11 h-6 rounded-full relative transition-colors cursor-pointer",
+        "w-11 h-6 rounded-full relative transition-colors cursor-pointer shrink-0",
         checked ? "bg-primary" : "bg-accent"
       )}
     >
@@ -268,67 +268,69 @@ export default function Settings() {
   const showSaveButton = !["users", "rbac", "rollback", "ota", "voice"].includes(activeTab);
 
   return (
-    <div className="flex-1 p-6 bg-background">
-      <div className="max-w-5xl mx-auto">
-        <h1 className="text-3xl font-bold text-foreground mb-6">Settings</h1>
+    <div className="flex-1 p-4 sm:p-6 lg:p-8 bg-background">
+      <div className="max-w-7xl mx-auto">
+        <h1 className="text-2xl sm:text-3xl font-bold text-foreground mb-6">Settings</h1>
 
-        <div className="flex flex-col md:flex-row gap-6">
+        <div className="flex flex-col md:flex-row gap-4 sm:gap-6">
           {/* Sidebar */}
-          <div className="w-full md:w-52 shrink-0 space-y-1">
-            {tabs.map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => {
-                  console.log(`[Settings] Switching to tab: ${tab.id}`);
-                  setActiveTab(tab.id);
-                }}
-                className={cn(
-                  "w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all",
-                  activeTab === tab.id
-                    ? "bg-accent text-accent-foreground"
-                    : "text-muted-foreground hover:bg-card hover:text-foreground"
-                )}
-              >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={tab.icon} />
-                </svg>
-                {tab.label}
-              </button>
-            ))}
+          <div className="w-full md:w-56 shrink-0 bg-card border border-border rounded-2xl p-2 md:sticky md:top-4 md:self-start">
+            <div className="flex md:flex-col gap-1 overflow-x-auto md:overflow-visible [mask-image:linear-gradient(to_right,transparent,black_8px,black_calc(100%-8px),transparent)] md:[mask-image:none]">
+              {tabs.map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => {
+                    console.log(`[Settings] Switching to tab: ${tab.id}`);
+                    setActiveTab(tab.id);
+                  }}
+                  className={cn(
+                    "shrink-0 md:w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium min-h-11 transition-all whitespace-nowrap",
+                    activeTab === tab.id
+                      ? "bg-accent text-accent-foreground"
+                      : "text-muted-foreground hover:bg-background hover:text-foreground"
+                  )}
+                >
+                  <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={tab.icon} />
+                  </svg>
+                  {tab.label}
+                </button>
+              ))}
+            </div>
           </div>
 
           {/* Content */}
           <div className="flex-1 min-w-0">
             {activeTab === "general" && (
-              <div className="bg-card border border-border rounded-2xl p-6 space-y-8">
+              <div className="bg-card border border-border rounded-2xl p-5 sm:p-6 lg:p-8 space-y-6 sm:space-y-8">
                 <div>
                   <h2 className="text-xl font-semibold text-card-foreground mb-1">General Settings</h2>
                   <p className="text-muted-foreground">Configure system-wide preferences</p>
                 </div>
                 <div className="space-y-6">
-                  <div className="flex items-center justify-between py-4 border-b border-border">
-                    <div>
+                  <div className="flex items-center justify-between gap-4 py-4 border-b border-border">
+                    <div className="min-w-0 flex-1">
                       <p className="font-medium text-card-foreground">Auto-save conversations</p>
                       <p className="text-sm text-muted-foreground">Automatically save chat history</p>
                     </div>
                     <Toggle checked={autoSave} onChange={() => setAutoSave(!autoSave)} />
                   </div>
-                  <div className="flex items-center justify-between py-4 border-b border-border">
-                    <div>
+                  <div className="flex items-center justify-between gap-4 py-4 border-b border-border">
+                    <div className="min-w-0 flex-1">
                       <p className="font-medium text-card-foreground">Show source citations</p>
                       <p className="text-sm text-muted-foreground">Display document references in AI responses</p>
                     </div>
                     <Toggle checked={showSources} onChange={() => setShowSources(!showSources)} />
                   </div>
-                  <div className="flex items-center justify-between py-4 border-b border-border">
-                    <div>
+                  <div className="flex items-center justify-between gap-4 py-4 border-b border-border">
+                    <div className="min-w-0 flex-1">
                       <p className="font-medium text-card-foreground">Enable streaming responses</p>
                       <p className="text-sm text-muted-foreground">Stream AI responses in real-time</p>
                     </div>
                     <Toggle checked={streamingEnabled} onChange={() => setStreamingEnabled(!streamingEnabled)} />
                   </div>
-                  <div className="flex items-center justify-between py-4">
-                    <div>
+                  <div className="flex items-center justify-between gap-4 py-4">
+                    <div className="min-w-0 flex-1">
                       <p className="font-medium text-card-foreground">Default to dark mode</p>
                       <p className="text-sm text-muted-foreground">Use dark theme by default</p>
                     </div>
@@ -339,7 +341,7 @@ export default function Settings() {
             )}
 
             {activeTab === "security" && (
-              <div className="bg-card border border-border rounded-2xl p-6 space-y-8">
+              <div className="bg-card border border-border rounded-2xl p-5 sm:p-6 lg:p-8 space-y-6 sm:space-y-8">
                 <div>
                   <h2 className="text-xl font-semibold text-card-foreground mb-1">Security</h2>
                   <p className="text-muted-foreground">Manage your account credentials</p>
@@ -347,19 +349,19 @@ export default function Settings() {
                 
                 <form onSubmit={handleChangePassword} className="space-y-6 max-w-md">
                   {passwordStatus === "success" && (
-                    <div className="p-3 text-sm text-green-600 bg-green-500/10 border border-green-500/20 rounded-lg">
+                    <div className="p-3 text-sm text-success bg-success/10 border border-success/20 rounded-lg">
                       Password successfully updated.
                     </div>
                   )}
                   {passwordStatus === "error" && (
-                    <div className="p-3 text-sm text-red-500 bg-red-500/10 border border-red-500/20 rounded-lg">
+                    <div className="p-3 text-sm text-destructive bg-destructive/10 border border-destructive/20 rounded-lg">
                       {passwordError}
                     </div>
                   )}
 
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-card-foreground">Current Password</label>
-                    <input 
+                    <label className="text-sm font-medium text-card-foreground" htmlFor="current-password">Current Password</label>
+                    <input id="current-password" 
                       type="password" 
                       required
                       value={oldPassword} 
@@ -369,8 +371,8 @@ export default function Settings() {
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-card-foreground">New Password</label>
-                    <input 
+                    <label className="text-sm font-medium text-card-foreground" htmlFor="new-password">New Password</label>
+                    <input id="new-password" 
                       type="password" 
                       required
                       value={changeNewPassword} 
@@ -383,7 +385,7 @@ export default function Settings() {
                   <button
                     type="submit"
                     disabled={passwordStatus === "saving"}
-                    className="px-6 py-2.5 rounded-xl font-medium transition-all bg-primary text-primary-foreground hover:opacity-90 disabled:opacity-50 flex items-center gap-2"
+                    className="w-full sm:w-auto min-h-11 px-6 py-2.5 rounded-xl font-medium transition-all bg-primary text-primary-foreground hover:opacity-90 disabled:opacity-50 flex items-center justify-center gap-2"
                   >
                     {passwordStatus === "saving" ? "Updating..." : "Change Password"}
                   </button>
@@ -392,15 +394,15 @@ export default function Settings() {
             )}
 
             {activeTab === "embedding" && (
-              <div className="bg-card border border-border rounded-2xl p-6 space-y-8">
+              <div className="bg-card border border-border rounded-2xl p-5 sm:p-6 lg:p-8 space-y-6 sm:space-y-8">
                 <div>
                   <h2 className="text-xl font-semibold text-card-foreground mb-1">Embedding Configuration</h2>
                   <p className="text-muted-foreground">Configure document embedding settings</p>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-card-foreground">Provider</label>
-                    <select value={embeddingProvider} onChange={(e) => setEmbeddingProvider(e.target.value)}
+                    <label className="text-sm font-medium text-card-foreground" htmlFor="provider">Provider</label>
+                    <select id="provider" value={embeddingProvider} onChange={(e) => setEmbeddingProvider(e.target.value)}
                       className="w-full px-4 py-2.5 bg-background border border-border rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20">
                       <option value="ollama">Ollama (Local)</option>
                       <option value="openai">OpenAI</option>
@@ -409,8 +411,8 @@ export default function Settings() {
                     </select>
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-card-foreground">Embedding Model</label>
-                    <select value={embeddingModel} onChange={(e) => setEmbeddingModel(e.target.value)}
+                    <label className="text-sm font-medium text-card-foreground" htmlFor="embedding-model">Embedding Model</label>
+                    <select id="embedding-model" value={embeddingModel} onChange={(e) => setEmbeddingModel(e.target.value)}
                       className="w-full px-4 py-2.5 bg-background border border-border rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20">
                       <option value="nomic-embed-text:latest">Nomic Embed Text</option>
                       <option value="all-minilm:latest">All-MiniLM</option>
@@ -418,8 +420,8 @@ export default function Settings() {
                     </select>
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-card-foreground">Dimensions</label>
-                    <input type="number" value={embeddingDimension} onChange={(e) => setEmbeddingDimension(parseInt(e.target.value))}
+                    <label className="text-sm font-medium text-card-foreground" htmlFor="dimensions">Dimensions</label>
+                    <input id="dimensions" type="number" value={embeddingDimension} onChange={(e) => setEmbeddingDimension(parseInt(e.target.value))}
                       min="128" max="4096"
                       className="w-full px-4 py-2.5 bg-background border border-border rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20" />
                   </div>
@@ -428,15 +430,15 @@ export default function Settings() {
             )}
 
             {activeTab === "chunking" && (
-              <div className="bg-card border border-border rounded-2xl p-6 space-y-8">
+              <div className="bg-card border border-border rounded-2xl p-5 sm:p-6 lg:p-8 space-y-6 sm:space-y-8">
                 <div>
                   <h2 className="text-xl font-semibold text-card-foreground mb-1">Chunking Configuration</h2>
                   <p className="text-muted-foreground">Configure how documents are split for indexing</p>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-card-foreground">Chunking Strategy</label>
-                    <select value={chunkingStrategy} onChange={(e) => setChunkingStrategy(e.target.value)}
+                    <label className="text-sm font-medium text-card-foreground" htmlFor="chunking-strategy">Chunking Strategy</label>
+                    <select id="chunking-strategy" value={chunkingStrategy} onChange={(e) => setChunkingStrategy(e.target.value)}
                       className="w-full px-4 py-2.5 bg-background border border-border rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20">
                       <option value="semantic">Semantic (Recommended)</option>
                       <option value="fixed">Fixed Size</option>
@@ -445,22 +447,22 @@ export default function Settings() {
                     </select>
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-card-foreground">Batch Size</label>
-                    <input type="number" value={batchSize} onChange={(e) => setBatchSize(parseInt(e.target.value))}
+                    <label className="text-sm font-medium text-card-foreground" htmlFor="batch-size">Batch Size</label>
+                    <input id="batch-size" type="number" value={batchSize} onChange={(e) => setBatchSize(parseInt(e.target.value))}
                       min="1" max="100"
                       className="w-full px-4 py-2.5 bg-background border border-border rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20" />
                     <p className="text-xs text-muted-foreground">Chunks to process in parallel</p>
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-card-foreground">Chunk Size ({chunkSize} tokens)</label>
-                    <input type="range" min="128" max="2048" step="64" value={chunkSize}
-                      onChange={(e) => setChunkSize(parseInt(e.target.value))} className="w-full" />
+                    <label className="text-sm font-medium text-card-foreground" htmlFor="chunk-size-chunksize-tokens">Chunk Size ({chunkSize} tokens)</label>
+                    <input id="chunk-size-chunksize-tokens" type="range" min="128" max="2048" step="64" value={chunkSize}
+                      onChange={(e) => setChunkSize(parseInt(e.target.value))} className="w-full h-2 my-2 bg-muted rounded-lg appearance-none cursor-pointer accent-primary touch-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-6 [&::-webkit-slider-thumb]:h-6 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-primary [&::-webkit-slider-thumb]:border-4 [&::-webkit-slider-thumb]:border-background [&::-webkit-slider-thumb]:shadow-md [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:transition-transform [&::-webkit-slider-thumb]:hover:scale-110 [&::-webkit-slider-thumb]:active:scale-95 [&::-moz-range-thumb]:w-6 [&::-moz-range-thumb]:h-6 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-primary [&::-moz-range-thumb]:border-4 [&::-moz-range-thumb]:border-background [&::-moz-range-thumb]:shadow-md [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:transition-transform [&::-moz-range-thumb]:hover:scale-110" />
                     <div className="flex justify-between text-xs text-muted-foreground"><span>128</span><span>2048</span></div>
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-card-foreground">Chunk Overlap ({chunkOverlap} tokens)</label>
-                    <input type="range" min="0" max="256" step="16" value={chunkOverlap}
-                      onChange={(e) => setChunkOverlap(parseInt(e.target.value))} className="w-full" />
+                    <label className="text-sm font-medium text-card-foreground" htmlFor="chunk-overlap-chunkoverlap-tokens">Chunk Overlap ({chunkOverlap} tokens)</label>
+                    <input id="chunk-overlap-chunkoverlap-tokens" type="range" min="0" max="256" step="16" value={chunkOverlap}
+                      onChange={(e) => setChunkOverlap(parseInt(e.target.value))} className="w-full h-2 my-2 bg-muted rounded-lg appearance-none cursor-pointer accent-primary touch-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-6 [&::-webkit-slider-thumb]:h-6 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-primary [&::-webkit-slider-thumb]:border-4 [&::-webkit-slider-thumb]:border-background [&::-webkit-slider-thumb]:shadow-md [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:transition-transform [&::-webkit-slider-thumb]:hover:scale-110 [&::-webkit-slider-thumb]:active:scale-95 [&::-moz-range-thumb]:w-6 [&::-moz-range-thumb]:h-6 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-primary [&::-moz-range-thumb]:border-4 [&::-moz-range-thumb]:border-background [&::-moz-range-thumb]:shadow-md [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:transition-transform [&::-moz-range-thumb]:hover:scale-110" />
                     <div className="flex justify-between text-xs text-muted-foreground"><span>0</span><span>256</span></div>
                   </div>
                 </div>
@@ -474,15 +476,15 @@ export default function Settings() {
             )}
 
             {activeTab === "database" && (
-              <div className="bg-card border border-border rounded-2xl p-6 space-y-8">
+              <div className="bg-card border border-border rounded-2xl p-5 sm:p-6 lg:p-8 space-y-6 sm:space-y-8">
                 <div>
                   <h2 className="text-xl font-semibold text-card-foreground mb-1">Vector Database</h2>
                   <p className="text-muted-foreground">Configure vector search and storage</p>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-card-foreground">Vector Database</label>
-                    <select value={vectorDb} onChange={(e) => setVectorDb(e.target.value)}
+                    <label className="text-sm font-medium text-card-foreground" htmlFor="vector-database">Vector Database</label>
+                    <select id="vector-database" value={vectorDb} onChange={(e) => setVectorDb(e.target.value)}
                       className="w-full px-4 py-2.5 bg-background border border-border rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20">
                       <option value="chroma">ChromaDB</option>
                       <option value="qdrant">Qdrant</option>
@@ -491,20 +493,20 @@ export default function Settings() {
                     </select>
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-card-foreground">Top K Results ({topK})</label>
-                    <input type="range" min="1" max="20" step="1" value={topK}
-                      onChange={(e) => setTopK(parseInt(e.target.value))} className="w-full" />
+                    <label className="text-sm font-medium text-card-foreground" htmlFor="top-k-results-topk">Top K Results ({topK})</label>
+                    <input id="top-k-results-topk" type="range" min="1" max="20" step="1" value={topK}
+                      onChange={(e) => setTopK(parseInt(e.target.value))} className="w-full h-2 my-2 bg-muted rounded-lg appearance-none cursor-pointer accent-primary touch-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-6 [&::-webkit-slider-thumb]:h-6 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-primary [&::-webkit-slider-thumb]:border-4 [&::-webkit-slider-thumb]:border-background [&::-webkit-slider-thumb]:shadow-md [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:transition-transform [&::-webkit-slider-thumb]:hover:scale-110 [&::-webkit-slider-thumb]:active:scale-95 [&::-moz-range-thumb]:w-6 [&::-moz-range-thumb]:h-6 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-primary [&::-moz-range-thumb]:border-4 [&::-moz-range-thumb]:border-background [&::-moz-range-thumb]:shadow-md [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:transition-transform [&::-moz-range-thumb]:hover:scale-110" />
                     <p className="text-xs text-muted-foreground">Number of chunks to retrieve</p>
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-card-foreground">Similarity Threshold ({similarityThreshold})</label>
-                    <input type="range" min="0" max="1" step="0.05" value={similarityThreshold}
-                      onChange={(e) => setSimilarityThreshold(parseFloat(e.target.value))} className="w-full" />
+                    <label className="text-sm font-medium text-card-foreground" htmlFor="similarity-threshold-similaritythreshold">Similarity Threshold ({similarityThreshold})</label>
+                    <input id="similarity-threshold-similaritythreshold" type="range" min="0" max="1" step="0.05" value={similarityThreshold}
+                      onChange={(e) => setSimilarityThreshold(parseFloat(e.target.value))} className="w-full h-2 my-2 bg-muted rounded-lg appearance-none cursor-pointer accent-primary touch-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-6 [&::-webkit-slider-thumb]:h-6 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-primary [&::-webkit-slider-thumb]:border-4 [&::-webkit-slider-thumb]:border-background [&::-webkit-slider-thumb]:shadow-md [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:transition-transform [&::-webkit-slider-thumb]:hover:scale-110 [&::-webkit-slider-thumb]:active:scale-95 [&::-moz-range-thumb]:w-6 [&::-moz-range-thumb]:h-6 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-primary [&::-moz-range-thumb]:border-4 [&::-moz-range-thumb]:border-background [&::-moz-range-thumb]:shadow-md [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:transition-transform [&::-moz-range-thumb]:hover:scale-110" />
                     <p className="text-xs text-muted-foreground">Minimum similarity score</p>
                   </div>
                 </div>
-                <div className="flex items-center justify-between py-4 border-t border-border">
-                  <div>
+                <div className="flex items-center justify-between gap-4 py-4 border-t border-border">
+                  <div className="min-w-0 flex-1">
                     <p className="font-medium text-card-foreground">Auto-optimize indices</p>
                     <p className="text-sm text-muted-foreground">Automatically optimize vector indices periodically</p>
                   </div>
@@ -514,33 +516,33 @@ export default function Settings() {
             )}
 
             {activeTab === "api" && (
-              <div className="bg-card border border-border rounded-2xl p-6 space-y-8">
+              <div className="bg-card border border-border rounded-2xl p-5 sm:p-6 lg:p-8 space-y-6 sm:space-y-8">
                 <div>
                   <h2 className="text-xl font-semibold text-card-foreground mb-1">API Keys</h2>
                   <p className="text-muted-foreground">Manage your API credentials for external services</p>
                 </div>
                 <div className="space-y-6">
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-card-foreground">OpenAI API Key</label>
-                    <input type="password" value={openaiKey} onChange={(e) => setOpenaiKey(e.target.value)} placeholder="sk-..."
+                    <label className="text-sm font-medium text-card-foreground" htmlFor="openai-api-key">OpenAI API Key</label>
+                    <input id="openai-api-key" type="password" value={openaiKey} onChange={(e) => setOpenaiKey(e.target.value)} placeholder="sk-..."
                       className="w-full px-4 py-2.5 bg-background border border-border rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20" />
                     <p className="text-xs text-muted-foreground">Required for OpenAI models and embeddings</p>
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-card-foreground">Anthropic API Key</label>
-                    <input type="password" value={anthropicKey} onChange={(e) => setAnthropicKey(e.target.value)} placeholder="sk-ant-..."
+                    <label className="text-sm font-medium text-card-foreground" htmlFor="anthropic-api-key">Anthropic API Key</label>
+                    <input id="anthropic-api-key" type="password" value={anthropicKey} onChange={(e) => setAnthropicKey(e.target.value)} placeholder="sk-ant-..."
                       className="w-full px-4 py-2.5 bg-background border border-border rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20" />
                     <p className="text-xs text-muted-foreground">Required for Claude models</p>
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-card-foreground">Cohere API Key</label>
-                    <input type="password" value={cohereKey} onChange={(e) => setCohereKey(e.target.value)} placeholder="..."
+                    <label className="text-sm font-medium text-card-foreground" htmlFor="cohere-api-key">Cohere API Key</label>
+                    <input id="cohere-api-key" type="password" value={cohereKey} onChange={(e) => setCohereKey(e.target.value)} placeholder="..."
                       className="w-full px-4 py-2.5 bg-background border border-border rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20" />
                     <p className="text-xs text-muted-foreground">Required for Cohere models and embeddings</p>
                   </div>
                 </div>
-                <div className="bg-blue-500/10 rounded-xl p-4 border border-blue-500/20">
-                  <p className="text-sm text-blue-600 font-medium mb-1">Security Note</p>
+                <div className="bg-primary/10 rounded-xl p-4 border border-primary/20">
+                  <p className="text-sm text-primary font-medium mb-1">Security Note</p>
                   <p className="text-sm text-muted-foreground">
                     API keys are stored locally and never sent to our servers.
                   </p>
@@ -552,7 +554,7 @@ export default function Settings() {
             {activeTab === "rollback" && <RollbackModule />}
             {activeTab === "ota" && <OtaUpdatesModule />}
             {activeTab === "voice" && (
-              <div className="bg-card border border-border rounded-2xl p-6 space-y-8">
+              <div className="bg-card border border-border rounded-2xl p-5 sm:p-6 lg:p-8 space-y-6 sm:space-y-8">
                 <div>
                   <h2 className="text-xl font-semibold text-card-foreground mb-1">Voice Settings</h2>
                   <p className="text-muted-foreground">Configure acoustic parameters and speech synthesis</p>
@@ -564,15 +566,15 @@ export default function Settings() {
         </div>
 
         {showSaveButton && activeTab !== "security" && (
-          <div className="flex justify-end mt-8">
+          <div className="flex justify-end mt-6 sm:mt-8">
             <button
               onClick={saveSettings}
               disabled={saveStatus === "saving"}
               className={cn(
-                "px-6 py-3 rounded-xl font-medium transition-all flex items-center gap-2",
+                "w-full sm:w-auto px-6 py-3 rounded-xl font-medium transition-all flex items-center justify-center gap-2",
                 saveStatus === "saving" ? "bg-muted text-muted-foreground cursor-wait"
-                  : saveStatus === "saved" ? "bg-green-500 text-white"
-                  : saveStatus === "error" ? "bg-red-500 text-white"
+                  : saveStatus === "saved" ? "bg-success text-white"
+                  : saveStatus === "error" ? "bg-destructive text-white"
                   : "bg-primary text-primary-foreground hover:opacity-90"
               )}
             >

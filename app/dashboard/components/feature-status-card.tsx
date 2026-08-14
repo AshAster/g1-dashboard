@@ -27,15 +27,15 @@ export function FeatureStatusCard({
 }: FeatureStatusCardProps) {
   
   const statusColors = {
-    success: "bg-green-500/10 text-green-500 border-green-500/20",
-    warning: "bg-amber-500/10 text-amber-500 border-amber-500/20",
+    success: "bg-success/10 text-success border-success/20",
+    warning: "bg-warning/10 text-warning border-warning/20",
     neutral: "bg-blue-500/10 text-blue-500 border-blue-500/20",
     offline: "bg-muted text-muted-foreground border-border"
   };
 
   const dotColors = {
-    success: "bg-green-500",
-    warning: "bg-amber-500",
+    success: "bg-success",
+    warning: "bg-warning",
     neutral: "bg-blue-500",
     offline: "bg-muted-foreground"
   };
@@ -61,7 +61,7 @@ export function FeatureStatusCard({
         <div className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">Live Status Preview</div>
         <div className="flex flex-wrap items-center gap-2">
           <div className={`flex items-center gap-2 w-fit px-3 py-1.5 rounded-lg border shadow-sm ${statusColors[statusIndicator]}`}>
-            {statusIndicator === 'success' && <span className="animate-pulse w-1.5 h-1.5 rounded-full bg-green-500"></span>}
+            {statusIndicator === 'success' && <span className="animate-pulse w-1.5 h-1.5 rounded-full bg-success"></span>}
             {statusIndicator !== 'success' && <span className={`w-1.5 h-1.5 rounded-full ${dotColors[statusIndicator]}`}></span>}
             <span className="text-sm font-semibold tracking-wide">{statusText}</span>
           </div>

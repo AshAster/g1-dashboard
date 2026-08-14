@@ -57,8 +57,8 @@ export function FeatureGate({ featureKey, children, hideWhenDisabled = false }: 
         {/* Subtle lock overlay on hover */}
         <div className="absolute inset-0 z-10 rounded-[inherit] bg-transparent hover:bg-foreground/5 transition-colors flex items-center justify-center opacity-0 hover:opacity-100">
           <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-background/90 border border-foreground/10 shadow-sm">
-            <ShieldOff className="w-3 h-3 text-amber-500" />
-            <span className="text-[10px] font-mono text-amber-500 uppercase tracking-widest whitespace-nowrap">
+            <ShieldOff className="w-3 h-3 text-warning" />
+            <span className="text-xs font-mono text-warning uppercase tracking-widest whitespace-nowrap">
               Not Enabled
             </span>
           </div>
@@ -77,12 +77,16 @@ export function FeatureGate({ featureKey, children, hideWhenDisabled = false }: 
           onClick={() => setShowDisclaimer(false)}
         >
           <div
-            className="bg-background border border-foreground/10 rounded-2xl shadow-2xl max-w-sm w-full p-8 text-center space-y-5 relative"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="feature-gate-title"
+            className="bg-background border border-foreground/10 rounded-2xl shadow-2xl max-w-sm w-full max-h-[90dvh] overflow-y-auto p-8 text-center space-y-5 relative"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close button */}
             <button
               onClick={() => setShowDisclaimer(false)}
+              aria-label="Close"
               className="absolute top-4 right-4 p-1.5 rounded-lg hover:bg-foreground/5 text-foreground/40 hover:text-foreground transition-colors"
             >
               <X className="w-4 h-4" />
@@ -90,15 +94,15 @@ export function FeatureGate({ featureKey, children, hideWhenDisabled = false }: 
 
             {/* Icon */}
             <div className="relative mx-auto w-16 h-16">
-              <div className="absolute inset-0 rounded-full bg-amber-500/10 animate-pulse" />
-              <div className="relative w-16 h-16 rounded-full bg-amber-500/10 border border-amber-500/20 flex items-center justify-center">
-                <ShieldOff className="w-7 h-7 text-amber-500" />
+              <div className="absolute inset-0 rounded-full bg-warning/10 animate-pulse" />
+              <div className="relative w-16 h-16 rounded-full bg-warning/10 border border-warning/20 flex items-center justify-center">
+                <ShieldOff className="w-7 h-7 text-warning" />
               </div>
             </div>
 
             {/* Title */}
             <div className="space-y-1.5">
-              <h3 className="text-lg font-bold text-foreground tracking-tight">
+              <h3 id="feature-gate-title" className="text-lg font-bold text-foreground tracking-tight">
                 Feature Not Available
               </h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
@@ -108,13 +112,13 @@ export function FeatureGate({ featureKey, children, hideWhenDisabled = false }: 
             </div>
 
             {/* Contact badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-amber-500/20 bg-amber-500/5 text-amber-600 text-xs font-semibold">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-warning/20 bg-warning/5 text-warning text-xs font-semibold">
               <Mail className="w-3 h-3" />
               Contact admin for this feature
             </div>
 
             {/* Feature key */}
-            <p className="text-[10px] font-mono text-muted-foreground/40 uppercase tracking-widest">
+            <p className="text-xs font-mono text-muted-foreground/40 uppercase tracking-widest">
               feature: {featureKey}
             </p>
 

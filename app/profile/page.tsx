@@ -31,7 +31,7 @@ export default async function ProfilePage() {
   }
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-dvh">
       <ProfileFeature tenant={tenant} />
     </div>
   );

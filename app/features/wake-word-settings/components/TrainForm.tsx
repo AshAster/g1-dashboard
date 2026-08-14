@@ -32,10 +32,10 @@ export function TrainForm({
         <p className="text-xs font-mono text-muted-foreground uppercase">// training configuration</p>
 
         <div>
-          <label className="block text-[10px] font-mono text-muted-foreground uppercase mb-2">
+          <label className="block text-xs font-mono text-muted-foreground uppercase mb-2" htmlFor="wake-phrase">
             Wake Phrase
           </label>
-          <input
+          <input id="wake-phrase"
             type="text"
             value={phrase}
             onChange={e => setPhrase(e.target.value)}
@@ -43,16 +43,16 @@ export function TrainForm({
             disabled={!!activeJob}
             className="w-full bg-background border border-border px-4 py-3 font-mono text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary disabled:opacity-40 uppercase"
           />
-          <p className="text-[10px] font-mono text-muted-foreground mt-1">
+          <p className="text-xs font-mono text-muted-foreground mt-1">
             2-3 words work best. Avoid common phrases.
           </p>
         </div>
 
         <div>
-          <label className="block text-[10px] font-mono text-muted-foreground uppercase mb-3">
+          <label className="block text-xs font-mono text-muted-foreground uppercase mb-3">
             Training Quality
           </label>
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {(["draft", "standard", "production"] as const).map(q => {
               const info = qualityInfo[q];
               const time = backend === "local_agx" ? 
@@ -70,9 +70,9 @@ export function TrainForm({
                     }`}
                 >
                   <p className="font-mono text-xs font-bold uppercase">{info.label}</p>
-                  <p className="font-mono text-[10px] mt-2 opacity-70">{info.steps} steps</p>
-                  <p className="font-mono text-[10px] opacity-70">{info.samples} clips</p>
-                  <p className="font-mono text-[10px] mt-1 text-primary/70">~{time}</p>
+                  <p className="font-mono text-xs mt-2 opacity-70">{info.steps} steps</p>
+                  <p className="font-mono text-xs opacity-70">{info.samples} clips</p>
+                  <p className="font-mono text-xs mt-1 text-primary/70">~{time}</p>
                 </button>
               );
             })}
@@ -80,7 +80,7 @@ export function TrainForm({
         </div>
 
         <div>
-          <label className="block text-[10px] font-mono text-muted-foreground uppercase mb-2">
+          <label className="block text-xs font-mono text-muted-foreground uppercase mb-2" htmlFor="sample-upload">
             Audio Samples (optional but recommended)
           </label>
           <div className="border border-dashed border-border/50 p-6 text-center">
@@ -100,7 +100,7 @@ export function TrainForm({
                   : "[ DROP WAV FILES OR CLICK TO UPLOAD ]"
                 }
               </p>
-              <p className="font-mono text-[10px] text-muted-foreground/50 mt-2">
+              <p className="font-mono text-xs text-muted-foreground/50 mt-2">
                 50+ recordings = better Indian accent accuracy (85-95% recall)
               </p>
             </label>
@@ -108,7 +108,7 @@ export function TrainForm({
           {files.length > 0 && (
             <div className="mt-2 space-y-1 max-h-24 overflow-y-auto">
               {files.map((f, i) => (
-                <p key={i} className="font-mono text-[10px] text-muted-foreground">
+                <p key={i} className="font-mono text-xs text-muted-foreground">
                   ▸ {f.name} ({(f.size / 1024).toFixed(0)} KB)
                 </p>
               ))}
@@ -117,8 +117,8 @@ export function TrainForm({
         </div>
 
         {backend === "local_agx" && !maintStatus?.maintenance_mode && (
-          <div className="border border-yellow-400/30 bg-yellow-400/5 p-3">
-            <p className="font-mono text-[10px] text-yellow-400 uppercase">
+          <div className="border border-warning/30 bg-warning/5 p-3">
+            <p className="font-mono text-xs text-warning uppercase">
               ⚠ Robot not in maintenance mode — enable it above before training
             </p>
           </div>
@@ -133,14 +133,14 @@ export function TrainForm({
             {submitting ? "[ STARTING... ]" : "[ START TRAINING ]"}
           </button>
           {activeJob && (
-            <p className="font-mono text-[10px] text-yellow-400 uppercase">
+            <p className="font-mono text-xs text-warning uppercase">
               Job #{activeJob.id} already running — wait or cancel it
             </p>
           )}
         </div>
 
         {submitMsg && (
-          <p className={`font-mono text-xs uppercase ${submitMsg.includes("failed") || submitMsg.includes("Enter") ? "text-red-400" : "text-green-400"}`}>
+          <p className={`font-mono text-xs uppercase ${submitMsg.includes("failed") || submitMsg.includes("Enter") ? "text-destructive" : "text-success"}`}>
             {submitMsg}
           </p>
         )}

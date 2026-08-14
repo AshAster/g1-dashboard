@@ -22,7 +22,7 @@ export function JobHistory({ jobs, activeJob, fetchJobs, deployJob, syncJob }: J
         </div>
         <button
           onClick={fetchJobs}
-          className="px-3 py-1 border border-border text-muted-foreground font-mono text-[10px] uppercase hover:border-primary hover:text-primary transition-colors"
+          className="px-3 py-1 border border-border text-muted-foreground font-mono text-xs uppercase hover:border-primary hover:text-primary transition-colors"
         >
           REFRESH
         </button>
@@ -33,43 +33,43 @@ export function JobHistory({ jobs, activeJob, fetchJobs, deployJob, syncJob }: J
           <span className="text-muted-foreground font-mono text-xs uppercase tracking-widest">[ No training jobs yet ]</span>
         </div>
       ) : (
-        <div className="border border-border overflow-hidden">
-          <div className="grid grid-cols-12 gap-0 border-b border-border bg-muted/20 px-4 py-2">
+        <div className="border border-border overflow-x-auto">
+          <div className="grid grid-cols-12 gap-0 border-b border-border bg-muted/20 px-4 py-2 min-w-[720px]">
             {["ID", "Phrase", "Quality", "Backend", "Status", "Recall", "FPPH", "Created", "Actions"].map((h, i) => (
-              <div key={h} className={`font-mono text-[10px] text-muted-foreground uppercase ${i === 1 ? "col-span-2" : i === 7 ? "col-span-2" : ""}`}>
+              <div key={h} className={`font-mono text-xs text-muted-foreground uppercase ${i === 1 ? "col-span-2" : i === 7 ? "col-span-2" : ""}`}>
                 {h}
               </div>
             ))}
           </div>
 
           {jobs.map(job => (
-            <div key={job.id} className="grid grid-cols-12 gap-0 border-b border-border/50 px-4 py-3 hover:bg-muted/10 transition-colors items-center">
+            <div key={job.id} className="grid grid-cols-12 gap-0 border-b border-border/50 px-4 py-3 hover:bg-muted/10 transition-colors items-center min-w-[720px]">
               <div className="font-mono text-xs text-muted-foreground">#{job.id}</div>
               <div className="col-span-2 font-mono text-xs text-foreground uppercase truncate">{job.wake_phrase}</div>
-              <div className="font-mono text-[10px] text-muted-foreground uppercase">{job.quality}</div>
-              <div className="font-mono text-[10px] text-muted-foreground uppercase">
+              <div className="font-mono text-xs text-muted-foreground uppercase">{job.quality}</div>
+              <div className="font-mono text-xs text-muted-foreground uppercase">
                 {job.backend === "local_agx" ? "AGX" : "KAGGLE"}
               </div>
               <div className="flex items-center gap-1.5">
                 <StatusDot s={job.status} />
-                <span className={`font-mono text-[10px] uppercase ${statusColor(job.status)}`}>
+                <span className={`font-mono text-xs uppercase ${statusColor(job.status)}`}>
                   {job.status}
                 </span>
               </div>
-              <div className="font-mono text-[10px] text-muted-foreground">
+              <div className="font-mono text-xs text-muted-foreground">
                 {job.recall ? `${(job.recall * 100).toFixed(1)}%` : "—"}
               </div>
-              <div className="font-mono text-[10px] text-muted-foreground">
+              <div className="font-mono text-xs text-muted-foreground">
                 {job.fpph ? job.fpph.toFixed(2) : "—"}
               </div>
-              <div className="col-span-2 font-mono text-[10px] text-muted-foreground">
+              <div className="col-span-2 font-mono text-xs text-muted-foreground">
                 {fmtDate(job.created_at)}
               </div>
               <div className="flex items-center gap-2">
                 {job.status === "ready" && (
                   <button
                     onClick={() => deployJob(job.id)}
-                    className="px-2 py-1 border border-green-400/40 text-green-400 font-mono text-[10px] uppercase hover:bg-green-400/10 transition-colors"
+                    className="px-2 py-1 border border-success/40 text-success font-mono text-xs uppercase hover:bg-success/10 transition-colors"
                   >
                     DEPLOY
                   </button>
@@ -77,13 +77,13 @@ export function JobHistory({ jobs, activeJob, fetchJobs, deployJob, syncJob }: J
                 {job.backend === "kaggle" && isActive(job.status) && (
                   <button
                     onClick={() => syncJob(job.id)}
-                    className="px-2 py-1 border border-border text-muted-foreground font-mono text-[10px] uppercase hover:border-primary hover:text-primary transition-colors"
+                    className="px-2 py-1 border border-border text-muted-foreground font-mono text-xs uppercase hover:border-primary hover:text-primary transition-colors"
                   >
                     SYNC
                   </button>
                 )}
                 {job.error_message && (
-                  <span className="font-mono text-[10px] text-red-400/70 truncate max-w-24" title={job.error_message}>
+                  <span className="font-mono text-xs text-destructive/70 truncate max-w-24" title={job.error_message}>
                     ERR
                   </span>
                 )}

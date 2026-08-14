@@ -3,7 +3,7 @@ import React from "react";
 export function QuickReference() {
   return (
     <section className="border-t border-border pt-8">
-      <p className="text-[10px] font-mono text-muted-foreground uppercase mb-4">// sample count guide</p>
+      <p className="text-xs font-mono text-muted-foreground uppercase mb-4">// sample count guide</p>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {[
           { samples: "0 recordings", recall: "60-75%", note: "TTS only, US accent" },
@@ -13,7 +13,7 @@ export function QuickReference() {
           <div key={r.samples} className="border border-border/50 p-4">
             <p className="font-mono text-xs text-foreground uppercase">{r.samples}</p>
             <p className="font-mono text-lg font-bold text-primary mt-1">{r.recall}</p>
-            <p className="font-mono text-[10px] text-muted-foreground mt-1">{r.note}</p>
+            <p className="font-mono text-xs text-muted-foreground mt-1">{r.note}</p>
           </div>
         ))}
       </div>

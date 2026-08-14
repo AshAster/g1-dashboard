@@ -99,7 +99,7 @@ export default function ChangePasswordPage() {
                   onChange={(e) => setOldPassword(e.target.value)}
                   placeholder="••••••••"
                   required
-                  className="w-full h-11 px-4 pr-11 rounded-lg bg-bg-elevated border border-border text-sm text-text-primary placeholder:text-text-muted focus:outline-none focus:border-accent-blue/60 focus:ring-1 focus:ring-accent-blue/20 transition-all"
+                  className="w-full h-11 px-4 pr-11 rounded-lg bg-bg-elevated border border-border text-base text-text-primary placeholder:text-text-muted focus:outline-none focus:border-accent-blue/60 focus:ring-1 focus:ring-accent-blue/20 transition-all"
                 />
                 <button
                   type="button"
@@ -129,7 +129,7 @@ export default function ChangePasswordPage() {
                   onChange={(e) => setNewPassword(e.target.value)}
                   placeholder="••••••••"
                   required
-                  className="w-full h-11 px-4 pr-11 rounded-lg bg-bg-elevated border border-border text-sm text-text-primary placeholder:text-text-muted focus:outline-none focus:border-accent-blue/60 focus:ring-1 focus:ring-accent-blue/20 transition-all"
+                  className="w-full h-11 px-4 pr-11 rounded-lg bg-bg-elevated border border-border text-base text-text-primary placeholder:text-text-muted focus:outline-none focus:border-accent-blue/60 focus:ring-1 focus:ring-accent-blue/20 transition-all"
                 />
                 <button
                   type="button"
@@ -159,7 +159,7 @@ export default function ChangePasswordPage() {
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   placeholder="••••••••"
                   required
-                  className="w-full h-11 px-4 pr-11 rounded-lg bg-bg-elevated border border-border text-sm text-text-primary placeholder:text-text-muted focus:outline-none focus:border-accent-blue/60 focus:ring-1 focus:ring-accent-blue/20 transition-all"
+                  className="w-full h-11 px-4 pr-11 rounded-lg bg-bg-elevated border border-border text-base text-text-primary placeholder:text-text-muted focus:outline-none focus:border-accent-blue/60 focus:ring-1 focus:ring-accent-blue/20 transition-all"
                 />
               </div>
             </div>

@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:is(.dark *));
+
 :root {
   /* Light Mode - Twitter/X Blue Theme */
   --card: #f7f8f8;
@@ -17,7 +19,7 @@
   --popover: #ffffff;
   --primary: #1e9df1;
   --sidebar: #eef0f2;
-  --secondary: #0f1419;
+  --secondary: #E5E5E6;
   --background: #ffffff;
   --foreground: #0f1419;
   --destructive: #f4212e;
@@ -32,15 +34,22 @@
   --shadow-offset-x: 0px;
   --shadow-offset-y: 2px;
   --sidebar-primary: #1e9df1;
-  --muted-foreground: #0f1419;
+  --muted-foreground: #5b7083;
   --accent-foreground: #1e9df1;
   --popover-foreground: #0f1419;
   --primary-foreground: #ffffff;
   --sidebar-foreground: #0f1419;
-  --secondary-foreground: #ffffff;
+  --secondary-foreground: #0f1419;
   --destructive-foreground: #ffffff;
   --sidebar-accent-foreground: #1e9df1;
   --sidebar-primary-foreground: #ffffff;
+  --error: #f4212e;
+  --accent-blue: #1e9df1;
+  --accent-purple: #8b5cf6;
+  --success: #16a34a;
+  --success-foreground: #ffffff;
+  --warning: #d97706;
+  --warning-foreground: #ffffff;
 }
 
 .dark {
@@ -59,7 +68,7 @@
   --popover: #000000;
   --primary: #1c9cf0;
   --sidebar: #17181c;
-  --secondary: #f0f3f4;
+  --secondary: #181818;
   --background: #000000;
   --foreground: #e7e9ea;
   --destructive: #f4212e;
@@ -69,15 +78,22 @@
   --sidebar-border: #38444d;
   --card-foreground: #d9d9d9;
   --sidebar-primary: #1da1f2;
-  --muted-foreground: #72767a;
+  --muted-foreground: #8b98a5;
   --accent-foreground: #1c9cf0;
   --popover-foreground: #e7e9ea;
   --primary-foreground: #ffffff;
   --sidebar-foreground: #d9d9d9;
-  --secondary-foreground: #0f1419;
+  --secondary-foreground: #e7e9ea;
   --destructive-foreground: #ffffff;
   --sidebar-accent-foreground: #1c9cf0;
   --sidebar-primary-foreground: #ffffff;
+  --error: #f4212e;
+  --accent-blue: #1c9cf0;
+  --accent-purple: #a78bfa;
+  --success: #4ade80;
+  --success-foreground: #052e13;
+  --warning: #fbbf24;
+  --warning-foreground: #451a03;
 }
 
 @theme inline {
@@ -87,7 +103,17 @@
   --color-muted: var(--muted);
   --color-accent: var(--accent);
   --color-border: var(--border);
-  --color-radius: var(--radius);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-error: var(--error);
+  --color-accent-blue: var(--accent-blue);
+  --color-accent-purple: var(--accent-purple);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
@@ -144,13 +170,29 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  /* Hide native scrollbar while keeping scroll functionality */
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE/Edge */
+  /* Thin, theme-tinted scrollbar — kept visible for position feedback and drag affordance. */
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
 }
 
 body::-webkit-scrollbar {
-  display: none; /* Chrome/Safari/Opera */
+  width: 10px;
+  height: 10px;
+}
+
+body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: var(--border);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background-color: var(--muted-foreground);
 }
 
 @keyframes marquee-scroll {

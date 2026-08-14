@@ -84,7 +84,7 @@ export function MessageList({ messages, showSources, setShowSources, sendMessage
                 <div className="flex items-center gap-2 px-1">
                   <button
                     onClick={() => setShowSources(showSources === msg.id ? null : msg.id)}
-                    className="flex items-center gap-1 px-2 py-0.5 bg-accent/80 hover:bg-accent rounded-full text-[10px] font-medium text-accent-foreground transition-all border border-border/30"
+                    className="flex items-center gap-1 px-2 py-0.5 bg-accent/80 hover:bg-accent rounded-full text-xs font-medium text-accent-foreground transition-all border border-border/30"
                   >
                     <svg className="w-3 h-3 mr-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -94,14 +94,14 @@ export function MessageList({ messages, showSources, setShowSources, sendMessage
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
                   </button>
-                  <span className="text-[10px] text-muted-foreground font-mono">
+                  <span className="text-xs text-muted-foreground font-mono">
                     {msg.timestamp.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
                   </span>
                 </div>
               )}
 
               {msg.role === "user" && (
-                <span className="text-[10px] text-muted-foreground font-mono px-1">
+                <span className="text-xs text-muted-foreground font-mono px-1">
                   {msg.timestamp.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
                 </span>
               )}
@@ -118,7 +118,7 @@ export function MessageList({ messages, showSources, setShowSources, sendMessage
                           <span className="truncate">{source.document}</span>
                           {source.page && <span className="text-muted-foreground font-normal shrink-0">• Page {source.page}</span>}
                         </span>
-                        <span className="text-[9px] text-green-500 font-bold shrink-0 bg-green-500/10 px-1.5 py-0.5 rounded border border-green-500/15">{(source.score * 100).toFixed(0)}% Match</span>
+                        <span className="text-xs text-success font-bold shrink-0 bg-success/10 px-1.5 py-0.5 rounded border border-success/15">{(source.score * 100).toFixed(0)}% Match</span>
                       </div>
                       <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed">{source.excerpt}</p>
                     </div>

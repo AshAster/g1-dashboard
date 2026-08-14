@@ -181,7 +181,7 @@ export function NavigationModule() {
           
           <button 
             onClick={handleEmergencyStop}
-            className="flex items-center gap-2 px-8 py-4 bg-red-500/20 text-red-500 border border-red-500/50 hover:bg-red-500 hover:text-white transition-all rounded-lg font-bold uppercase tracking-widest"
+            className="flex items-center gap-2 px-8 py-4 bg-destructive/20 text-destructive border border-destructive/50 hover:bg-destructive hover:text-white transition-all rounded-lg font-bold uppercase tracking-widest"
           >
             <Square className="w-5 h-5 fill-current" />
             Emergency Stop
@@ -201,7 +201,7 @@ export function NavigationModule() {
                 <button
                   disabled={slamBusy}
                   onClick={handleStartMapping}
-                  className="w-full py-4 rounded bg-green-500/10 text-green-500 border border-green-500/30 hover:bg-green-500/20 font-bold tracking-widest transition-all flex justify-center items-center gap-2"
+                  className="w-full py-4 rounded bg-success/10 text-success border border-success/30 hover:bg-success/20 font-bold tracking-widest transition-all flex justify-center items-center gap-2"
                 >
                   <Play className="w-4 h-4" /> Start New Map
                 </button>
@@ -242,7 +242,7 @@ export function NavigationModule() {
                     <div key={map.id} className={`p-4 rounded border ${activeMap?.id === map.id ? 'border-primary bg-primary/5' : 'border-border bg-background'} flex flex-col gap-3 transition-colors`}>
                       <div className="flex justify-between items-center">
                         <span className="font-mono font-bold">{map.name}</span>
-                        <button onClick={() => handleDeleteMap(map.id)} className="text-muted-foreground hover:text-red-400 p-1">
+                        <button onClick={() => handleDeleteMap(map.id)} className="text-muted-foreground hover:text-destructive p-1">
                           <Trash2 className="w-4 h-4" />
                         </button>
                       </div>
@@ -308,7 +308,7 @@ export function NavigationModule() {
             {/* Terminal Logs */}
             <div className="border border-border rounded-xl bg-background/50 backdrop-blur overflow-hidden flex flex-col h-[300px]">
               <div className="px-4 py-2 border-b border-border bg-background flex items-center gap-3">
-                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                <span className="w-2 h-2 rounded-full bg-success animate-pulse"></span>
                 <span className="text-xs font-mono font-bold tracking-widest uppercase">System Logs</span>
               </div>
               <div className="flex-1 p-4 font-mono text-xs overflow-y-auto space-y-2">
@@ -319,8 +319,8 @@ export function NavigationModule() {
                     <div key={i} className="flex gap-3">
                       <span className="text-muted-foreground shrink-0">[{log.ts}]</span>
                       <span className={`
-                        ${log.type === "error" ? "text-red-400" : ""}
-                        ${log.type === "success" ? "text-green-400" : ""}
+                        ${log.type === "error" ? "text-destructive" : ""}
+                        ${log.type === "success" ? "text-success" : ""}
                         ${log.type === "info" ? "text-foreground" : ""}
                       `}>
                         {log.msg}

@@ -13,7 +13,7 @@ export function PersonaHeader() {
           <h1 className="text-4xl font-bold tracking-tighter uppercase text-foreground">
             Persona Manager
           </h1>
-          <p className="text-[10px] font-mono text-muted-foreground mt-2 uppercase tracking-widest">
+          <p className="text-xs font-mono text-muted-foreground mt-2 uppercase tracking-widest">
             SYS.CONFIG // Configure system parameters and operational protocols
           </p>
         </div>
@@ -32,8 +32,8 @@ export function PersonaHeader() {
 
       <div className="flex items-center gap-4 mt-4">
         <div className="flex items-center gap-2">
-          <span className={`w-1.5 h-1.5 rounded-full ${source === "robot" ? "bg-green-400 animate-pulse" : source === "db" ? "bg-yellow-400" : "bg-muted"}`} />
-          <span className="font-mono text-[10px] text-muted-foreground uppercase">
+          <span className={`w-1.5 h-1.5 rounded-full ${source === "robot" ? "bg-success animate-pulse" : source === "db" ? "bg-warning" : "bg-muted"}`} />
+          <span className="font-mono text-xs text-muted-foreground uppercase">
             {source === "robot" ? "Reading from: Robot (live)" : source === "db" ? "Reading from: Database (robot offline)" : "Connecting..."}
           </span>
         </div>

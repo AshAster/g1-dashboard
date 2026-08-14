@@ -29,7 +29,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/app/components/ui/avatar"
 
 // --- Dropdown Contents ---
 const PersonaMenu = () => (
-  <div className="w-[300px]">
+  <div className="w-[min(300px,90vw)]">
     <h3 className="mb-3 text-sm font-semibold text-foreground border-b border-border pb-2">Persona Manager</h3>
     <div className="flex flex-col gap-1">
       <Link href="/persona#templates" className="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm text-muted-foreground hover:bg-accent hover:text-primary transition-colors">
@@ -46,7 +46,7 @@ const PersonaMenu = () => (
 );
 
 const RagMenu = () => (
-  <div className="w-[240px]">
+  <div className="w-[min(240px,90vw)]">
     <h3 className="mb-3 text-sm font-semibold text-foreground border-b border-border pb-2">Knowledge Hub</h3>
     <div className="flex flex-col gap-1">
       <Link href="/rag#document" className="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm text-muted-foreground hover:bg-accent hover:text-primary transition-colors">
@@ -60,7 +60,7 @@ const RagMenu = () => (
 );
 
 const GestureMenu = () => (
-  <div className="w-[240px]">
+  <div className="w-[min(240px,90vw)]">
     <h3 className="mb-3 text-sm font-semibold text-foreground border-b border-border pb-2">Gesture Settings</h3>
     <div className="flex flex-col gap-1">
       <Link href="/gesture#custom" className="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm text-muted-foreground hover:bg-accent hover:text-primary transition-colors">
@@ -74,7 +74,7 @@ const GestureMenu = () => (
 );
 
 const InventoryMenu = () => (
-  <div className="w-[240px]">
+  <div className="w-[min(240px,90vw)]">
     <h3 className="mb-3 text-sm font-semibold text-foreground border-b border-border pb-2">Robot Inventory</h3>
     <div className="flex flex-col gap-1">
       <Link href="/inventory#health" className="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm text-muted-foreground hover:bg-accent hover:text-primary transition-colors">
@@ -93,7 +93,7 @@ export type NavItem = {
 };
 
 const NavigationMenu = () => (
-  <div className="p-3 w-48">
+  <div className="p-3 w-[min(192px,90vw)]">
     <h3 className="mb-3 text-sm font-semibold text-foreground border-b border-border pb-2">Navigation</h3>
     <div className="space-y-1">
       <Link href="/navigation#navigate" className="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm text-muted-foreground hover:bg-accent hover:text-primary transition-colors">
@@ -127,13 +127,15 @@ export const LimelightNav = ({
   const router = useRouter();
   const [activeIndex, setActiveIndex] = useState(0);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [dir, setDir] = useState<"l" | "r" | null>(null);
   const [isReady, setIsReady] = useState(false);
   const [limelightCenter, setLimelightCenter] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
-  
+
   const navItemRefs = useRef<(HTMLAnchorElement | null)[]>([]);
   const limelightRef = useRef<HTMLDivElement | null>(null);
+  const navWrapRef = useRef<HTMLDivElement | null>(null);
   const lastScrollY = useRef(0);
 
   const isAdmin = role === "admin";
@@ -149,6 +151,7 @@ export const LimelightNav = ({
     if (index >= 0) {
       setActiveIndex(index);
     }
+    setOpenIndex(null);
   }, [pathname, visibleItems]);
 
   const handleSetHovered = (index: number | null) => {
@@ -160,7 +163,32 @@ export const LimelightNav = ({
     setHoveredIndex(index);
   };
 
-  const targetIndex = hoveredIndex !== null ? hoveredIndex : activeIndex;
+  const shownIndex = hoveredIndex !== null ? hoveredIndex : openIndex;
+  const targetIndex = shownIndex !== null ? shownIndex : activeIndex;
+
+  // Close the tap-opened dropdown on outside click/tap or Escape (keyboard/touch users
+  // have no onMouseLeave to fall back on).
+  useEffect(() => {
+    if (openIndex === null) return;
+
+    const handleOutside = (e: MouseEvent | TouchEvent) => {
+      if (navWrapRef.current && !navWrapRef.current.contains(e.target as Node)) {
+        setOpenIndex(null);
+      }
+    };
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpenIndex(null);
+    };
+
+    document.addEventListener("mousedown", handleOutside);
+    document.addEventListener("touchstart", handleOutside);
+    document.addEventListener("keydown", handleKey);
+    return () => {
+      document.removeEventListener("mousedown", handleOutside);
+      document.removeEventListener("touchstart", handleOutside);
+      document.removeEventListener("keydown", handleKey);
+    };
+  }, [openIndex]);
 
   useLayoutEffect(() => {
     if (visibleItems.length === 0) return;
@@ -223,10 +251,10 @@ export const LimelightNav = ({
       `}} />
       <header
         className={`absolute top-0 left-0 right-0 z-40 w-full bg-background/80 backdrop-blur-md border-b border-border/40 transition-transform duration-300 ${
-          isVisible ? "translate-y-0" : "-translate-y-full"
+          isVisible ? "translate-y-0" : "translate-y-0 md:-translate-y-full"
         }`}
       >
-        <div className="flex items-center justify-between px-4 py-3 max-w-7xl mx-auto gap-4">
+        <div className="flex items-center justify-between px-4 py-3 max-w-[1600px] mx-auto gap-4">
           
           {/* Left Side: Hamburger Menu Button on Mobile */}
           <div className="flex md:hidden items-center shrink-0">
@@ -245,14 +273,16 @@ export const LimelightNav = ({
             className="flex-1 flex justify-start md:justify-center overflow-x-auto no-scrollbar py-1"
             onMouseLeave={() => handleSetHovered(null)}
           >
-            <div className="relative">
+            <div className="relative" ref={navWrapRef}>
               <nav
-                className="relative flex items-center h-11 rounded-xl bg-card/40 text-card-foreground border border-border/40 px-1.5 backdrop-blur-md max-w-[80vw] md:max-w-[95vw] overflow-x-auto sm:max-w-none no-scrollbar flex-nowrap scroll-smooth"
+                className="relative flex items-center h-11 rounded-xl bg-card/40 text-card-foreground border border-border/40 px-1.5 backdrop-blur-md max-w-[80vw] md:max-w-[95vw] overflow-x-auto sm:max-w-none no-scrollbar flex-nowrap scroll-smooth [mask-image:linear-gradient(to_right,transparent,black_12px,black_calc(100%-12px),transparent)]"
               >
                 {visibleItems.map((item, index) => {
                   const isActive = activeIndex === index;
                   const isHovered = hoveredIndex === index;
                   const isHighlighted = isHovered || (hoveredIndex === null && isActive);
+                  const hasDropdown = !!item.dropdownComponent;
+                  const isRevealed = hoveredIndex === index || openIndex === index;
 
                   return (
                     <Link
@@ -262,6 +292,19 @@ export const LimelightNav = ({
                         navItemRefs.current[index] = el;
                       }}
                       onMouseEnter={() => handleSetHovered(index)}
+                      onFocus={() => handleSetHovered(index)}
+                      onClick={(e) => {
+                        if (hasDropdown && !isRevealed) {
+                          // First tap/click with no hover support (touch, or fast click):
+                          // reveal the submenu instead of navigating away from it.
+                          e.preventDefault();
+                          setOpenIndex(index);
+                        } else {
+                          setOpenIndex(null);
+                        }
+                      }}
+                      aria-haspopup={hasDropdown ? "menu" : undefined}
+                      aria-expanded={hasDropdown ? isRevealed : undefined}
                       className="relative z-20 flex items-center justify-center gap-1.5 px-3 py-1.5 cursor-pointer group shrink-0"
                     >
                       {React.cloneElement(item.icon, {
@@ -298,10 +341,10 @@ export const LimelightNav = ({
 
               {/* Dropdown renders below the nav */}
               <AnimatePresence>
-                {hoveredIndex !== null && visibleItems[hoveredIndex]?.dropdownComponent && (
-                  <DropdownContent 
-                    dir={dir} 
-                    selectedItem={visibleItems[hoveredIndex]} 
+                {shownIndex !== null && visibleItems[shownIndex]?.dropdownComponent && (
+                  <DropdownContent
+                    dir={dir}
+                    selectedItem={visibleItems[shownIndex]}
                     center={limelightCenter}
                   />
                 )}
@@ -310,7 +353,7 @@ export const LimelightNav = ({
           </div>
 
           {/* Right Side: Header Actions */}
-          <div className="flex items-center gap-2 scale-90 md:scale-100 origin-right shrink-0">
+          <div className="flex items-center gap-2 origin-right shrink-0">
             {/* Notification bell */}
             {isLoggedIn && (
               <button

@@ -84,7 +84,8 @@ export function ChatSidebar({
                   e.stopPropagation();
                   onDeleteSession(session.id);
                 }}
-                className="opacity-0 group-hover:opacity-100 p-1 text-muted-foreground hover:text-red-500 transition-opacity"
+                aria-label="Delete chat"
+                className="opacity-100 md:opacity-0 md:group-hover:opacity-100 p-2 -m-1 text-muted-foreground hover:text-destructive transition-opacity"
                 title="Delete chat"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

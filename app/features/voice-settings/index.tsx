@@ -27,17 +27,17 @@ export function VoiceSettingsModule() {
           </div>
           <span className="font-mono text-sm uppercase tracking-wider">{label}</span>
         </div>
-        <span className="font-mono text-xs text-muted-foreground bg-background px-3 py-1 rounded-full border border-border">
+        <span className="shrink-0 font-mono text-xs text-muted-foreground bg-background px-3 py-1 rounded-full border border-border">
           {value}{unit}
         </span>
       </div>
-      <input 
+      <input
         type="range" 
         min={min} 
         max={max} 
         value={value} 
         onChange={(e) => onChange(Number(e.target.value))}
-        className="w-full h-2 bg-muted rounded-lg appearance-none cursor-pointer accent-primary"
+        className="w-full h-2 my-2 bg-muted rounded-lg appearance-none cursor-pointer accent-primary touch-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-6 [&::-webkit-slider-thumb]:h-6 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-primary [&::-webkit-slider-thumb]:border-4 [&::-webkit-slider-thumb]:border-background [&::-webkit-slider-thumb]:shadow-md [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:transition-transform [&::-webkit-slider-thumb]:hover:scale-110 [&::-webkit-slider-thumb]:active:scale-95 [&::-moz-range-thumb]:w-6 [&::-moz-range-thumb]:h-6 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-primary [&::-moz-range-thumb]:border-4 [&::-moz-range-thumb]:border-background [&::-moz-range-thumb]:shadow-md [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:transition-transform [&::-moz-range-thumb]:hover:scale-110"
       />
     </div>
   );
@@ -45,7 +45,7 @@ export function VoiceSettingsModule() {
   return (
     <FeatureGate featureKey="voiceSettings">
       <div className="space-y-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
           <Slider 
             label="Pitch" 
             icon={FiActivity} 
@@ -76,7 +76,7 @@ export function VoiceSettingsModule() {
                 </div>
                 <span className="font-mono text-sm uppercase tracking-wider">Sample Rate</span>
               </div>
-              <span className="font-mono text-xs text-muted-foreground bg-background px-3 py-1 rounded-full border border-border">
+              <span className="shrink-0 font-mono text-xs text-muted-foreground bg-background px-3 py-1 rounded-full border border-border">
                 {settings.sampleRate} Hz
               </span>
             </div>
@@ -92,15 +92,15 @@ export function VoiceSettingsModule() {
           </div>
         </div>
 
-        <div className="flex items-center justify-between p-6 border border-border bg-card/20 rounded-xl">
-          <button className="flex items-center gap-2 px-6 py-3 bg-secondary text-secondary-foreground font-semibold uppercase tracking-wider text-sm hover:opacity-90 transition-opacity rounded-lg">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-end gap-2 p-6 border border-border bg-card/20 rounded-xl">
+          <button className="min-h-11 w-full sm:w-auto sm:min-w-[160px] flex items-center justify-center gap-2 px-6 py-3 bg-secondary text-secondary-foreground font-semibold uppercase tracking-wider text-sm hover:opacity-90 transition-opacity rounded-lg">
             <FiPlay /> Test Voice
           </button>
-          
-          <button 
+
+          <button
             onClick={handleSave}
             disabled={saving}
-            className="flex items-center gap-2 px-8 py-3 bg-primary text-primary-foreground font-semibold uppercase tracking-wider text-sm hover:opacity-90 transition-opacity disabled:opacity-50 shadow-lg hover:-translate-y-0.5 rounded-lg"
+            className="min-h-11 w-full sm:w-auto sm:min-w-[160px] flex items-center justify-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-semibold uppercase tracking-wider text-sm hover:opacity-90 transition-opacity disabled:opacity-50 shadow-lg hover:-translate-y-0.5 rounded-lg"
           >
             {saving ? <FiRefreshCw className="animate-spin" /> : <FiSave />}
             {saving ? "Saving..." : "Apply Settings"}

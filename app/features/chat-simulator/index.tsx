@@ -19,7 +19,7 @@ export function ChatSimulatorModule() {
 
   return (
     <FeatureGate featureKey="chatSimulator">
-      <div className="flex-1 flex flex-col md:flex-row bg-background h-[calc(100vh-7rem)] overflow-hidden relative">
+      <div className="flex-1 flex flex-col md:flex-row bg-background h-[calc(100dvh-7rem)] overflow-hidden relative">
         {isHistoryOpen && (
           <div 
             className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 md:hidden animate-fade-in"

@@ -81,8 +81,8 @@ export function ProfileForm({
             {isEditing ? (
               <div className="space-y-3 w-full max-w-sm mx-auto md:mx-0">
                 <div>
-                  <label className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-1 block">Company Name</label>
-                  <input 
+                  <label className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-1 block" htmlFor="company-name">Company Name</label>
+                  <input id="company-name" 
                     type="text" 
                     value={formData.name}
                     onChange={(e) => setFormData({...formData, name: e.target.value})}
@@ -90,8 +90,8 @@ export function ProfileForm({
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-1 block">Company Type</label>
-                  <input 
+                  <label className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-1 block" htmlFor="company-type">Company Type</label>
+                  <input id="company-type" 
                     type="text" 
                     value={formData.companyType}
                     onChange={(e) => setFormData({...formData, companyType: e.target.value})}
@@ -99,15 +99,15 @@ export function ProfileForm({
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-1 block">Company Logo</label>
-                  <input 
+                  <label className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-1 block" htmlFor="company-logo">Company Logo</label>
+                  <input id="company-logo" 
                     type="file" 
                     accept="image/*"
                     onChange={handleLogoUpload}
-                    className="w-full text-sm bg-background p-1.5 rounded-lg border border-border file:mr-4 file:py-1.5 file:px-4 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20 cursor-pointer text-muted-foreground"
+                    className="w-full text-base bg-background p-1.5 rounded-lg border border-border file:mr-4 file:py-1.5 file:px-4 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20 cursor-pointer text-muted-foreground"
                   />
                   {formData.companyLogo && formData.companyLogo.startsWith('data:image') && (
-                    <p className="text-[10px] text-primary mt-1 font-medium">New image selected</p>
+                    <p className="text-xs text-primary mt-1 font-medium">New image selected</p>
                   )}
                 </div>
               </div>
@@ -126,9 +126,9 @@ export function ProfileForm({
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="space-y-6">
             <div>
-              <label className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-2 block">Admin Contact (Host)</label>
+              <label className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-2 block" htmlFor="admin-contact-host">Admin Contact (Host)</label>
               {isEditing ? (
-                <input 
+                <input id="admin-contact-host" 
                   type="text" 
                   value={formData.host}
                   onChange={(e) => setFormData({...formData, host: e.target.value})}
@@ -142,9 +142,9 @@ export function ProfileForm({
             </div>
 
             <div>
-              <label className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-2 block">Admin Email (Host Mail)</label>
+              <label className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-2 block" htmlFor="admin-email-host-mail">Admin Email (Host Mail)</label>
               {isEditing ? (
-                <input 
+                <input id="admin-email-host-mail" 
                   type="email" 
                   value={formData.hostEmail}
                   onChange={(e) => setFormData({...formData, hostEmail: e.target.value})}
@@ -160,9 +160,9 @@ export function ProfileForm({
 
           <div className="space-y-6">
             <div>
-              <label className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-2 block">Company Description</label>
+              <label className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-2 block" htmlFor="company-description">Company Description</label>
               {isEditing ? (
-                <textarea 
+                <textarea id="company-description" 
                   value={formData.companyDescription}
                   onChange={(e) => setFormData({...formData, companyDescription: e.target.value})}
                   className="w-full text-sm bg-background p-3 rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/50 min-h-[120px]"

@@ -9,7 +9,7 @@ export default function RobotInventoryPage() {
         <h1 className="text-4xl font-bold tracking-tighter uppercase text-foreground">
           Health Stats
         </h1>
-        <p className="text-[10px] font-mono text-muted-foreground mt-2 uppercase tracking-widest">
+        <p className="text-xs font-mono text-muted-foreground mt-2 uppercase tracking-widest">
           SYS.CONFIG // Robot health monitoring and diagnostics
         </p>
       </div>

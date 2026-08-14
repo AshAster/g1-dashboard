@@ -21,13 +21,13 @@ export function ConfigModal({
 
   return (
     <div className="fixed inset-0 bg-background/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="bg-card border border-border w-full max-w-lg shadow-2xl flex flex-col max-h-[90vh]">
+      <div role="dialog" aria-modal="true" aria-labelledby="config-modal-title" className="bg-card border border-border w-full max-w-lg shadow-2xl flex flex-col max-h-[90dvh]">
         <div className="p-6 border-b border-border flex justify-between items-center">
           <div>
-            <h3 className="font-bold text-lg uppercase tracking-wide">Configuration</h3>
+            <h3 id="config-modal-title" className="font-bold text-lg uppercase tracking-wide">Configuration</h3>
             <p className="text-xs font-mono text-muted-foreground mt-1">{integration.name} Settings</p>
           </div>
-          <button onClick={onClose} className="p-2 text-muted-foreground hover:text-foreground">
+          <button onClick={onClose} aria-label="Close" className="p-2 text-muted-foreground hover:text-foreground">
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
@@ -46,7 +46,7 @@ export function ConfigModal({
                   <path fill="none" d="M0 0h48v48H0z"/>
                 </svg>
                 {integration.isConfigured && (
-                  <div className="absolute -bottom-2 -right-2 bg-green-500 rounded-full p-1 border-2 border-card">
+                  <div className="absolute -bottom-2 -right-2 bg-success rounded-full p-1 border-2 border-card">
                     <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                     </svg>
@@ -96,11 +96,11 @@ export function ConfigModal({
               )}
               {integration.config_schema && Object.entries(integration.config_schema).map(([key, schema]) => (
                 <div key={key} className="space-y-2">
-                  <label className="text-sm font-bold text-foreground">
+                  <label className="text-sm font-bold text-foreground" htmlFor="schema-title-key-schema-required">
                     {schema.title || key}
-                    {schema.required && <span className="text-red-500 ml-1">*</span>}
+                    {schema.required && <span className="text-destructive ml-1">*</span>}
                   </label>
-                  <input
+                  <input id="schema-title-key-schema-required"
                     type={schema.type === 'password' ? 'password' : 'text'}
                     value={formValues[key] || ''}
                     onChange={(e) => onFormChange(key, e.target.value)}

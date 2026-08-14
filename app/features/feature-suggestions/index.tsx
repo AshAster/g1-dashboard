@@ -9,7 +9,7 @@ export function FeatureSuggestionsModule() {
     <FeatureGate featureKey="featureSuggestions" hideWhenDisabled={true}>
       <div className="p-6 border border-border bg-card/20 rounded-xl">
         <div className="flex items-center gap-3 mb-4">
-          <div className="p-2 bg-amber-500/10 text-amber-500 rounded-lg">
+          <div className="p-2 bg-warning/10 text-warning rounded-lg">
             <FiZap size={18} />
           </div>
           <h3 className="font-bold text-sm uppercase tracking-wide">AI Recommendations</h3>

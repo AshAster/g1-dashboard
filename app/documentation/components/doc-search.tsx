@@ -50,7 +50,7 @@ export function DocSearch() {
         </div>
         <input
           type="text"
-          className="w-full pl-10 pr-10 py-2.5 bg-card border border-border rounded-xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all shadow-sm text-sm"
+          className="w-full pl-10 pr-10 py-2.5 bg-card border border-border rounded-xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all shadow-sm text-base"
           placeholder="Search documentation (e.g. 'persona')..."
           value={query}
           onChange={(e) => {

@@ -37,12 +37,12 @@ export function SkillLibraryModule() {
             <input 
               type="text" 
               placeholder="Search skills..."
-              className="w-full bg-card border border-border pl-12 pr-4 py-3 text-foreground font-mono text-sm focus:outline-none focus:border-primary transition-colors rounded-lg shadow-sm"
+              className="w-full bg-card border border-border pl-12 pr-4 py-3 text-foreground font-mono text-base focus:outline-none focus:border-primary transition-colors rounded-lg shadow-sm"
             />
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {skills.map((skill) => (
             <div 
               key={skill.id}
@@ -53,7 +53,7 @@ export function SkillLibraryModule() {
                   <div className="p-3 bg-primary/10 rounded-lg text-primary">
                     <FiCode size={20} />
                   </div>
-                  <span className="text-[10px] uppercase font-mono tracking-widest text-muted-foreground border border-border px-2 py-1 rounded">
+                  <span className="text-xs uppercase font-mono tracking-widest text-muted-foreground border border-border px-2 py-1 rounded">
                     {skill.category}
                   </span>
                 </div>

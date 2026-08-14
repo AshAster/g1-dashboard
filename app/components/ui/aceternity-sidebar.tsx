@@ -3,6 +3,7 @@
 import { cn } from "@/lib/utils";
 import React, {
   useState,
+  useEffect,
   createContext,
   useContext,
 } from "react";
@@ -35,6 +36,8 @@ interface SidebarContextProps {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   animate: boolean;
+  pinned: boolean;
+  setPinned: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 
@@ -90,6 +93,22 @@ export const SidebarProvider = ({
       ? setOpenProp
       : setOpenState;
 
+  /*
+   * Pinned = desktop sidebar stays expanded without needing hover.
+   * Persisted so an incidental hover-expand doesn't reset on every visit,
+   * but also doesn't force the pin on for users who never asked for it.
+   */
+  const [pinned, setPinned] = useState(false);
+
+  useEffect(() => {
+    const stored = localStorage.getItem("sidebar-pinned");
+    if (stored === "true") setPinned(true);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("sidebar-pinned", String(pinned));
+  }, [pinned]);
+
 
   return (
     <SidebarContext.Provider
@@ -97,6 +116,8 @@ export const SidebarProvider = ({
         open,
         setOpen,
         animate,
+        pinned,
+        setPinned,
       }}
     >
       {children}
@@ -161,6 +182,8 @@ export const DesktopSidebar = ({
   ...props
 }: React.ComponentProps<"div">) => {
 
+  const { pinned } = useSidebar();
+
   return (
     <div
       className={cn(
@@ -174,10 +197,10 @@ export const DesktopSidebar = ({
         "shrink-0",
 
         /*
-         * Width
+         * Width — pinned stays expanded without hover;
+         * unpinned falls back to the original hover-to-expand behavior.
          */
-        "w-[60px]",
-        "hover:w-[220px]",
+        pinned ? "w-[220px]" : "w-[60px] hover:w-[220px]",
 
         /*
          * Layout
@@ -419,6 +442,7 @@ export const SidebarLink = ({
   const {
     open,
     setOpen,
+    pinned,
   } = useSidebar();
 
 
@@ -549,6 +573,11 @@ export const SidebarLink = ({
            * Slight animation delay
            */
           "md:group-hover/nav:delay-[30ms]",
+
+          /*
+           * Pinned: stay visible without needing hover.
+           */
+          pinned && "md:max-w-[180px] md:opacity-100",
 
 
           /*

@@ -10,7 +10,7 @@ export default function GestureSettingsPage() {
         <h1 className="text-4xl font-bold tracking-tighter uppercase text-foreground">
           Gesture Settings
         </h1>
-        <p className="text-[10px] font-mono text-muted-foreground mt-2 uppercase tracking-widest">
+        <p className="text-xs font-mono text-muted-foreground mt-2 uppercase tracking-widest">
           SYS.CONFIG // Configure physical expression and movement macros
         </p>
       </div>

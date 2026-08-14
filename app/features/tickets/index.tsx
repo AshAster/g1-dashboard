@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, useRef } from "react";
+import React, { useCallback, useEffect, useState, useRef } from "react";
 import { FiLifeBuoy, FiPlus, FiX } from "react-icons/fi";
 import { motion, AnimatePresence } from "motion/react";
 import { FeatureGate } from "@/app/components/feature-gate";
@@ -13,6 +13,12 @@ type Ticket = {
   createdAt: string;
 };
 
+type TenantProfile = {
+  id?: string;
+  name?: string;
+  hostEmail?: string;
+};
+
 const getAuthHeaders = (): Record<string, string> => {
   const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
   return token ? { 'Authorization': `Bearer ${token}` } : {};
@@ -22,7 +28,7 @@ export function SupportTicketsModule() {
   const [tickets, setTickets] = useState<Ticket[]>([]);
   const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [tenantProfile, setTenantProfile] = useState<any>(null);
+  const [tenantProfile, setTenantProfile] = useState<TenantProfile | null>(null);
 
   // Form State
   const [subject, setSubject] = useState("");
@@ -34,9 +40,58 @@ export function SupportTicketsModule() {
   const prevTicketsRef = React.useRef<Ticket[]>([]);
   const lastSeqRef = useRef<number>(-1);
 
+  const fetchTicketsOnly = useCallback(async () => {
+    try {
+      const res = await fetch("/api/tickets", { headers: getAuthHeaders() });
+      const data = await res.json();
+      if (data.tickets && Array.isArray(data.tickets)) {
+        // Check if any status changed
+        if (prevTicketsRef.current.length > 0) {
+          const oldStatusMap = new Map(prevTicketsRef.current.map(t => [t.id, t.status]));
+
+          for (const newTicket of data.tickets) {
+            const oldStatus = oldStatusMap.get(newTicket.id);
+            if (oldStatus && oldStatus !== newTicket.status) {
+              showToast(`Ticket "${newTicket.subject}" status changed to ${newTicket.status}`);
+            }
+          }
+        }
+
+        prevTicketsRef.current = data.tickets;
+        setTickets(data.tickets);
+      }
+    } catch (error) {
+      console.error("Failed to fetch tickets", error);
+    }
+  }, []);
+
+  const fetchProfileAndTickets = useCallback(async () => {
+    try {
+      const profileRes = await fetch("/api/auth/me", {
+        headers: getAuthHeaders()
+      });
+
+      if (profileRes.ok) {
+        const profile = await profileRes.json();
+        const normalizedProfile: TenantProfile = {
+          id: profile.tenantId || profile.id || "tenant-default",
+          name: profile.tenantName || profile.name || "Tenant Admin",
+          hostEmail: profile.email || "admin@tenant.com"
+        };
+        setTenantProfile(normalizedProfile);
+      }
+
+      await fetchTicketsOnly();
+    } catch (error) {
+      console.error("Failed to load initial data", error);
+    } finally {
+      setLoading(false);
+    }
+  }, [fetchTicketsOnly]);
+
   useEffect(() => {
     fetchProfileAndTickets();
-    
+
     // Simple interval-based polling using the monotonic counter from /api/events.
     // Each GET returns immediately — no hanging Promises to leak in Turbopack.
     const intervalId = setInterval(async () => {
@@ -59,51 +114,9 @@ export function SupportTicketsModule() {
         // network blip — will retry on next interval
       }
     }, 5000);
-    
+
     return () => clearInterval(intervalId);
-  }, []);
-
-  const fetchProfileAndTickets = async () => {
-    try {
-      // Fetch profile directly via proxy if available or backend
-      const profileRes = await fetch((process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api/v1") + "/tenant/profile", {
-        headers: getAuthHeaders()
-      });
-      if (profileRes.ok) {
-        setTenantProfile(await profileRes.json());
-      }
-      await fetchTicketsOnly();
-    } catch (error) {
-      console.error("Failed to load initial data", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const fetchTicketsOnly = async () => {
-    try {
-      const res = await fetch("/api/tickets", { headers: getAuthHeaders() });
-      const data = await res.json();
-      if (data.tickets && Array.isArray(data.tickets)) {
-        // Check if any status changed
-        if (prevTicketsRef.current.length > 0) {
-          const oldStatusMap = new Map(prevTicketsRef.current.map(t => [t.id, t.status]));
-          
-          for (const newTicket of data.tickets) {
-            const oldStatus = oldStatusMap.get(newTicket.id);
-            if (oldStatus && oldStatus !== newTicket.status) {
-              showToast(`Ticket "${newTicket.subject}" status changed to ${newTicket.status}`);
-            }
-          }
-        }
-        
-        prevTicketsRef.current = data.tickets;
-        setTickets(data.tickets);
-      }
-    } catch (error) {
-      console.error("Failed to fetch tickets", error);
-    }
-  };
+  }, [fetchProfileAndTickets, fetchTicketsOnly]);
 
   const showToast = (message: string) => {
     setToast({ message, visible: true });
@@ -147,7 +160,7 @@ export function SupportTicketsModule() {
   const getStatusColor = (status: string) => {
     switch (status) {
       case "RESOLVED": return "bg-emerald-500/10 text-emerald-500 border-emerald-500/20";
-      case "UNDER REVIEW": return "bg-amber-500/10 text-amber-500 border-amber-500/20";
+      case "UNDER REVIEW": return "bg-warning/10 text-warning border-warning/20";
       default: return "bg-blue-500/10 text-blue-500 border-blue-500/20";
     }
   };
@@ -197,7 +210,7 @@ export function SupportTicketsModule() {
             <FiLifeBuoy className="w-12 h-12 text-muted-foreground/30 mx-auto mb-4" />
             <h3 className="text-xl font-medium">No Tickets Yet</h3>
             <p className="text-muted-foreground max-w-sm mx-auto mt-2">
-              You haven't submitted any support requests. If you encounter an issue, feel free to open a new ticket.
+              You have not submitted any support requests. If you encounter an issue, feel free to open a new ticket.
             </p>
           </div>
         ) : (
@@ -233,19 +246,22 @@ export function SupportTicketsModule() {
                 initial={{ opacity: 0, scale: 0.95, y: 10 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 10 }}
-                className="bg-card w-full max-w-lg rounded-2xl border border-border shadow-2xl overflow-hidden"
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="new-ticket-title"
+                className="bg-card w-full max-w-lg max-h-[90dvh] rounded-2xl border border-border shadow-2xl overflow-y-auto"
               >
                 <div className="flex items-center justify-between p-6 border-b border-border bg-muted/30">
-                  <h2 className="text-xl font-semibold">Create Support Ticket</h2>
-                  <button onClick={() => setIsModalOpen(false)} className="p-2 rounded-lg hover:bg-accent text-muted-foreground">
+                  <h2 id="new-ticket-title" className="text-xl font-semibold">Create Support Ticket</h2>
+                  <button onClick={() => setIsModalOpen(false)} aria-label="Close" className="p-2 rounded-lg hover:bg-accent text-muted-foreground">
                     <FiX />
                   </button>
                 </div>
                 
                 <form onSubmit={handleSubmit} className="p-6 space-y-5">
                   <div className="space-y-2">
-                    <label className="text-sm font-medium">Subject</label>
-                    <input
+                    <label className="text-sm font-medium" htmlFor="subject">Subject</label>
+                    <input id="subject"
                       type="text"
                       required
                       value={subject}
@@ -256,8 +272,8 @@ export function SupportTicketsModule() {
                   </div>
                   
                   <div className="space-y-2">
-                    <label className="text-sm font-medium">Description</label>
-                    <textarea
+                    <label className="text-sm font-medium" htmlFor="description">Description</label>
+                    <textarea id="description"
                       required
                       rows={5}
                       value={description}

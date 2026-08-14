@@ -25,14 +25,15 @@ export function RoleBuilderModal({
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 sm:p-8">
-      <div className="bg-background border border-border w-full max-w-5xl max-h-full overflow-y-auto rounded-xl shadow-2xl flex flex-col relative">
+      <div role="dialog" aria-modal="true" aria-labelledby="role-builder-title" className="bg-background border border-border w-full max-w-5xl max-h-full overflow-y-auto rounded-xl shadow-2xl flex flex-col relative">
         <div className="sticky top-0 bg-background/95 backdrop-blur z-10 border-b border-border p-6 flex items-center justify-between">
           <div>
-            <h2 className="text-2xl font-bold uppercase tracking-wider">{editForm.id ? "Edit Persona" : "Role Builder"}</h2>
+            <h2 id="role-builder-title" className="text-2xl font-bold uppercase tracking-wider">{editForm.id ? "Edit Persona" : "Role Builder"}</h2>
             <p className="text-xs font-mono text-muted-foreground uppercase">{editForm.id ? "Update configuration" : "Create new configuration"}</p>
           </div>
-          <button 
+          <button
             onClick={closeRoleBuilder}
+            aria-label="Close"
             className="p-3 bg-secondary/50 hover:bg-secondary rounded-full transition-colors"
           >
             <FiX size={24} />
@@ -41,8 +42,8 @@ export function RoleBuilderModal({
         
         <div className="p-6 sm:p-10 space-y-12">
           <section>
-            <label className="text-xs font-mono text-primary uppercase tracking-wider mb-2 block">Internal Profile Name</label>
-            <input 
+            <label className="text-xs font-mono text-primary uppercase tracking-wider mb-2 block" htmlFor="internal-profile-name">Internal Profile Name</label>
+            <input id="internal-profile-name" 
               className="w-full bg-card border border-border px-4 py-3 text-foreground font-bold text-lg focus:outline-none focus:border-primary transition-colors"
               value={editForm.name}
               onChange={(e) => { setEditForm({ ...editForm, name: e.target.value }); markUnsaved(); }}
@@ -58,33 +59,33 @@ export function RoleBuilderModal({
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6 border border-border bg-card/20">
               <div className="space-y-2">
-                <label className="text-xs font-mono text-muted-foreground uppercase tracking-wider">Robot Name</label>
-                <input 
-                  className="w-full bg-background border border-border px-4 py-3 text-foreground font-mono text-sm focus:outline-none focus:border-primary transition-colors"
+                <label className="text-xs font-mono text-muted-foreground uppercase tracking-wider" htmlFor="robot-name">Robot Name</label>
+                <input id="robot-name" 
+                  className="w-full bg-background border border-border px-4 py-3 text-foreground font-mono text-base focus:outline-none focus:border-primary transition-colors"
                   value={editForm.identity?.name || ""}
                   onChange={(e) => updateIdentity("name", e.target.value)}
                 />
               </div>
               <div className="space-y-2">
-                <label className="text-xs font-mono text-muted-foreground uppercase tracking-wider">Company</label>
-                <input 
-                  className="w-full bg-background border border-border px-4 py-3 text-foreground font-mono text-sm focus:outline-none focus:border-primary transition-colors"
+                <label className="text-xs font-mono text-muted-foreground uppercase tracking-wider" htmlFor="company">Company</label>
+                <input id="company" 
+                  className="w-full bg-background border border-border px-4 py-3 text-foreground font-mono text-base focus:outline-none focus:border-primary transition-colors"
                   value={editForm.identity?.company || ""}
                   onChange={(e) => updateIdentity("company", e.target.value)}
                 />
               </div>
               <div className="space-y-2">
-                <label className="text-xs font-mono text-muted-foreground uppercase tracking-wider">Location</label>
-                <input 
-                  className="w-full bg-background border border-border px-4 py-3 text-foreground font-mono text-sm focus:outline-none focus:border-primary transition-colors"
+                <label className="text-xs font-mono text-muted-foreground uppercase tracking-wider" htmlFor="location">Location</label>
+                <input id="location" 
+                  className="w-full bg-background border border-border px-4 py-3 text-foreground font-mono text-base focus:outline-none focus:border-primary transition-colors"
                   value={editForm.identity?.location || ""}
                   onChange={(e) => updateIdentity("location", e.target.value)}
                 />
               </div>
               <div className="space-y-2">
-                <label className="text-xs font-mono text-muted-foreground uppercase tracking-wider">Role</label>
-                <input 
-                  className="w-full bg-background border border-border px-4 py-3 text-foreground font-mono text-sm focus:outline-none focus:border-primary transition-colors"
+                <label className="text-xs font-mono text-muted-foreground uppercase tracking-wider" htmlFor="role">Role</label>
+                <input id="role" 
+                  className="w-full bg-background border border-border px-4 py-3 text-foreground font-mono text-base focus:outline-none focus:border-primary transition-colors"
                   value={editForm.identity?.role || ""}
                   onChange={(e) => updateIdentity("role", e.target.value)}
                 />
@@ -92,9 +93,9 @@ export function RoleBuilderModal({
               
               <FeatureGate featureKey="voiceSettings">
                 <div className="space-y-2">
-                  <label className="text-xs font-mono text-muted-foreground uppercase tracking-wider">Voice</label>
-                  <select
-                    className="w-full bg-background border border-border px-4 py-3 text-foreground font-mono text-sm focus:outline-none focus:border-primary transition-colors appearance-none"
+                  <label className="text-xs font-mono text-muted-foreground uppercase tracking-wider" htmlFor="voice">Voice</label>
+                  <select id="voice"
+                    className="w-full bg-background border border-border px-4 py-3 text-foreground font-mono text-base focus:outline-none focus:border-primary transition-colors appearance-none"
                     value={editForm.identity?.voice || "Male"}
                     onChange={(e) => updateIdentity("voice", e.target.value)}
                   >
@@ -106,9 +107,9 @@ export function RoleBuilderModal({
 
               <FeatureGate featureKey="wakeWordSettings">
                 <div className="space-y-2">
-                  <label className="text-xs font-mono text-muted-foreground uppercase tracking-wider">Wake Word</label>
-                  <select
-                    className="w-full bg-background border border-border px-4 py-3 text-foreground font-mono text-sm focus:outline-none focus:border-primary transition-colors appearance-none"
+                  <label className="text-xs font-mono text-muted-foreground uppercase tracking-wider" htmlFor="wake-word">Wake Word</label>
+                  <select id="wake-word"
+                    className="w-full bg-background border border-border px-4 py-3 text-foreground font-mono text-base focus:outline-none focus:border-primary transition-colors appearance-none"
                     value={editForm.wakeWord || "hey_jarvis"}
                     onChange={(e) => {
                       setEditForm({ ...editForm, wakeWord: e.target.value });
@@ -138,11 +139,11 @@ export function RoleBuilderModal({
             </div>
             
             <div className="p-6 border border-border bg-card/20">
-              <label className="block text-xs font-mono text-muted-foreground uppercase tracking-wider mb-4">
+              <label className="block text-xs font-mono text-muted-foreground uppercase tracking-wider mb-4" htmlFor="master-instructions-passed-to-llm">
                 Master Instructions (Passed to LLM)
               </label>
-              <textarea 
-                className="w-full h-40 bg-background border border-border px-4 py-3 text-foreground font-mono text-sm focus:outline-none focus:border-primary transition-colors resize-none"
+              <textarea id="master-instructions-passed-to-llm" 
+                className="w-full h-40 bg-background border border-border px-4 py-3 text-foreground font-mono text-base focus:outline-none focus:border-primary transition-colors resize-none"
                 value={editForm.system_prompt || ""}
                 onChange={(e) => { setEditForm({ ...editForm, system_prompt: e.target.value }); markUnsaved(); }}
               />
@@ -164,13 +165,13 @@ export function RoleBuilderModal({
                 <div key={idx} className="flex items-start gap-3">
                   <span className="text-primary font-mono text-xs mt-3">#{idx + 1}</span>
                   <textarea 
-                    className="flex-1 bg-background border border-border px-4 py-3 text-foreground font-mono text-sm focus:outline-none focus:border-primary transition-colors resize-none h-16"
+                    className="flex-1 bg-background border border-border px-4 py-3 text-foreground font-mono text-base focus:outline-none focus:border-primary transition-colors resize-none h-16"
                     value={rule}
                     onChange={(e) => updateRule(idx, e.target.value)}
                   />
                   <button 
                     onClick={() => removeRule(idx)}
-                    className="p-3 mt-1 text-muted-foreground hover:text-red-500 transition-colors"
+                    className="p-3 mt-1 text-muted-foreground hover:text-destructive transition-colors"
                     title="Remove Rule"
                   >
                     <FiTrash2 />

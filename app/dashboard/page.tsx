@@ -131,16 +131,16 @@ export default function ClientDashboardPage() {
         <div className="flex flex-col gap-3 min-w-[240px]">
           <div className="flex items-center justify-between p-3.5 rounded-xl bg-card border border-border shadow-sm">
             <span className="text-sm font-semibold text-foreground">AGX Health Status</span>
-            <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-bold ${agxStatus === 'online' ? 'bg-green-500/10 text-green-500' : 'bg-red-500/10 text-red-500'}`}>
-              <span className={`w-1.5 h-1.5 rounded-full ${agxStatus === 'online' ? 'bg-green-500 animate-pulse' : 'bg-red-500'}`}></span>
+            <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-bold ${agxStatus === 'online' ? 'bg-success/10 text-success' : 'bg-destructive/10 text-destructive'}`}>
+              <span className={`w-1.5 h-1.5 rounded-full ${agxStatus === 'online' ? 'bg-success animate-pulse' : 'bg-destructive'}`}></span>
               {agxStatus === 'online' ? 'ONLINE' : 'OFFLINE'}
             </div>
           </div>
           
           <div className="flex items-center justify-between p-3.5 rounded-xl bg-card border border-border shadow-sm">
             <span className="text-sm font-semibold text-foreground">Robot Health Status</span>
-            <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-bold ${robotStatus === 'online' ? 'bg-green-500/10 text-green-500' : 'bg-red-500/10 text-red-500'}`}>
-              <span className={`w-1.5 h-1.5 rounded-full ${robotStatus === 'online' ? 'bg-green-500 animate-pulse' : 'bg-red-500'}`}></span>
+            <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-bold ${robotStatus === 'online' ? 'bg-success/10 text-success' : 'bg-destructive/10 text-destructive'}`}>
+              <span className={`w-1.5 h-1.5 rounded-full ${robotStatus === 'online' ? 'bg-success animate-pulse' : 'bg-destructive'}`}></span>
               {robotStatus === 'online' ? 'ONLINE' : 'OFFLINE'}
             </div>
           </div>
@@ -150,7 +150,7 @@ export default function ClientDashboardPage() {
       {/* Modules Hub */}
       <section className="dash-widget mt-4">
         <h2 className="text-xl font-bold tracking-tight text-foreground mb-6">Preview panel</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           
           <FeatureStatusCard
             title="Knowledge Base (RAG)"

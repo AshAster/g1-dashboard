@@ -5,8 +5,8 @@ export function UploadModal({ progress, show }: { progress: number, show: boolea
 
   return (
     <div className="fixed inset-0 bg-background/80 backdrop-blur-sm z-50 flex items-center justify-center">
-      <div className="bg-card border border-border p-8 max-w-md w-full shadow-2xl">
-        <h3 className="text-xl font-bold uppercase tracking-wide mb-2">Processing Documents</h3>
+      <div role="dialog" aria-modal="true" aria-labelledby="upload-modal-title" className="bg-card border border-border p-8 max-w-md w-full max-h-[90dvh] overflow-y-auto shadow-2xl">
+        <h3 id="upload-modal-title" className="text-xl font-bold uppercase tracking-wide mb-2">Processing Documents</h3>
         <p className="text-sm text-muted-foreground mb-6 font-mono">
           // Indexing content for vector retrieval
         </p>

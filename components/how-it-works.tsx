@@ -56,7 +56,7 @@ export function HowItWorks() {
           <h2 className="text-4xl md:text-5xl font-bold text-foreground tracking-tight mb-4">
             How it Works
           </h2>
-          <p className="text-gray-500 dark:text-gray-400 text-lg max-w-2xl mx-auto font-medium leading-relaxed">
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto font-medium leading-relaxed">
             From the moment you speak to the final physical action, here is exactly how VEDA processes every interaction in milliseconds.
           </p>
         </div>

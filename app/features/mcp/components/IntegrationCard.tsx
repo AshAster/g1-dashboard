@@ -25,7 +25,7 @@ const AnimatedButton = ({ onClick, text, isPro }: { onClick: () => void, text: s
     <button 
       onClick={(e) => { e.stopPropagation(); onClick(); }}
       className={`group flex justify-center items-center px-3 gap-2 h-[36px] w-full max-w-[140px] mx-auto border-none rounded-[20px] cursor-pointer transition-colors ${
-        isPro ? 'bg-amber-500/20 hover:bg-amber-500/30 text-amber-600' : 'bg-[#5e41de33] hover:bg-[#5e41de4d] text-[#5D41DE]'
+        isPro ? 'bg-warning/20 hover:bg-warning/30 text-warning' : 'bg-[#5e41de33] hover:bg-[#5e41de4d] text-[#5D41DE]'
       }`}
     >
       {isPro ? (
@@ -139,16 +139,16 @@ export function IntegrationCard({ integration, onToggle, onConfigure }: Integrat
       <div className="flex justify-between items-start z-10">
         <div>
           {tier === "PRO" && (
-            <div className="group/crown relative inline-flex items-center justify-center p-2 rounded-xl bg-amber-500/10 text-amber-500 border border-amber-500/20 cursor-help">
+            <div className="group/crown relative inline-flex items-center justify-center p-2 rounded-xl bg-warning/10 text-warning border border-warning/20 cursor-help">
               <Crown className="w-4 h-4" />
               {/* Tooltip */}
-              <div className="absolute bottom-full left-0 mb-2 whitespace-nowrap bg-transparent text-amber-500 font-medium px-2 py-1 text-xs tracking-wide opacity-0 group-hover/crown:opacity-100 transition-opacity pointer-events-none z-50 drop-shadow-sm backdrop-blur-[2px] rounded-md">
+              <div className="absolute bottom-full left-0 mb-2 whitespace-nowrap bg-transparent text-warning font-medium px-2 py-1 text-xs tracking-wide opacity-0 group-hover/crown:opacity-100 transition-opacity pointer-events-none z-50 drop-shadow-sm backdrop-blur-[2px] rounded-md">
                 Contact admin for buying this mcp
               </div>
             </div>
           )}
           {tier === "BASIC" && (
-            <span className="text-[9px] uppercase tracking-widest font-mono bg-blue-500/10 text-blue-500 px-2 py-1 rounded-full border border-blue-500/20">
+            <span className="text-xs uppercase tracking-widest font-mono bg-blue-500/10 text-blue-500 px-2 py-1 rounded-full border border-blue-500/20">
               BASIC
             </span>
           )}
@@ -163,7 +163,7 @@ export function IntegrationCard({ integration, onToggle, onConfigure }: Integrat
         <div className="relative">
           {getBrandIcon(integration.name, integration.is_active)}
           {integration.is_active && (
-            <div className="absolute -top-1 -right-1 bg-green-500 text-white rounded-full p-0.5 shadow-md">
+            <div className="absolute -top-1 -right-1 bg-success text-white rounded-full p-0.5 shadow-md">
               <CheckCircle2 className="w-3 h-3" />
             </div>
           )}

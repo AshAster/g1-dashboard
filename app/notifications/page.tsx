@@ -34,7 +34,7 @@ export default function NotificationsPage() {
         <h1 className="text-4xl font-bold tracking-tighter text-foreground flex items-center gap-3">
           <FiBell className="text-primary" /> Notifications
         </h1>
-        <p className="text-[10px] font-mono text-muted-foreground mt-2 uppercase tracking-widest">
+        <p className="text-xs font-mono text-muted-foreground mt-2 uppercase tracking-widest">
           SYS.NOTIFICATIONS // View recent system alerts and updates
         </p>
       </div>
@@ -50,8 +50,8 @@ export default function NotificationsPage() {
             >
               <div className="p-2 bg-background rounded-lg shadow-sm border border-border">
                 {notif.type === "info" && <FiInfo className="text-blue-500" />}
-                {notif.type === "success" && <FiCheckCircle className="text-green-500" />}
-                {notif.type === "warning" && <FiAlertCircle className="text-amber-500" />}
+                {notif.type === "success" && <FiCheckCircle className="text-success" />}
+                {notif.type === "warning" && <FiAlertCircle className="text-warning" />}
               </div>
               <div className="flex-1">
                 <p className="text-sm font-medium text-foreground">{notif.message}</p>

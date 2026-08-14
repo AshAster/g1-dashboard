@@ -20,22 +20,22 @@ interface Employee {
 
 function PhotoBadge({ count }: { count: number }) {
   if (count === 0) return (
-    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs bg-red-500/10 text-red-400 border border-red-500/20">
+    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs bg-destructive/10 text-destructive border border-destructive/20">
       ✗ No photo
     </span>
   );
   if (count === 1) return (
-    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs bg-yellow-500/10 text-yellow-400 border border-yellow-500/20">
+    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs bg-warning/10 text-warning border border-warning/20">
       ⚠ {count} photo
     </span>
   );
   if (count < 3) return (
-    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs bg-yellow-500/10 text-yellow-400 border border-yellow-500/20">
+    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs bg-warning/10 text-warning border border-warning/20">
       {count} photos
     </span>
   );
   return (
-    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs bg-green-500/10 text-green-400 border border-green-500/20">
+    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs bg-success/10 text-success border border-success/20">
       ✓ {count} photos
     </span>
   );
@@ -149,7 +149,7 @@ export function EmployeesModule() {
         <div className="border-b border-border pb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <h1 className="text-3xl sm:text-4xl font-bold tracking-tighter uppercase text-foreground">Employees</h1>
-            <p className="text-[10px] font-mono text-muted-foreground mt-1.5 uppercase tracking-widest">Manage employee face enrollment for robot recognition</p>
+            <p className="text-xs font-mono text-muted-foreground mt-1.5 uppercase tracking-widest">Manage employee face enrollment for robot recognition</p>
           </div>
           <div className="flex gap-2 w-full sm:w-auto">
             <button onClick={() => { setShowBulk(true); setError(""); setBulkResult(null); }}
@@ -164,15 +164,15 @@ export function EmployeesModule() {
         </div>
 
         {/* Alerts */}
-        {error && <div className="mb-4 p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm">{error}</div>}
-        {success && <div className="mb-4 p-3 rounded-lg bg-green-500/10 border border-green-500/20 text-green-400 text-sm">{success}</div>}
+        {error && <div className="mb-4 p-3 rounded-lg bg-destructive/10 border border-destructive/20 text-destructive text-sm">{error}</div>}
+        {success && <div className="mb-4 p-3 rounded-lg bg-success/10 border border-success/20 text-success text-sm">{success}</div>}
         {bulkResult && (
           <div className="mb-4 p-4 rounded-lg bg-card border border-border text-sm space-y-1">
             <p className="font-medium">Bulk import complete: {bulkResult.enrolled} enrolled, {bulkResult.failed} failed (total {bulkResult.total})</p>
             {bulkResult.errors?.length > 0 && (
               <ul className="mt-2 space-y-1 text-muted-foreground">
                 {bulkResult.errors.map((e: any, i: number) => (
-                  <li key={i} className="text-red-400">Row {e.row} ({e.employee_id}): {e.reason}</li>
+                  <li key={i} className="text-destructive">Row {e.row} ({e.employee_id}): {e.reason}</li>
                 ))}
               </ul>
             )}
@@ -206,8 +206,8 @@ export function EmployeesModule() {
                   <td className="px-4 py-3 text-muted-foreground">{emp.department || "—"}</td>
                   <td className="px-4 py-3">
                     {emp.is_enrolled
-                      ? <span className="text-green-400 text-xs">✓ Enrolled</span>
-                      : <span className="text-red-400 text-xs">✗ Not enrolled</span>}
+                      ? <span className="text-success text-xs">✓ Enrolled</span>
+                      : <span className="text-destructive text-xs">✗ Not enrolled</span>}
                   </td>
                   <td className="px-4 py-3"><PhotoBadge count={emp.photo_count} /></td>
                   <td className="px-4 py-3">
@@ -217,7 +217,7 @@ export function EmployeesModule() {
                         + Photos
                       </button>
                       <button onClick={() => handleDelete(emp)}
-                        className="text-xs px-2 py-1 rounded border border-red-500/30 text-red-400 hover:bg-red-500/10 transition-colors">
+                        className="text-xs px-2 py-1 rounded border border-destructive/30 text-destructive hover:bg-destructive/10 transition-colors">
                         Delete
                       </button>
                     </div>
@@ -240,24 +240,24 @@ export function EmployeesModule() {
                 <div className="flex items-start justify-between gap-2">
                   <div className="min-w-0">
                     <h3 className="font-semibold text-sm text-foreground truncate">{emp.username.replace(/_/g, " ")}</h3>
-                    <p className="font-mono text-[10px] text-muted-foreground mt-0.5">{emp.employee_id}</p>
+                    <p className="font-mono text-xs text-muted-foreground mt-0.5">{emp.employee_id}</p>
                   </div>
                   <div className="shrink-0">
                     {emp.is_enrolled ? (
-                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] bg-green-500/10 text-green-400 border border-green-500/20 font-medium">✓ Enrolled</span>
+                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs bg-success/10 text-success border border-success/20 font-medium">✓ Enrolled</span>
                     ) : (
-                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] bg-red-500/10 text-red-400 border border-red-500/20 font-medium">✗ Not Enrolled</span>
+                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs bg-destructive/10 text-destructive border border-destructive/20 font-medium">✗ Not Enrolled</span>
                     )}
                   </div>
                 </div>
 
                 <div className="grid grid-cols-2 gap-3 text-xs border-t border-b border-border/40 py-2.5">
                   <div className="min-w-0">
-                    <span className="text-[10px] text-muted-foreground uppercase font-mono tracking-wider block">Email</span>
+                    <span className="text-xs text-muted-foreground uppercase font-mono tracking-wider block">Email</span>
                     <span className="truncate text-foreground font-medium block mt-0.5">{emp.email || "—"}</span>
                   </div>
                   <div className="min-w-0">
-                    <span className="text-[10px] text-muted-foreground uppercase font-mono tracking-wider block">Department</span>
+                    <span className="text-xs text-muted-foreground uppercase font-mono tracking-wider block">Department</span>
                     <span className="truncate text-foreground font-medium block mt-0.5">{emp.department || "—"}</span>
                   </div>
                 </div>
@@ -274,7 +274,7 @@ export function EmployeesModule() {
                     </button>
                     <button 
                       onClick={() => handleDelete(emp)}
-                      className="text-xs px-2.5 py-1.5 rounded-lg border border-red-500/30 text-red-400 hover:bg-red-500/10 font-medium transition-colors"
+                      className="text-xs px-2.5 py-1.5 rounded-lg border border-destructive/30 text-destructive hover:bg-destructive/10 font-medium transition-colors"
                     >
                       Delete
                     </button>
@@ -289,38 +289,38 @@ export function EmployeesModule() {
       {/* Add Employee Modal */}
       {showForm && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-card border border-border rounded-xl w-full max-w-md p-6">
-            <h2 className="text-lg font-semibold mb-4">Add Employee</h2>
+          <div role="dialog" aria-modal="true" aria-labelledby="add-employee-title" className="bg-card border border-border rounded-xl w-full max-w-md max-h-[90dvh] overflow-y-auto p-6">
+            <h2 id="add-employee-title" className="text-lg font-semibold mb-4">Add Employee</h2>
             <form ref={formRef} onSubmit={handleCreate} className="space-y-4">
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="text-xs text-muted-foreground mb-1 block">Employee ID *</label>
-                  <input name="employee_id" required placeholder="EMP001"
-                    className="w-full px-3 py-2 text-sm rounded-lg border border-border bg-background focus:outline-none focus:ring-1 focus:ring-primary" />
+                  <label className="text-xs text-muted-foreground mb-1 block" htmlFor="employee_id">Employee ID *</label>
+                  <input id="employee_id" name="employee_id" required placeholder="EMP001"
+                    className="w-full px-3 py-2 text-base rounded-lg border border-border bg-background focus:outline-none focus:ring-1 focus:ring-primary" />
                 </div>
                 <div>
-                  <label className="text-xs text-muted-foreground mb-1 block">Full Name *</label>
-                  <input name="name" required placeholder="Jai"
-                    className="w-full px-3 py-2 text-sm rounded-lg border border-border bg-background focus:outline-none focus:ring-1 focus:ring-primary" />
+                  <label className="text-xs text-muted-foreground mb-1 block" htmlFor="name">Full Name *</label>
+                  <input id="name" name="name" required placeholder="Jai"
+                    className="w-full px-3 py-2 text-base rounded-lg border border-border bg-background focus:outline-none focus:ring-1 focus:ring-primary" />
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="text-xs text-muted-foreground mb-1 block">Email <span className="text-muted-foreground/60">(optional)</span></label>
-                  <input name="email" type="email" placeholder="Jai@company.com"
-                    className="w-full px-3 py-2 text-sm rounded-lg border border-border bg-background focus:outline-none focus:ring-1 focus:ring-primary" />
+                  <label className="text-xs text-muted-foreground mb-1 block" htmlFor="email">Email <span className="text-muted-foreground/60">(optional)</span></label>
+                  <input id="email" name="email" type="email" placeholder="Jai@company.com"
+                    className="w-full px-3 py-2 text-base rounded-lg border border-border bg-background focus:outline-none focus:ring-1 focus:ring-primary" />
                 </div>
                 <div>
-                  <label className="text-xs text-muted-foreground mb-1 block">Department <span className="text-muted-foreground/60">(optional)</span></label>
-                  <input name="department" placeholder="Management"
-                    className="w-full px-3 py-2 text-sm rounded-lg border border-border bg-background focus:outline-none focus:ring-1 focus:ring-primary" />
+                  <label className="text-xs text-muted-foreground mb-1 block" htmlFor="department">Department <span className="text-muted-foreground/60">(optional)</span></label>
+                  <input id="department" name="department" placeholder="Management"
+                    className="w-full px-3 py-2 text-base rounded-lg border border-border bg-background focus:outline-none focus:ring-1 focus:ring-primary" />
                 </div>
               </div>
               <div>
-                <label className="text-xs text-muted-foreground mb-1 block">Photos * (select multiple for better accuracy)</label>
+                <label className="text-xs text-muted-foreground mb-1 block" htmlFor="photos">Photos * (select multiple for better accuracy)</label>
                 <input id="photos" name="photos" type="file" multiple accept="image/*" required
-                  className="w-full text-sm text-muted-foreground file:mr-3 file:py-1 file:px-3 file:rounded file:border-0 file:text-xs file:bg-muted file:text-foreground cursor-pointer" />
-                <p className="text-xs text-yellow-500 mt-1">
+                  className="w-full text-base text-muted-foreground file:mr-3 file:py-1 file:px-3 file:rounded file:border-0 file:text-xs file:bg-muted file:text-foreground cursor-pointer" />
+                <p className="text-xs text-warning mt-1">
                   💡 Add 3+ photos from different angles for best accuracy
                 </p>
               </div>
@@ -342,18 +342,18 @@ export function EmployeesModule() {
       {/* Bulk Import Modal */}
       {showBulk && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-card border border-border rounded-xl w-full max-w-lg p-6">
-            <h2 className="text-lg font-semibold mb-2">Bulk Import (Excel)</h2>
+          <div role="dialog" aria-modal="true" aria-labelledby="bulk-import-title" className="bg-card border border-border rounded-xl w-full max-w-lg max-h-[90dvh] overflow-y-auto p-6">
+            <h2 id="bulk-import-title" className="text-lg font-semibold mb-2">Bulk Import (Excel)</h2>
             <p className="text-sm text-muted-foreground mb-4">
               Upload an <strong>.xlsx</strong> file with columns:<br />
               <code className="text-xs bg-muted px-1 py-0.5 rounded">employee_id | name | email (optional) | department (optional)</code><br />
               Insert one photo per row (any column — matched by row number).
             </p>
-            <div className="p-3 rounded-lg bg-yellow-500/10 border border-yellow-500/20 text-yellow-400 text-xs mb-4">
+            <div className="p-3 rounded-lg bg-warning/10 border border-warning/20 text-warning text-xs mb-4">
               ⚠ Photo is required for each row. Rows without a photo will be skipped.
             </div>
             <input ref={bulkRef} type="file" accept=".xlsx,.xls"
-              className="w-full text-sm text-muted-foreground file:mr-3 file:py-1 file:px-3 file:rounded file:border-0 file:text-xs file:bg-muted file:text-foreground cursor-pointer mb-4" />
+              className="w-full text-base text-muted-foreground file:mr-3 file:py-1 file:px-3 file:rounded file:border-0 file:text-xs file:bg-muted file:text-foreground cursor-pointer mb-4" />
             <div className="flex justify-end gap-2">
               <button onClick={() => setShowBulk(false)}
                 className="px-4 py-2 text-sm rounded-lg border border-border hover:bg-muted transition-colors">
@@ -371,8 +371,8 @@ export function EmployeesModule() {
       {/* Add Photos Modal */}
       {photoTarget && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-card border border-border rounded-xl w-full max-w-md p-6">
-            <h2 className="text-lg font-semibold mb-1">Add Photos</h2>
+          <div role="dialog" aria-modal="true" aria-labelledby="add-photos-title" className="bg-card border border-border rounded-xl w-full max-w-md max-h-[90dvh] overflow-y-auto p-6">
+            <h2 id="add-photos-title" className="text-lg font-semibold mb-1">Add Photos</h2>
             <p className="text-sm text-muted-foreground mb-4">
               {photoTarget.username.replace(/_/g, " ")} — currently {photoTarget.photo_count} photo(s)
             </p>

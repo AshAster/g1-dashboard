@@ -17,11 +17,13 @@ import {
   FiLifeBuoy,
   FiLogOut,
 } from "react-icons/fi";
+import { Pin, PinOff } from "lucide-react";
 
 import {
   AceternitySidebar,
   SidebarBody,
   SidebarLink,
+  useSidebar,
 } from "@/app/components/ui/aceternity-sidebar";
 
 
@@ -240,11 +242,14 @@ export const Sidebar = ({
           "
         >
 
-          {/* Brand */}
+          {/* Brand + Pin toggle */}
 
-          <BrandLogo
-            open={open}
-          />
+          <div className="flex items-center justify-between gap-1">
+            <BrandLogo
+              open={open}
+            />
+            <SidebarPinToggle />
+          </div>
 
 
           {/* Navigation */}
@@ -342,11 +347,53 @@ export const Sidebar = ({
 // BRAND LOGO
 // ============================================================
 
+// ============================================================
+// PIN TOGGLE
+// ============================================================
+//
+// Desktop only. Lets a user lock the sidebar expanded instead of
+// having it reflow the page on every incidental hover.
+
+const SidebarPinToggle = () => {
+  const { pinned, setPinned } = useSidebar();
+
+  return (
+    <button
+      onClick={() => setPinned(!pinned)}
+      title={pinned ? "Unpin sidebar" : "Pin sidebar open"}
+      className={`
+        hidden md:flex
+        shrink-0
+        items-center
+        justify-center
+        h-6 w-6
+        rounded-md
+        text-sidebar-foreground/60
+        hover:text-sidebar-foreground
+        hover:bg-sidebar-accent
+        transition-all
+        duration-300
+        ease-in-out
+
+        ${pinned
+          ? "opacity-100"
+          : "opacity-0 max-w-0 pointer-events-none group-hover/nav:opacity-100 group-hover/nav:max-w-6 group-hover/nav:pointer-events-auto"
+        }
+      `}
+    >
+      {pinned ? <PinOff className="h-3.5 w-3.5" /> : <Pin className="h-3.5 w-3.5" />}
+    </button>
+  );
+};
+
+
 const BrandLogo = ({
   open,
 }: {
   open: boolean;
 }) => {
+
+  const { pinned } = useSidebar();
 
   return (
 
@@ -393,7 +440,7 @@ const BrandLogo = ({
           ease-in-out
 
           ${
-            open
+            open || pinned
               ? "max-w-[180px] opacity-100"
               : "max-w-0 opacity-0"
           }
@@ -421,6 +468,8 @@ const RaiseTicketButton = ({
 }: {
   open: boolean;
 }) => {
+
+  const { pinned } = useSidebar();
 
   return (
 
@@ -512,7 +561,7 @@ const RaiseTicketButton = ({
           ease-in-out
 
           ${
-            open
+            open || pinned
               ? "max-w-[180px] opacity-100"
               : "max-w-0 opacity-0"
           }
@@ -540,6 +589,8 @@ const LogoutButton = ({
 }: {
   open: boolean;
 }) => {
+
+  const { pinned } = useSidebar();
 
   const handleLogout =
     async () => {
@@ -605,7 +656,7 @@ const LogoutButton = ({
           ease-in-out
 
           ${
-            open
+            open || pinned
               ? "max-w-[180px] opacity-100"
               : "max-w-0 opacity-0"
           }

@@ -10,15 +10,15 @@ interface CalloutProps {
 export function Callout({ type = 'info', title, children }: CalloutProps) {
   const styles = {
     info: "bg-blue-500/10 border-blue-500/20 text-blue-700 dark:text-blue-400",
-    warning: "bg-amber-500/10 border-amber-500/20 text-amber-700 dark:text-amber-400",
-    danger: "bg-red-500/10 border-red-500/20 text-red-700 dark:text-red-400",
+    warning: "bg-warning/10 border-warning/20 text-warning dark:text-warning",
+    danger: "bg-destructive/10 border-destructive/20 text-destructive dark:text-destructive",
     note: "bg-muted/50 border-border text-foreground",
   };
 
   const icons = {
     info: <Info className="w-5 h-5 text-blue-500" />,
-    warning: <AlertTriangle className="w-5 h-5 text-amber-500" />,
-    danger: <AlertCircle className="w-5 h-5 text-red-500" />,
+    warning: <AlertTriangle className="w-5 h-5 text-warning" />,
+    danger: <AlertCircle className="w-5 h-5 text-destructive" />,
     note: <FileText className="w-5 h-5 text-muted-foreground" />,
   };
 

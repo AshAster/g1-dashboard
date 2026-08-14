@@ -52,14 +52,15 @@ export function PrebuiltPersonasModule() {
 
       {isOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 sm:p-8">
-          <div className="bg-background border border-border w-full max-w-4xl max-h-full overflow-y-auto rounded-xl shadow-2xl flex flex-col relative">
+          <div role="dialog" aria-modal="true" aria-labelledby="persona-templates-title" className="bg-background border border-border w-full max-w-4xl max-h-full overflow-y-auto rounded-xl shadow-2xl flex flex-col relative">
             <div className="sticky top-0 bg-background/95 backdrop-blur z-10 border-b border-border p-6 flex items-center justify-between">
               <div>
-                <h2 className="text-2xl font-bold uppercase tracking-wider">Persona Templates</h2>
+                <h2 id="persona-templates-title" className="text-2xl font-bold uppercase tracking-wider">Persona Templates</h2>
                 <p className="text-xs font-mono text-muted-foreground uppercase">Select a template to clone into your Personal Library</p>
               </div>
-              <button 
+              <button
                 onClick={() => setIsOpen(false)}
+                aria-label="Close"
                 className="p-3 bg-secondary/50 hover:bg-secondary rounded-full transition-colors"
               >
                 <FiX size={24} />

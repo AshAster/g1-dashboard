@@ -104,7 +104,7 @@ export default function Home() {
           {/* Left Content */}
           <div className="text-left">
             <div ref={badgeRef} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent border border-border mb-8">
-              <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+              <span className="w-2 h-2 rounded-full bg-success animate-pulse" />
               <span className="text-sm text-accent-foreground font-medium">System Online</span>
             </div>
 

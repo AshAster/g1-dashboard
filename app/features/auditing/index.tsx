@@ -206,17 +206,17 @@ export function AuditingModule() {
           </div>
         </div>
 
-        <div className="border border-border rounded-xl overflow-hidden bg-card/30">
-          <div className="grid grid-cols-7 gap-4 p-4 border-b border-border bg-muted/50 text-xs font-mono text-muted-foreground uppercase tracking-wider">
+        <div className="border border-border rounded-xl overflow-x-auto bg-card/30">
+          <div className="grid grid-cols-7 gap-4 p-4 border-b border-border bg-muted/50 text-xs font-mono text-muted-foreground uppercase tracking-wider min-w-[800px]">
             <div className="col-span-2">User</div>
             <div className="col-span-2">Action</div>
             <div>Status</div>
             <div className="col-span-2 text-right">Timestamp</div>
           </div>
 
-          <div className="flex flex-col max-h-[600px] overflow-y-auto">
+          <div className="flex flex-col max-h-[600px] overflow-y-auto min-w-[800px]">
             {isLoading && <div className="p-8 text-center text-muted-foreground font-mono">Loading audit logs...</div>}
-            {isError && <div className="p-8 text-center text-red-500 font-mono">Error loading audit logs</div>}
+            {isError && <div className="p-8 text-center text-destructive font-mono">Error loading audit logs</div>}
             
             {!isLoading && !isError && filteredLogs.length === 0 && (
               <div className="p-8 text-center text-muted-foreground font-mono">
@@ -233,27 +233,27 @@ export function AuditingModule() {
               return (
                 <div 
                   key={log.id}
-                  className="audit-row grid grid-cols-7 gap-4 p-4 items-center border-b border-border/50 hover:bg-card/50 transition-colors last:border-0"
+                  className="audit-row grid grid-cols-7 gap-4 p-4 items-center border-b border-border/50 hover:bg-card/50 transition-colors last:border-0 min-w-[800px]"
                 >
                   <div className="col-span-2 flex flex-col gap-1">
                     <span className="font-bold text-sm text-foreground truncate">{log.name}</span>
-                    <span className="text-[10px] text-muted-foreground font-mono truncate">{log.email}</span>
+                    <span className="text-xs text-muted-foreground font-mono truncate">{log.email}</span>
                   </div>
 
                   <div className="col-span-2 flex flex-col gap-1">
                     <div className="flex items-center gap-3">
-                      <div className={`w-2 h-2 rounded-full flex-shrink-0 ${isSuccess ? 'bg-green-500' : 'bg-red-500'}`} />
+                      <div className={`w-2 h-2 rounded-full flex-shrink-0 ${isSuccess ? 'bg-success' : 'bg-destructive'}`} />
                       <span className="font-bold text-sm text-foreground truncate">{actionName}</span>
                     </div>
                   </div>
                   
                   <div className="font-mono text-xs">
-                    <span className={`px-2 py-1 rounded text-[10px] font-bold ${isSuccess ? 'bg-green-500/10 text-green-500' : 'bg-red-500/10 text-red-500'}`}>
+                    <span className={`px-2 py-1 rounded text-xs font-bold ${isSuccess ? 'bg-success/10 text-success' : 'bg-destructive/10 text-destructive'}`}>
                       {statusName}
                     </span>
                   </div>
                   
-                  <div className="col-span-2 text-right font-mono text-xs text-muted-foreground">{timeAgo} <br/><span className="text-[9px] opacity-50">{new Date(log.timestamp).toLocaleString()}</span></div>
+                  <div className="col-span-2 text-right font-mono text-xs text-muted-foreground">{timeAgo} <br/><span className="text-xs opacity-50">{new Date(log.timestamp).toLocaleString()}</span></div>
                 </div>
               );
             })}

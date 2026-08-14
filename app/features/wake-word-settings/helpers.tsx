@@ -3,12 +3,12 @@ import { JobStatus } from "./types";
 
 export function statusColor(s: JobStatus) {
   const map: Record<string, string> = {
-    running: "text-yellow-400",
-    uploading: "text-yellow-400",
-    downloading: "text-yellow-400",
-    ready: "text-green-400",
-    deployed: "text-green-400",
-    error: "text-red-400",
+    running: "text-warning",
+    uploading: "text-warning",
+    downloading: "text-warning",
+    ready: "text-success",
+    deployed: "text-success",
+    error: "text-destructive",
     cancelled: "text-muted-foreground",
     queued: "text-blue-400",
   };
@@ -19,7 +19,7 @@ export function StatusDot({ s }: { s: JobStatus }) {
   const pulse = ["running", "uploading", "downloading"].includes(s);
   return (
     <span className="relative flex items-center gap-1.5">
-      <span className={`w-1.5 h-1.5 rounded-full ${pulse ? "animate-pulse bg-yellow-400" : s === "ready" || s === "deployed" ? "bg-green-400" : s === "error" ? "bg-red-400" : "bg-muted-foreground"}`} />
+      <span className={`w-1.5 h-1.5 rounded-full ${pulse ? "animate-pulse bg-warning" : s === "ready" || s === "deployed" ? "bg-success" : s === "error" ? "bg-destructive" : "bg-muted-foreground"}`} />
     </span>
   );
 }

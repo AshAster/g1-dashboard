@@ -48,7 +48,7 @@ export default function SignInPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center relative overflow-hidden px-4">
+    <div className="flex min-h-dvh items-center justify-center relative overflow-hidden px-4">
       {/* Local Video Background */}
       <video 
         autoPlay 
@@ -123,7 +123,7 @@ export default function SignInPage() {
                 placeholder="admin@g1platform.com"
                 required
                 autoComplete="email"
-                className="w-full h-11 px-4 rounded-full bg-white/5 border border-white/10 text-sm text-white placeholder:text-gray-400 focus:outline-none focus:border-white/40 focus:ring-1 focus:ring-white/30 transition-all backdrop-blur-sm"
+                className="w-full h-11 px-4 rounded-full bg-white/5 border border-white/10 text-base text-white placeholder:text-gray-400 focus:outline-none focus:border-white/40 focus:ring-1 focus:ring-white/30 transition-all backdrop-blur-sm"
               />
             </div>
 
@@ -141,7 +141,7 @@ export default function SignInPage() {
                   placeholder="••••••••"
                   required
                   autoComplete="current-password"
-                  className="w-full h-11 px-4 pr-11 rounded-full bg-white/5 border border-white/10 text-sm text-white placeholder:text-gray-400 focus:outline-none focus:border-white/40 focus:ring-1 focus:ring-white/30 transition-all backdrop-blur-sm"
+                  className="w-full h-11 px-4 pr-11 rounded-full bg-white/5 border border-white/10 text-base text-white placeholder:text-gray-400 focus:outline-none focus:border-white/40 focus:ring-1 focus:ring-white/30 transition-all backdrop-blur-sm"
                 />
                 <button
                   type="button"
@@ -185,8 +185,8 @@ export default function SignInPage() {
             </button>
             {/* Additional Links below button */}
             <div className="flex justify-between items-center text-xs text-gray-300 pt-2">
-              <label className="flex items-center gap-1.5 cursor-pointer">
-                <input type="checkbox" className="rounded border-white/20 bg-white/10 text-white focus:ring-white/30" />
+              <label className="flex items-center gap-1.5 cursor-pointer" htmlFor="remember-me">
+                <input id="remember-me" type="checkbox" className="rounded border-white/20 bg-white/10 text-white focus:ring-white/30" />
                 <span>Remember Me</span>
               </label>
               <a href="#" className="hover:text-white transition-colors">Forgot Password?</a>

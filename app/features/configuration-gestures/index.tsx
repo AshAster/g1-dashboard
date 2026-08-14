@@ -44,10 +44,10 @@ export function ConfigurationGesturesModule() {
           </div>
           
           <div className="flex items-center gap-4">
-            <div className={`flex items-center gap-2 px-4 py-2 rounded-lg border ${isHealthy ? 'bg-green-500/10 border-green-500/20 text-green-400' : 'bg-red-500/10 border-red-500/20 text-red-400'}`}>
+            <div className={`flex items-center gap-2 px-4 py-2 rounded-lg border ${isHealthy ? 'bg-success/10 border-success/20 text-success' : 'bg-destructive/10 border-destructive/20 text-destructive'}`}>
               <span className="relative flex h-3 w-3">
-                {isHealthy && <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>}
-                <span className={`relative inline-flex rounded-full h-3 w-3 ${isHealthy ? 'bg-green-500' : 'bg-red-500'}`}></span>
+                {isHealthy && <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-success opacity-75"></span>}
+                <span className={`relative inline-flex rounded-full h-3 w-3 ${isHealthy ? 'bg-success' : 'bg-destructive'}`}></span>
               </span>
               <span className="text-xs font-bold uppercase tracking-widest">{isHealthy ? 'Robot Connected' : 'Disconnected'}</span>
             </div>
@@ -82,11 +82,11 @@ export function ConfigurationGesturesModule() {
         )}
 
         {/* Recording Studio */}
-        <div className={`p-8 rounded-2xl border transition-all duration-500 ${isRecording ? 'bg-red-500/5 border-red-500/50 shadow-[0_0_30px_rgba(239,68,68,0.1)]' : 'bg-card/50 border-border'}`}>
+        <div className={`p-8 rounded-2xl border transition-all duration-500 ${isRecording ? 'bg-destructive/5 border-destructive/50 shadow-[0_0_30px_rgba(239,68,68,0.1)]' : 'bg-card/50 border-border'}`}>
           <div className="flex items-start justify-between">
             <div>
               <h3 className="text-lg font-bold text-foreground mb-2 flex items-center gap-2">
-                <FiActivity className={isRecording ? 'text-red-500 animate-pulse' : 'text-primary'} /> 
+                <FiActivity className={isRecording ? 'text-destructive animate-pulse' : 'text-primary'} /> 
                 {isRecording ? 'Recording in Progress' : 'Record New Gesture'}
               </h3>
               <p className="text-sm text-muted-foreground max-w-xl">
@@ -110,7 +110,7 @@ export function ConfigurationGesturesModule() {
             {isRecording ? (
               <button 
                 onClick={stopRecording}
-                className="w-full sm:w-auto flex justify-center items-center gap-2 px-8 py-3 bg-red-500 text-white font-bold uppercase tracking-wider rounded-lg hover:bg-red-600 transition-colors animate-pulse"
+                className="w-full sm:w-auto flex justify-center items-center gap-2 px-8 py-3 bg-destructive text-white font-bold uppercase tracking-wider rounded-lg hover:bg-destructive transition-colors animate-pulse"
               >
                 <FiSave /> Stop & Save
               </button>
@@ -140,7 +140,7 @@ export function ConfigurationGesturesModule() {
               No custom gestures recorded yet. Connect to a robot to view saved macros.
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {gestures.map((gesture) => (
                 <div key={gesture.name} className="p-6 border border-border bg-card/30 rounded-xl hover:bg-card/60 transition-colors group">
                   <div className="flex justify-between items-start mb-4">
@@ -152,7 +152,7 @@ export function ConfigurationGesturesModule() {
                     </div>
                   </div>
                   
-                  <div className="text-[10px] text-muted-foreground font-mono mb-6">
+                  <div className="text-xs text-muted-foreground font-mono mb-6">
                     Last modified: {new Date(gesture.modified).toLocaleString()}
                   </div>
                   
@@ -166,7 +166,7 @@ export function ConfigurationGesturesModule() {
                     </button>
                     <button 
                       onClick={() => deleteGesture(gesture.name)}
-                      className="p-2 border border-border text-muted-foreground hover:text-red-500 hover:border-red-500/50 hover:bg-red-500/10 rounded-lg transition-all"
+                      className="p-2 border border-border text-muted-foreground hover:text-destructive hover:border-destructive/50 hover:bg-destructive/10 rounded-lg transition-all"
                       title="Delete Gesture"
                     >
                       <FiTrash2 />

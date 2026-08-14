@@ -98,7 +98,7 @@ export function FeaturesGrid() {
         <h2 className='text-4xl md:text-5xl font-bold text-foreground tracking-tight mb-4'>
           What features you get ?
         </h2>
-        <p className='text-gray-500 dark:text-gray-400 text-lg max-w-2xl font-medium leading-relaxed'>
+        <p className='text-muted-foreground text-lg max-w-2xl font-medium leading-relaxed'>
           VEDA is packed with powerful capabilities to help you manage your robotic fleet, customize personas, and connect with your tools — without any overwhelming clutter.
         </p>
       </div>

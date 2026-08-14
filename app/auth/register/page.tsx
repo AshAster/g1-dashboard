@@ -42,7 +42,7 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center relative overflow-hidden px-4">
+    <div className="flex min-h-dvh items-center justify-center relative overflow-hidden px-4">
       {/* Local Video Background */}
       <video 
         autoPlay 
@@ -93,13 +93,13 @@ export default function RegisterPage() {
 
           <form className="space-y-4" onSubmit={handleSubmit}>
             {error && (
-              <div className="rounded-xl bg-red-500/10 border border-red-500/20 p-3">
-                <p className="text-sm font-medium text-red-500 text-center">{error}</p>
+              <div className="rounded-xl bg-destructive/10 border border-destructive/20 p-3">
+                <p className="text-sm font-medium text-destructive text-center">{error}</p>
               </div>
             )}
             {success && (
-              <div className="rounded-xl bg-green-500/10 border border-green-500/20 p-3">
-                <p className="text-sm font-medium text-green-500 text-center">Account created successfully! Redirecting...</p>
+              <div className="rounded-xl bg-success/10 border border-success/20 p-3">
+                <p className="text-sm font-medium text-success text-center">Account created successfully! Redirecting...</p>
               </div>
             )}
             
@@ -110,7 +110,7 @@ export default function RegisterPage() {
                   name="username"
                   type="text"
                   required
-                  className="w-full h-11 px-4 rounded-full bg-white/5 border border-white/10 text-sm text-white placeholder:text-gray-400 focus:outline-none focus:border-white/40 focus:ring-1 focus:ring-white/30 transition-all backdrop-blur-sm"
+                  className="w-full h-11 px-4 rounded-full bg-white/5 border border-white/10 text-base text-white placeholder:text-gray-400 focus:outline-none focus:border-white/40 focus:ring-1 focus:ring-white/30 transition-all backdrop-blur-sm"
                   placeholder="Username"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
@@ -122,7 +122,7 @@ export default function RegisterPage() {
                   name="email"
                   type="email"
                   required
-                  className="w-full h-11 px-4 rounded-full bg-white/5 border border-white/10 text-sm text-white placeholder:text-gray-400 focus:outline-none focus:border-white/40 focus:ring-1 focus:ring-white/30 transition-all backdrop-blur-sm"
+                  className="w-full h-11 px-4 rounded-full bg-white/5 border border-white/10 text-base text-white placeholder:text-gray-400 focus:outline-none focus:border-white/40 focus:ring-1 focus:ring-white/30 transition-all backdrop-blur-sm"
                   placeholder="Email Address"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -135,7 +135,7 @@ export default function RegisterPage() {
                     name="password"
                     type="password"
                     required
-                    className="w-full h-11 px-4 rounded-full bg-white/5 border border-white/10 text-sm text-white placeholder:text-gray-400 focus:outline-none focus:border-white/40 focus:ring-1 focus:ring-white/30 transition-all backdrop-blur-sm"
+                    className="w-full h-11 px-4 rounded-full bg-white/5 border border-white/10 text-base text-white placeholder:text-gray-400 focus:outline-none focus:border-white/40 focus:ring-1 focus:ring-white/30 transition-all backdrop-blur-sm"
                     placeholder="Password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
@@ -147,7 +147,7 @@ export default function RegisterPage() {
                     name="confirmPassword"
                     type="password"
                     required
-                    className="w-full h-11 px-4 rounded-full bg-white/5 border border-white/10 text-sm text-white placeholder:text-gray-400 focus:outline-none focus:border-white/40 focus:ring-1 focus:ring-white/30 transition-all backdrop-blur-sm"
+                    className="w-full h-11 px-4 rounded-full bg-white/5 border border-white/10 text-base text-white placeholder:text-gray-400 focus:outline-none focus:border-white/40 focus:ring-1 focus:ring-white/30 transition-all backdrop-blur-sm"
                     placeholder="Confirm Password"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}

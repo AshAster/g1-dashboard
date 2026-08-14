@@ -110,12 +110,12 @@ export function PersonaLibraryModule() {
                           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                           <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
                         </span>
-                        <span className="text-[10px] uppercase tracking-wider font-bold text-primary">Active</span>
+                        <span className="text-xs uppercase tracking-wider font-bold text-primary">Active</span>
                       </div>
                     ) : (
                       <div className="flex items-center gap-2 bg-muted/30 border border-border px-3 py-1 rounded-md w-[88px] justify-start">
                         <span className="h-2 w-2 rounded-full bg-muted-foreground/30 flex-shrink-0"></span>
-                        <span className="text-[10px] uppercase tracking-wider font-bold text-muted-foreground">Saved</span>
+                        <span className="text-xs uppercase tracking-wider font-bold text-muted-foreground">Saved</span>
                       </div>
                     )}
                   </div>
@@ -123,13 +123,13 @@ export function PersonaLibraryModule() {
                     {!p.isActive && (
                       <button 
                         onClick={(e) => handleDelete(p.id, e)}
-                        className="p-2 text-muted-foreground hover:text-red-500 hover:bg-red-500/10 rounded-md transition-colors"
+                        className="p-2 text-muted-foreground hover:text-destructive hover:bg-destructive/10 rounded-md transition-colors"
                         title="Delete Persona"
                       >
                         <FiTrash2 size={16} />
                       </button>
                     )}
-                    <button className="p-2 text-muted-foreground hover:text-primary transition-colors">
+                    <button aria-label="More options" className="p-2 text-muted-foreground hover:text-primary transition-colors">
                       <FiMoreHorizontal size={16} />
                     </button>
                   </div>
@@ -143,17 +143,18 @@ export function PersonaLibraryModule() {
       {/* Details Dialog */}
       {activeDialog === "library_details" && selectedPersona && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 sm:p-8">
-          <div className="bg-background border border-border w-full max-w-3xl max-h-full overflow-y-auto rounded-xl shadow-2xl flex flex-col relative">
+          <div role="dialog" aria-modal="true" aria-labelledby="persona-detail-title" className="bg-background border border-border w-full max-w-3xl max-h-full overflow-y-auto rounded-xl shadow-2xl flex flex-col relative">
             <div className="sticky top-0 bg-background/95 backdrop-blur z-10 border-b border-border p-6 flex items-center justify-between">
               <div>
-                <h2 className="text-2xl font-bold uppercase tracking-wider">{selectedPersona.name}</h2>
+                <h2 id="persona-detail-title" className="text-2xl font-bold uppercase tracking-wider">{selectedPersona.name}</h2>
                 <div className="flex gap-2 mt-2">
-                  {selectedPersona.isActive && <span className="bg-primary text-primary-foreground text-[10px] uppercase tracking-wider px-2 py-1 rounded font-bold">Currently Active on Robot</span>}
-                  {selectedPersona.isTemplate && <span className="bg-secondary text-secondary-foreground text-[10px] uppercase tracking-wider px-2 py-1 rounded font-bold">Template</span>}
+                  {selectedPersona.isActive && <span className="bg-primary text-primary-foreground text-xs uppercase tracking-wider px-2 py-1 rounded font-bold">Currently Active on Robot</span>}
+                  {selectedPersona.isTemplate && <span className="bg-secondary text-secondary-foreground text-xs uppercase tracking-wider px-2 py-1 rounded font-bold">Template</span>}
                 </div>
               </div>
-              <button 
+              <button
                 onClick={() => setActiveDialog(null)}
+                aria-label="Close"
                 className="p-3 bg-secondary/50 hover:bg-secondary rounded-full transition-colors"
               >
                 <FiX size={24} />
@@ -161,7 +162,7 @@ export function PersonaLibraryModule() {
             </div>
             
             <div className="p-6 sm:p-10 space-y-8">
-              <div className="grid grid-cols-2 gap-4 text-sm font-mono">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm font-mono">
                 <div><span className="text-muted-foreground block mb-1">Robot Name</span>{selectedPersona.robotName || '-'}</div>
                 <div><span className="text-muted-foreground block mb-1">Role</span>{selectedPersona.robotRole || '-'}</div>
                 <div><span className="text-muted-foreground block mb-1">Company</span>{selectedPersona.robotCompany || '-'}</div>
@@ -213,7 +214,7 @@ export function PersonaLibraryModule() {
                 {!selectedPersona.isTemplate && !selectedPersona.isActive && (
                   <button 
                     onClick={(e) => handleDelete(selectedPersona.id, e)}
-                    className="px-6 py-3 font-semibold uppercase tracking-wider text-sm text-red-500 hover:bg-red-500/10 transition-colors"
+                    className="px-6 py-3 font-semibold uppercase tracking-wider text-sm text-destructive hover:bg-destructive/10 transition-colors"
                   >
                     Delete
                   </button>
