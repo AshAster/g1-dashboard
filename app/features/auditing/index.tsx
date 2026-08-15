@@ -183,30 +183,30 @@ export function AuditingModule() {
 
   return (
     <FeatureGate featureKey="auditing">
-      <div ref={containerRef} className="space-y-6">
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+      <div ref={containerRef} className="space-y-5 sm:space-y-6">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-4 mb-5 sm:mb-8">
           <div className="relative w-full sm:w-96">
-            <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" />
+            <FiSearch className="absolute left-3.5 sm:left-4 top-1/2 -translate-y-1/2 text-muted-foreground" />
             <input 
               type="text" 
               placeholder="Search audit logs..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-card border border-border pl-12 pr-4 py-3 text-foreground font-mono text-sm focus:outline-none focus:border-primary transition-colors rounded-lg shadow-sm"
+              className="w-full min-h-11 bg-card border border-border pl-11 sm:pl-12 pr-4 py-3 text-foreground font-mono text-base sm:text-sm focus:outline-none focus:border-primary transition-colors rounded-lg shadow-sm"
             />
           </div>
           <div className="flex gap-3 w-full sm:w-auto">
             <button 
               onClick={handleExportCSV}
               disabled={!data?.logs || data.logs.length === 0}
-              className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-3 bg-secondary text-secondary-foreground font-semibold uppercase tracking-wider text-sm hover:opacity-90 transition-opacity rounded-lg shadow-sm disabled:opacity-50"
+              className="flex-1 sm:flex-none min-h-11 flex items-center justify-center gap-2 px-4 sm:px-6 py-3 bg-secondary text-secondary-foreground font-semibold uppercase tracking-wider text-xs sm:text-sm hover:opacity-90 transition-opacity rounded-lg shadow-sm disabled:opacity-50"
             >
               <FiDownload /> Export CSV
             </button>
           </div>
         </div>
 
-        <div className="border border-border rounded-xl overflow-x-auto bg-card/30">
+        <div className="border border-border rounded-xl overflow-x-auto overscroll-x-contain bg-card/30 [scrollbar-width:thin]">
           <div className="grid grid-cols-7 gap-4 p-4 border-b border-border bg-muted/50 text-xs font-mono text-muted-foreground uppercase tracking-wider min-w-[800px]">
             <div className="col-span-2">User</div>
             <div className="col-span-2">Action</div>
@@ -214,12 +214,12 @@ export function AuditingModule() {
             <div className="col-span-2 text-right">Timestamp</div>
           </div>
 
-          <div className="flex flex-col max-h-[600px] overflow-y-auto min-w-[800px]">
-            {isLoading && <div className="p-8 text-center text-muted-foreground font-mono">Loading audit logs...</div>}
-            {isError && <div className="p-8 text-center text-destructive font-mono">Error loading audit logs</div>}
+          <div className="flex flex-col max-h-[420px] sm:max-h-[600px] overflow-y-auto overscroll-contain min-w-[800px]">
+            {isLoading && <div className="p-6 sm:p-8 text-center text-muted-foreground font-mono text-sm">Loading audit logs...</div>}
+            {isError && <div className="p-6 sm:p-8 text-center text-destructive font-mono text-sm">Error loading audit logs</div>}
             
             {!isLoading && !isError && filteredLogs.length === 0 && (
-              <div className="p-8 text-center text-muted-foreground font-mono">
+              <div className="p-6 sm:p-8 text-center text-muted-foreground font-mono text-sm">
                 {searchQuery ? "No logs match your search." : "No audit logs found."}
               </div>
             )}

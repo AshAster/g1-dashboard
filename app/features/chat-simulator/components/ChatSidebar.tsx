@@ -29,15 +29,15 @@ export function ChatSidebar({
   return (
     <div className={cn(
       "border-r border-border bg-card flex flex-col h-full flex-shrink-0 transition-transform duration-300 ease-in-out",
-      "fixed inset-y-0 left-0 z-50 w-64 md:relative md:translate-x-0 md:z-auto",
+      "fixed inset-y-0 left-0 z-50 w-[80%] max-w-[280px] md:w-60 lg:w-64 md:relative md:translate-x-0 md:z-auto md:max-w-none shadow-2xl md:shadow-none",
       isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
     )}>
-      <div className="p-4 border-b border-border">
+      <div className="p-3 sm:p-4 border-b border-border">
         <button
           onClick={onNewChat}
-          className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-all font-medium"
+          className="w-full min-h-11 flex items-center justify-center gap-2 px-4 py-2.5 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-all font-medium text-sm"
         >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
           </svg>
           New Chat
@@ -51,7 +51,7 @@ export function ChatSidebar({
           </h3>
           <button
             onClick={onClose}
-            className="md:hidden p-1 text-muted-foreground hover:text-foreground hover:bg-accent rounded-lg"
+            className="md:hidden p-2 -m-1 text-muted-foreground hover:text-foreground hover:bg-accent rounded-lg"
             title="Close history"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -69,14 +69,14 @@ export function ChatSidebar({
             <div
               key={session.id}
               className={cn(
-                "group flex items-center justify-between px-3 py-2 rounded-lg cursor-pointer transition-colors",
+                "group flex items-center justify-between gap-1 px-3 py-2.5 md:py-2 rounded-lg cursor-pointer transition-colors",
                 activeSessionId === session.id
                   ? "bg-primary/10 text-primary font-medium"
                   : "hover:bg-accent text-foreground"
               )}
               onClick={() => onSelectSession(session.id)}
             >
-              <div className="flex-1 truncate text-sm">
+              <div className="flex-1 min-w-0 truncate text-sm">
                 {session.title || "New Chat"}
               </div>
               <button

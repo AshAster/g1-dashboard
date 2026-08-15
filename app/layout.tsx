@@ -93,9 +93,9 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
             <div className="flex flex-col md:flex-row h-dvh overflow-hidden bg-sidebar">
               <Sidebar tenant={tenantData} role={role} />
 
-              <div className="flex flex-col flex-1 min-h-0 md:rounded-tl-2xl bg-background overflow-hidden relative">
+              <div className="flex flex-col flex-1 min-w-0 min-h-0 md:rounded-tl-2xl bg-background overflow-hidden relative">
                 <LimelightNav role={role} isLoggedIn={isLoggedIn} tenant={tenantData} />
-                <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">
+                <main className="flex-1 min-w-0 overflow-y-auto overflow-x-hidden overscroll-contain px-3 py-4 sm:px-6 sm:py-6 lg:px-8 lg:py-8 pb-[max(1rem,env(safe-area-inset-bottom))]">
                   <AuthGuard>
                     <FeaturesProvider>
                       {children}

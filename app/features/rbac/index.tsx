@@ -91,7 +91,7 @@ export function RbacModule() {
       <div ref={containerRef} className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
           <div>
-            <h3 className="text-xl font-bold uppercase tracking-wide">Role-Based Access Control</h3>
+            <h3 className="text-base sm:text-lg lg:text-xl font-bold uppercase tracking-wide">Role-Based Access Control</h3>
             <p className="text-sm text-muted-foreground font-mono mt-1">Manage user permissions and security roles.</p>
           </div>
           <button
@@ -109,7 +109,7 @@ export function RbacModule() {
             </div>
           )}
           
-          <div className="grid grid-cols-4 gap-4 p-4 border-b border-border bg-muted/50 text-xs font-mono text-muted-foreground uppercase tracking-wider min-w-[560px]">
+          <div className="grid grid-cols-4 gap-3 sm:gap-4 p-3 sm:p-4 border-b border-border bg-muted/50 text-[10px] sm:text-xs font-mono text-muted-foreground uppercase tracking-wider min-w-[560px]">
             <div className="col-span-2">User Profile</div>
             <div>Access Level</div>
             <div className="text-right">Actions</div>
@@ -120,7 +120,7 @@ export function RbacModule() {
                <div className="p-8 text-center text-muted-foreground font-mono text-sm">No users found.</div>
             )}
             {users.map((u) => (
-              <div key={u.id} className="rbac-row grid grid-cols-4 gap-4 p-4 items-center hover:bg-card/50 transition-colors min-w-[560px]">
+              <div key={u.id} className="rbac-row grid grid-cols-4 gap-3 sm:gap-4 p-3 sm:p-4 items-center hover:bg-card/50 transition-colors min-w-[560px]">
                 <div className="col-span-2 flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary/30 to-primary/10 border border-primary/20 flex items-center justify-center text-primary font-bold shadow-sm">
                     {u.username.charAt(0).toUpperCase()}
@@ -151,8 +151,8 @@ export function RbacModule() {
       </div>
 
       {showModal && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
-          <div role="dialog" aria-modal="true" aria-labelledby="invite-user-title" className="bg-card border border-border rounded-2xl p-6 w-full max-w-md max-h-[90dvh] overflow-y-auto shadow-2xl relative animate-in zoom-in-95 duration-200">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm p-3 sm:p-4 overscroll-contain">
+          <div role="dialog" aria-modal="true" aria-labelledby="invite-user-title" className="bg-card border border-border rounded-2xl p-4 sm:p-6 w-full max-w-md max-h-[88dvh] overflow-y-auto overscroll-contain shadow-2xl relative animate-in zoom-in-95 duration-200">
             <button
               onClick={() => setShowModal(false)}
               aria-label="Close"
@@ -173,22 +173,22 @@ export function RbacModule() {
               <div className="space-y-1">
                 <label className="text-xs font-bold font-mono uppercase tracking-wider text-muted-foreground" htmlFor="username">Username</label>
                 <input id="username" required value={newUsername} onChange={e => setNewUsername(e.target.value)}
-                  className="w-full px-4 py-2.5 bg-background border border-border rounded-xl text-base focus:outline-none focus:ring-2 focus:ring-primary/50 transition-shadow" placeholder="johndoe" />
+                  className="w-full min-h-11 px-4 py-2.5 bg-background border border-border rounded-xl text-base focus:outline-none focus:ring-2 focus:ring-primary/50 transition-shadow" placeholder="johndoe" />
               </div>
               <div className="space-y-1">
                 <label className="text-xs font-bold font-mono uppercase tracking-wider text-muted-foreground" htmlFor="email">Email</label>
                 <input id="email" required type="email" value={newEmail} onChange={e => setNewEmail(e.target.value)}
-                  className="w-full px-4 py-2.5 bg-background border border-border rounded-xl text-base focus:outline-none focus:ring-2 focus:ring-primary/50 transition-shadow" placeholder="john@example.com" />
+                  className="w-full min-h-11 px-4 py-2.5 bg-background border border-border rounded-xl text-base focus:outline-none focus:ring-2 focus:ring-primary/50 transition-shadow" placeholder="john@example.com" />
               </div>
               <div className="space-y-1">
                 <label className="text-xs font-bold font-mono uppercase tracking-wider text-muted-foreground" htmlFor="temporary-password">Temporary Password</label>
                 <input id="temporary-password" required type="password" value={newPassword} onChange={e => setNewPassword(e.target.value)}
-                  className="w-full px-4 py-2.5 bg-background border border-border rounded-xl text-base focus:outline-none focus:ring-2 focus:ring-primary/50 transition-shadow" placeholder="••••••••" />
+                  className="w-full min-h-11 px-4 py-2.5 bg-background border border-border rounded-xl text-base focus:outline-none focus:ring-2 focus:ring-primary/50 transition-shadow" placeholder="••••••••" />
               </div>
               <div className="space-y-1">
                 <label className="text-xs font-bold font-mono uppercase tracking-wider text-muted-foreground" htmlFor="access-role">Access Role</label>
                 <select id="access-role" value={newRole} onChange={e => setNewRole(e.target.value as any)}
-                  className="w-full px-4 py-2.5 bg-background border border-border rounded-xl text-base focus:outline-none focus:ring-2 focus:ring-primary/50 transition-shadow appearance-none">
+                  className="w-full min-h-11 px-4 py-2.5 bg-background border border-border rounded-xl text-base focus:outline-none focus:ring-2 focus:ring-primary/50 transition-shadow appearance-none">
                   <option value="admin">Admin - Full System Access</option>
                   <option value="editor">Editor - Read/Write Robots</option>
                   <option value="user">User - Chat Only</option>

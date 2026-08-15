@@ -2,7 +2,7 @@ import React from "react";
 
 export function QuickReference() {
   return (
-    <section className="border-t border-border pt-8">
+    <section className="border-t border-border pt-6 sm:pt-8">
       <p className="text-xs font-mono text-muted-foreground uppercase mb-4">// sample count guide</p>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {[

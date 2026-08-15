@@ -23,24 +23,24 @@ const suggestedPrompts = [
 
 export function MessageList({ messages, showSources, setShowSources, sendMessage, messagesEndRef }: MessageListProps) {
   return (
-    <div className="flex-1 overflow-y-auto p-3 md:p-6 space-y-4 md:space-y-6">
+    <div className="flex-1 overflow-y-auto overscroll-contain p-3 sm:p-4 md:p-6 space-y-4 md:space-y-6">
       {messages.length === 0 ? (
-        <div className="h-full flex flex-col items-center justify-center text-center p-8">
-          <div className="w-16 h-16 rounded-xl bg-accent flex items-center justify-center mb-4">
-            <svg className="w-8 h-8 text-accent-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className="h-full flex flex-col items-center justify-center text-center p-4 sm:p-8">
+          <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl bg-accent flex items-center justify-center mb-4">
+            <svg className="w-6 h-6 sm:w-8 sm:h-8 text-accent-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
             </svg>
           </div>
-          <h3 className="text-lg font-semibold text-card-foreground mb-2">Start a conversation</h3>
-          <p className="text-muted-foreground max-w-sm text-sm">
+          <h3 className="text-base sm:text-lg font-semibold text-card-foreground mb-2">Start a conversation</h3>
+          <p className="text-muted-foreground max-w-sm text-xs sm:text-sm text-balance">
             Ask questions about your documents and get AI-powered answers with source citations
           </p>
-          <div className="flex flex-wrap gap-2 mt-6 justify-center max-w-md">
+          <div className="flex flex-wrap gap-2 mt-5 sm:mt-6 justify-center max-w-md">
             {suggestedPrompts.map((prompt, idx) => (
               <button
                 key={idx}
                 onClick={() => sendMessage(prompt)}
-                className="px-4 py-2 bg-accent text-accent-foreground rounded-full text-xs sm:text-sm hover:opacity-85 hover:scale-[1.02] transition-all font-medium border border-border/40"
+                className="px-3 sm:px-4 py-2 bg-accent text-accent-foreground rounded-full text-[11px] sm:text-sm hover:opacity-85 hover:scale-[1.02] transition-all font-medium border border-border/40"
               >
                 {prompt}
               </button>
@@ -57,7 +57,7 @@ export function MessageList({ messages, showSources, setShowSources, sendMessage
             )}
           >
             {msg.role === "assistant" && (
-              <div className="w-8 h-8 rounded-xl bg-primary/10 border border-primary/20 text-primary flex items-center justify-center shrink-0 mt-0.5 shadow-xs">
+              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-primary/10 border border-primary/20 text-primary flex items-center justify-center shrink-0 mt-0.5 shadow-xs">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
@@ -65,11 +65,11 @@ export function MessageList({ messages, showSources, setShowSources, sendMessage
             )}
 
             <div className={cn(
-              "max-w-[80%] sm:max-w-[75%] space-y-1.5 flex flex-col",
+              "max-w-[85%] sm:max-w-[78%] md:max-w-[75%] min-w-0 space-y-1.5 flex flex-col",
               msg.role === "user" ? "items-end" : "items-start"
             )}>
               <div className={cn(
-                "rounded-2xl px-4 py-2.5 text-sm shadow-xs transition-all duration-200 border",
+                "rounded-2xl px-3.5 sm:px-4 py-2.5 text-[13px] sm:text-sm shadow-xs transition-all duration-200 border max-w-full",
                 msg.role === "user"
                   ? "bg-primary text-primary-foreground border-primary rounded-tr-none"
                   : "bg-card border-border text-card-foreground rounded-tl-none"

@@ -11,51 +11,51 @@ export const metadata = {
 
 export default function DocumentationPage() {
   return (
-    <div className="max-w-7xl mx-auto">
+    <div className="max-w-7xl mx-auto w-full">
 
       {/* Top Header Row — client-component header that hides on scroll down */}
       <DocHeader />
 
-      <div className="flex flex-col lg:grid lg:grid-cols-[240px_1fr] gap-8 items-start relative">
+      <div className="flex flex-col lg:grid lg:grid-cols-[220px_1fr] xl:grid-cols-[240px_1fr] gap-6 lg:gap-8 items-start relative">
         
         {/* Left Sidebar */}
         <DocSidebar />
         
         {/* Main Content Area */}
-        <main className="flex-1 min-w-0 pb-32">
+        <main className="flex-1 w-full min-w-0 pb-20 sm:pb-28 lg:pb-32">
           
           {/* CATEGORY: CORE PLATFORM */}
           
           <DocSection id="getting-started" categoryName="Core Platform" title="Getting Started">
-            <p className="text-lg">
+            <p className="text-sm sm:text-base lg:text-lg">
               Welcome to <strong>VEDA</strong>. The VEDA Control Center is the central hub for managing your robotic fleet's AI personas, knowledge base, facial recognition systems, and hardware telemetry.
             </p>
             
-            <h3 className="text-xl font-semibold mt-8 mb-4">Quick Start</h3>
-            <div className="overflow-x-auto my-6 rounded-xl border border-border">
-              <table className="w-full text-sm text-left">
+            <h3 className="text-lg sm:text-xl font-semibold mt-6 sm:mt-8 mb-3 sm:mb-4">Quick Start</h3>
+            <div className="overflow-x-auto overscroll-x-contain my-5 sm:my-6 rounded-xl border border-border [scrollbar-width:thin]">
+              <table className="w-full min-w-[480px] text-xs sm:text-sm text-left">
                 <thead className="bg-muted/50 text-foreground border-b border-border">
                   <tr>
-                    <th className="px-4 py-3 font-semibold">Step</th>
-                    <th className="px-4 py-3 font-semibold">Action</th>
-                    <th className="px-4 py-3 font-semibold">Where</th>
+                    <th className="px-3 sm:px-4 py-2.5 sm:py-3 font-semibold whitespace-nowrap">Step</th>
+                    <th className="px-3 sm:px-4 py-2.5 sm:py-3 font-semibold whitespace-nowrap">Action</th>
+                    <th className="px-3 sm:px-4 py-2.5 sm:py-3 font-semibold whitespace-nowrap">Where</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-border/50">
                   <tr className="hover:bg-muted/30 transition-colors">
-                    <td className="px-4 py-3 font-medium">1</td>
-                    <td className="px-4 py-3">Upload business documents</td>
-                    <td className="px-4 py-3 text-primary">Knowledge Base</td>
+                    <td className="px-3 sm:px-4 py-2.5 sm:py-3 font-medium">1</td>
+                    <td className="px-3 sm:px-4 py-2.5 sm:py-3">Upload business documents</td>
+                    <td className="px-3 sm:px-4 py-2.5 sm:py-3 text-primary">Knowledge Base</td>
                   </tr>
                   <tr className="hover:bg-muted/30 transition-colors">
-                    <td className="px-4 py-3 font-medium">2</td>
-                    <td className="px-4 py-3">Configure the robot's personality</td>
-                    <td className="px-4 py-3 text-primary">Persona Engine</td>
+                    <td className="px-3 sm:px-4 py-2.5 sm:py-3 font-medium">2</td>
+                    <td className="px-3 sm:px-4 py-2.5 sm:py-3">Configure the robot's personality</td>
+                    <td className="px-3 sm:px-4 py-2.5 sm:py-3 text-primary">Persona Engine</td>
                   </tr>
                   <tr className="hover:bg-muted/30 transition-colors">
-                    <td className="px-4 py-3 font-medium">3</td>
-                    <td className="px-4 py-3">Train a custom wakeword</td>
-                    <td className="px-4 py-3 text-primary">Wake Words</td>
+                    <td className="px-3 sm:px-4 py-2.5 sm:py-3 font-medium">3</td>
+                    <td className="px-3 sm:px-4 py-2.5 sm:py-3">Train a custom wakeword</td>
+                    <td className="px-3 sm:px-4 py-2.5 sm:py-3 text-primary">Wake Words</td>
                   </tr>
                 </tbody>
               </table>
@@ -67,7 +67,7 @@ export default function DocumentationPage() {
             <p>
               The Dashboard serves as the command center for your entire VEDA ecosystem. It provides real-time telemetry and a high-level overview of all active modules.
             </p>
-            <h3 className="text-xl font-semibold mt-8 mb-4">Preview Panel</h3>
+            <h3 className="text-lg sm:text-xl font-semibold mt-6 sm:mt-8 mb-3 sm:mb-4">Preview Panel</h3>
             <p>
               The preview panel consists of dynamic cards for every major feature. Each card displays actual real-time data from the backend APIs. For example, the <strong>Knowledge Hub</strong> card shows exactly how many documents are indexed, and the <strong>Persona Engine</strong> card displays the currently active persona deployed to the robot.
             </p>
@@ -83,15 +83,15 @@ export default function DocumentationPage() {
               The Persona Engine allows you to define exactly how the robot thinks, speaks, and behaves. It acts as the core "brain" configuration.
             </p>
             
-            <h3 className="text-xl font-semibold mt-8 mb-4">Key Concepts</h3>
-            <ul className="space-y-4">
+            <h3 className="text-lg sm:text-xl font-semibold mt-6 sm:mt-8 mb-3 sm:mb-4">Key Concepts</h3>
+            <ul className="space-y-3 sm:space-y-4 text-sm sm:text-base">
               <li><strong>Identity:</strong> The robot's Name, Company, Role, and physical Location.</li>
               <li><strong>System Prompt:</strong> The core directive fed to the LLM. This dictates the ultimate rules of engagement.</li>
               <li><strong>Conversation Rules:</strong> Specific constraints (e.g., "Never discuss pricing", "Always be polite").</li>
             </ul>
 
-            <h3 className="text-xl font-semibold mt-8 mb-4">Deploying a Persona</h3>
-            <ol className="list-decimal list-inside space-y-2 my-4">
+            <h3 className="text-lg sm:text-xl font-semibold mt-6 sm:mt-8 mb-3 sm:mb-4">Deploying a Persona</h3>
+            <ol className="list-decimal list-inside space-y-2 my-4 text-sm sm:text-base">
               <li>Go to the Persona Engine page.</li>
               <li>Fill out the Identity and System Prompt fields.</li>
               <li>Click <strong>Deploy to Robot</strong>.</li>
@@ -122,12 +122,12 @@ export default function DocumentationPage() {
               The Knowledge Base uses Retrieval-Augmented Generation (RAG) to give the robot access to your proprietary business documents. Instead of hallucinating, the robot will search these documents to answer user questions.
             </p>
             
-            <h3 className="text-xl font-semibold mt-8 mb-4">Supported Formats</h3>
-            <div className="flex gap-4 my-4">
-              <span className="px-3 py-1 bg-muted rounded-md text-sm font-medium">.PDF</span>
-              <span className="px-3 py-1 bg-muted rounded-md text-sm font-medium">.DOCX</span>
-              <span className="px-3 py-1 bg-muted rounded-md text-sm font-medium">.TXT</span>
-              <span className="px-3 py-1 bg-muted rounded-md text-sm font-medium">.CSV</span>
+            <h3 className="text-lg sm:text-xl font-semibold mt-6 sm:mt-8 mb-3 sm:mb-4">Supported Formats</h3>
+            <div className="flex flex-wrap gap-2 sm:gap-4 my-4">
+              <span className="px-2.5 sm:px-3 py-1 bg-muted rounded-md text-xs sm:text-sm font-medium">.PDF</span>
+              <span className="px-2.5 sm:px-3 py-1 bg-muted rounded-md text-xs sm:text-sm font-medium">.DOCX</span>
+              <span className="px-2.5 sm:px-3 py-1 bg-muted rounded-md text-xs sm:text-sm font-medium">.TXT</span>
+              <span className="px-2.5 sm:px-3 py-1 bg-muted rounded-md text-xs sm:text-sm font-medium">.CSV</span>
             </div>
 
             <p className="mt-6">
@@ -144,7 +144,7 @@ export default function DocumentationPage() {
             <p>
               The Facial Recognition System (FRS) manages employee profiles. When the robot's cameras detect a face, it checks this database to identify the person and inject context into the conversation.
             </p>
-            <h3 className="text-xl font-semibold mt-8 mb-4">Profile Setup</h3>
+            <h3 className="text-lg sm:text-xl font-semibold mt-6 sm:mt-8 mb-3 sm:mb-4">Profile Setup</h3>
             <p>Each profile requires:</p>
             <ul className="list-disc list-inside space-y-1 mb-6">
               <li>Full Name & Employee ID</li>
@@ -163,8 +163,8 @@ export default function DocumentationPage() {
             <p>
               This module interfaces with the robot's SLAM (Simultaneous Localization and Mapping) capabilities.
             </p>
-            <h3 className="text-xl font-semibold mt-8 mb-4">Commands</h3>
-            <ul className="space-y-4">
+            <h3 className="text-lg sm:text-xl font-semibold mt-6 sm:mt-8 mb-3 sm:mb-4">Commands</h3>
+            <ul className="space-y-3 sm:space-y-4 text-sm sm:text-base">
               <li><code>slam/start</code> - Begins building a new map of the current environment.</li>
               <li><code>slam/save</code> - Saves the current map to the AGX.</li>
               <li><code>go</code> - Sends coordinates to the robot to autonomously navigate to a saved location.</li>
@@ -178,8 +178,8 @@ export default function DocumentationPage() {
             <p>
               Custom gestures allow you to record physical arm movements and save them as reusable actions.
             </p>
-            <h3 className="text-xl font-semibold mt-8 mb-4">Recording a Gesture</h3>
-            <ol className="list-decimal list-inside space-y-2 my-4">
+            <h3 className="text-lg sm:text-xl font-semibold mt-6 sm:mt-8 mb-3 sm:mb-4">Recording a Gesture</h3>
+            <ol className="list-decimal list-inside space-y-2 my-4 text-sm sm:text-base">
               <li>Click <strong>Start Recording</strong>. The robot's motors will enter compliant (zero-torque) mode.</li>
               <li>Physically move the robot's arms into the desired sequence.</li>
               <li>Click <strong>Stop Recording</strong>. The trajectory is saved as a <code>.npy</code> file on the AGX.</li>
@@ -204,7 +204,7 @@ export default function DocumentationPage() {
             <p>
               The Model Context Protocol (MCP) allows the robot to interact with external tools and APIs. This gives the AI the ability to actually <em>do</em> things rather than just talk.
             </p>
-            <h3 className="text-xl font-semibold mt-8 mb-4">Available Tools</h3>
+            <h3 className="text-lg sm:text-xl font-semibold mt-6 sm:mt-8 mb-3 sm:mb-4">Available Tools</h3>
             <ul className="space-y-2 list-disc list-inside">
               <li><strong>Google Workspace:</strong> Calendar, Docs, Drive, Gmail, Slides</li>
               <li><strong>Jira:</strong> Ticket management</li>
@@ -238,7 +238,7 @@ export default function DocumentationPage() {
           {/* CATEGORY: SETTINGS */}
 
           <DocSection id="general-settings" categoryName="Settings" title="General Settings">
-            <ul className="space-y-4">
+            <ul className="space-y-3 sm:space-y-4 text-sm sm:text-base">
               <li><strong>Auto-Save:</strong> Automatically saves forms as you type.</li>
               <li><strong>Show Sources:</strong> Appends the source document name to the end of the robot's answers when using RAG.</li>
               <li><strong>Streaming:</strong> Enables token-by-token streaming for faster perceived response times.</li>
@@ -249,7 +249,7 @@ export default function DocumentationPage() {
             <p>
               Manage administrator access and API keys here.
             </p>
-            <h3 className="text-xl font-semibold mt-8 mb-4">RBAC (Role-Based Access Control)</h3>
+            <h3 className="text-lg sm:text-xl font-semibold mt-6 sm:mt-8 mb-3 sm:mb-4">RBAC (Role-Based Access Control)</h3>
             <p>
               Users can be either <code>admin</code> or <code>user</code>. Admins have access to all system settings, while users can only interact with the chat simulator and view the dashboard.
             </p>

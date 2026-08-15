@@ -15,7 +15,7 @@ export function ChatHeader({
 }: ChatHeaderProps) {
   return (
     <>
-      <div className="p-4 border-b border-border">
+      <div className="p-3 sm:p-4 border-b border-border">
         <div className="flex items-center justify-between gap-2">
           <div className="flex items-center gap-2 min-w-0">
             {/* Mobile history toggle button */}
@@ -29,15 +29,15 @@ export function ChatHeader({
               </svg>
             </button>
 
-            <h1 className="text-base md:text-xl font-semibold text-foreground flex items-center gap-2 truncate">
+            <h1 className="text-sm sm:text-base md:text-xl font-semibold text-foreground flex items-center gap-2 truncate min-w-0">
               <span className="truncate">Chat with your robot</span>
             </h1>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
             {messages.length > 0 && (
               <button
                 onClick={clearChat}
-                className="p-2 text-muted-foreground hover:text-destructive hover:bg-destructive/10 rounded-lg transition-colors"
+                className="p-2.5 text-muted-foreground hover:text-destructive hover:bg-destructive/10 rounded-lg transition-colors"
                 title="Clear chat"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

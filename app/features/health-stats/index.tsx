@@ -74,105 +74,105 @@ export function HealthStatsModule() {
 
   return (
     <FeatureGate featureKey="healthStats">
-      <div ref={containerRef} className="space-y-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div ref={containerRef} className="space-y-6 sm:space-y-8">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
           {stats.map((stat) => (
             <div
               key={stat.label}
-              className="stat-card p-6 border border-border bg-card/30 rounded-xl relative overflow-hidden group hover:bg-card/60 transition-colors"
+              className="stat-card p-4 sm:p-5 lg:p-6 border border-border bg-card/30 rounded-xl relative overflow-hidden group hover:bg-card/60 transition-colors"
             >
               <div className={`absolute top-0 right-0 w-32 h-32 -mr-8 -mt-8 rounded-full blur-3xl opacity-20 transition-opacity group-hover:opacity-40 ${stat.bg.replace('/10', '')}`} />
               
-              <div className="flex justify-between items-start mb-4 relative z-10">
-                <div className={`p-3 rounded-lg ${stat.bg} ${stat.color}`}>
+              <div className="flex justify-between items-start gap-2 mb-3 sm:mb-4 relative z-10">
+                <div className={`p-2 sm:p-3 rounded-lg shrink-0 ${stat.bg} ${stat.color}`}>
                   <stat.icon size={24} />
                 </div>
-                <span className={`text-xs uppercase tracking-widest font-bold px-2 py-1 rounded border border-border ${stat.status === 'offline' ? 'text-destructive bg-destructive/10' : 'text-muted-foreground bg-background'}`}>
+                <span className={`text-[9px] sm:text-xs uppercase tracking-widest font-bold px-1.5 sm:px-2 py-1 rounded border border-border shrink-0 ${stat.status === 'offline' ? 'text-destructive bg-destructive/10' : 'text-muted-foreground bg-background'}`}>
                   {stat.status}
                 </span>
               </div>
               
               <div className="relative z-10">
-                <h3 className="text-3xl font-bold tracking-tighter mb-1">{stat.value}</h3>
-                <p className="text-xs font-mono text-muted-foreground uppercase">{stat.label}</p>
+                <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-tighter mb-1 break-words">{stat.value}</h3>
+                <p className="text-[10px] sm:text-xs font-mono text-muted-foreground uppercase break-words">{stat.label}</p>
               </div>
             </div>
           ))}
         </div>
 
-        <div className="p-8 border border-border bg-card/20 rounded-xl relative overflow-hidden">
-          <div className="flex items-center gap-3 mb-6 relative z-10">
+        <div className="p-4 sm:p-6 lg:p-8 border border-border bg-card/20 rounded-xl relative overflow-hidden">
+          <div className="flex items-center gap-2.5 sm:gap-3 mb-4 sm:mb-6 relative z-10 flex-wrap">
             <FiActivity className={isOffline ? "text-muted-foreground" : "text-primary"} size={20} />
-            <h3 className="font-bold text-lg uppercase tracking-wide">System Diagnostics (Thor)</h3>
+            <h3 className="font-bold text-sm sm:text-base lg:text-lg uppercase tracking-wide">System Diagnostics (Thor)</h3>
             {isOffline && (
-              <span className="ml-auto text-xs bg-destructive/10 text-destructive px-3 py-1 rounded-full font-bold uppercase tracking-wider">
+              <span className="ml-auto text-[10px] sm:text-xs bg-destructive/10 text-destructive px-2.5 sm:px-3 py-1 rounded-full font-bold uppercase tracking-wider whitespace-nowrap">
                 Connection Lost
               </span>
             )}
           </div>
           
-          <div className={`p-6 border border-dashed rounded-lg transition-colors ${isOffline ? 'border-destructive/30 bg-destructive/5' : 'border-border/50 bg-background/50'}`}>
+          <div className={`p-4 sm:p-5 lg:p-6 border border-dashed rounded-lg transition-colors ${isOffline ? 'border-destructive/30 bg-destructive/5' : 'border-border/50 bg-background/50'}`}>
             {telemetry && !isOffline ? (
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 relative z-10">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-5 lg:gap-6 relative z-10">
                 {/* Uptime */}
                 <div className="flex flex-col gap-1">
                   <div className="flex items-center gap-2 text-muted-foreground mb-1">
                     <FiClock size={14} className="text-blue-500" />
-                    <span className="text-xs uppercase tracking-widest font-bold">Uptime</span>
+                    <span className="text-[10px] sm:text-xs uppercase tracking-widest font-bold">Uptime</span>
                   </div>
-                  <span className="text-xl font-mono">{telemetry.agx_orin.uptime_hrs} <span className="text-xs text-muted-foreground">HRS</span></span>
+                  <span className="text-base sm:text-lg lg:text-xl font-mono break-words">{telemetry.agx_orin.uptime_hrs} <span className="text-xs text-muted-foreground">HRS</span></span>
                 </div>
 
                 {/* Power Draw */}
                 <div className="flex flex-col gap-1">
                   <div className="flex items-center gap-2 text-muted-foreground mb-1">
                     <FiZap size={14} className="text-warning" />
-                    <span className="text-xs uppercase tracking-widest font-bold">GPU Power</span>
+                    <span className="text-[10px] sm:text-xs uppercase tracking-widest font-bold">GPU Power</span>
                   </div>
-                  <span className="text-xl font-mono">{telemetry.agx_orin.power_draw_w} <span className="text-xs text-muted-foreground">W</span></span>
+                  <span className="text-base sm:text-lg lg:text-xl font-mono break-words">{telemetry.agx_orin.power_draw_w} <span className="text-xs text-muted-foreground">W</span></span>
                 </div>
 
                 {/* Fan Speed */}
                 <div className="flex flex-col gap-1">
                   <div className="flex items-center gap-2 text-muted-foreground mb-1">
                     <FiWind size={14} className="text-cyan-500" />
-                    <span className="text-xs uppercase tracking-widest font-bold">Fan Speed</span>
+                    <span className="text-[10px] sm:text-xs uppercase tracking-widest font-bold">Fan Speed</span>
                   </div>
-                  <span className="text-xl font-mono">{telemetry.agx_orin.fan_speed_pct} <span className="text-xs text-muted-foreground">%</span></span>
+                  <span className="text-base sm:text-lg lg:text-xl font-mono break-words">{telemetry.agx_orin.fan_speed_pct} <span className="text-xs text-muted-foreground">%</span></span>
                 </div>
 
                 {/* GPU Clock */}
                 <div className="flex flex-col gap-1">
                   <div className="flex items-center gap-2 text-muted-foreground mb-1">
                     <FiActivity size={14} className="text-purple-500" />
-                    <span className="text-xs uppercase tracking-widest font-bold">GPU Core Clock</span>
+                    <span className="text-[10px] sm:text-xs uppercase tracking-widest font-bold">GPU Core Clock</span>
                   </div>
-                  <span className="text-xl font-mono">{telemetry.agx_orin.gpu_core_clock_mhz} <span className="text-xs text-muted-foreground">MHz</span></span>
+                  <span className="text-base sm:text-lg lg:text-xl font-mono break-words">{telemetry.agx_orin.gpu_core_clock_mhz} <span className="text-xs text-muted-foreground">MHz</span></span>
                 </div>
 
                 {/* Storage */}
                 <div className="flex flex-col gap-1">
                   <div className="flex items-center gap-2 text-muted-foreground mb-1">
                     <FiHardDrive size={14} className="text-emerald-500" />
-                    <span className="text-xs uppercase tracking-widest font-bold">Disk Free</span>
+                    <span className="text-[10px] sm:text-xs uppercase tracking-widest font-bold">Disk Free</span>
                   </div>
-                  <span className="text-xl font-mono">{telemetry.agx_orin.disk_free_gb} <span className="text-xs text-muted-foreground">GB</span></span>
+                  <span className="text-base sm:text-lg lg:text-xl font-mono break-words">{telemetry.agx_orin.disk_free_gb} <span className="text-xs text-muted-foreground">GB</span></span>
                 </div>
 
                 {/* GPU Memory */}
                 <div className="flex flex-col gap-1">
                   <div className="flex items-center gap-2 text-muted-foreground mb-1">
                     <FiDatabase size={14} className="text-indigo-500" />
-                    <span className="text-xs uppercase tracking-widest font-bold">GPU VRAM</span>
+                    <span className="text-[10px] sm:text-xs uppercase tracking-widest font-bold">GPU VRAM</span>
                   </div>
-                  <span className="text-xl font-mono">{telemetry.agx_orin.gpu_mem_free_gb} <span className="text-xs text-muted-foreground">GB Free</span></span>
+                  <span className="text-base sm:text-lg lg:text-xl font-mono break-words">{telemetry.agx_orin.gpu_mem_free_gb} <span className="text-xs text-muted-foreground">GB Free</span></span>
                 </div>
 
                 {/* Network */}
                 <div className="flex flex-col gap-1 col-span-2">
                   <div className="flex items-center gap-2 text-muted-foreground mb-1">
                     <FiWifi size={14} className="text-success" />
-                    <span className="text-xs uppercase tracking-widest font-bold">Network I/O (Total)</span>
+                    <span className="text-[10px] sm:text-xs uppercase tracking-widest font-bold">Network I/O (Total)</span>
                   </div>
                   <div className="flex items-center gap-4">
                     <span className="text-xl font-mono text-success">↑ {telemetry.agx_orin.net_sent_mb} <span className="text-xs text-muted-foreground">MB</span></span>

@@ -53,26 +53,26 @@ export function ProfileForm({
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto space-y-8">
-      <div className="flex justify-between items-center pb-4 border-b border-border">
+    <div className="w-full max-w-4xl mx-auto space-y-6 sm:space-y-8">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 pb-4 border-b border-border">
         <div>
-          <h1 className="text-3xl font-bold text-foreground">Tenant Profile</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold text-foreground">Tenant Profile</h1>
           <p className="text-sm text-muted-foreground mt-1">Manage your workspace and company details.</p>
         </div>
         {!isEditing && (
-          <button onClick={() => setIsEditing(true)} className="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary/10 text-primary hover:bg-primary/20 transition-colors font-medium">
+          <button onClick={() => setIsEditing(true)} className="w-full sm:w-auto min-h-11 flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-primary/10 text-primary hover:bg-primary/20 transition-colors text-sm font-medium">
             <FiEdit2 /> Edit Profile
           </button>
         )}
       </div>
 
-      <motion.div layout className="bg-card border border-border rounded-xl p-8 shadow-sm space-y-8">
+      <motion.div layout className="bg-card border border-border rounded-xl p-4 sm:p-6 lg:p-8 shadow-sm space-y-6 sm:space-y-8">
         
         {/* Header / Logo section */}
-        <div className="flex flex-col md:flex-row items-center gap-6 pb-6 border-b border-border">
-          <Avatar className="w-24 h-24 md:w-32 md:h-32 border-4 border-background shadow-lg rounded-full flex-shrink-0">
+        <div className="flex flex-col md:flex-row items-center gap-4 sm:gap-6 pb-5 sm:pb-6 border-b border-border">
+          <Avatar className="w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 border-4 border-background shadow-lg rounded-full flex-shrink-0">
             {logo ? <AvatarImage src={logo} className="object-cover rounded-full" /> : null}
-            <AvatarFallback className="bg-primary/10 text-primary text-4xl font-semibold rounded-full">
+            <AvatarFallback className="bg-primary/10 text-primary text-2xl sm:text-3xl md:text-4xl font-semibold rounded-full">
               {initial}
             </AvatarFallback>
           </Avatar>
@@ -86,7 +86,7 @@ export function ProfileForm({
                     type="text" 
                     value={formData.name}
                     onChange={(e) => setFormData({...formData, name: e.target.value})}
-                    className="w-full text-lg font-bold bg-background p-2 rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/50"
+                    className="w-full min-h-11 text-base sm:text-lg font-bold bg-background p-2 rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/50"
                   />
                 </div>
                 <div>
@@ -95,7 +95,7 @@ export function ProfileForm({
                     type="text" 
                     value={formData.companyType}
                     onChange={(e) => setFormData({...formData, companyType: e.target.value})}
-                    className="w-full text-sm font-medium bg-background p-2 rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/50"
+                    className="w-full min-h-11 text-base sm:text-sm font-medium bg-background p-2 rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/50"
                   />
                 </div>
                 <div>
@@ -113,7 +113,7 @@ export function ProfileForm({
               </div>
             ) : (
               <div>
-                <h2 className="text-3xl font-bold text-foreground">{name}</h2>
+                <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground break-words">{name}</h2>
                 <span className="inline-block mt-2 px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-bold uppercase tracking-wider">
                   {type}
                 </span>
@@ -123,8 +123,8 @@ export function ProfileForm({
         </div>
 
         {/* Details section */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="space-y-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 lg:gap-8">
+          <div className="space-y-5 sm:space-y-6">
             <div>
               <label className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-2 block" htmlFor="admin-contact-host">Admin Contact (Host)</label>
               {isEditing ? (
@@ -132,7 +132,7 @@ export function ProfileForm({
                   type="text" 
                   value={formData.host}
                   onChange={(e) => setFormData({...formData, host: e.target.value})}
-                  className="w-full text-sm font-medium bg-background p-3 rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/50"
+                  className="w-full min-h-11 text-base sm:text-sm font-medium bg-background p-3 rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/50"
                 />
               ) : (
                 <div className="text-sm text-foreground font-medium bg-secondary/50 p-3 rounded-lg border border-border/50">
@@ -148,7 +148,7 @@ export function ProfileForm({
                   type="email" 
                   value={formData.hostEmail}
                   onChange={(e) => setFormData({...formData, hostEmail: e.target.value})}
-                  className="w-full text-sm font-medium bg-background p-3 rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/50"
+                  className="w-full min-h-11 text-base sm:text-sm font-medium bg-background p-3 rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/50"
                 />
               ) : (
                 <div className="text-sm text-foreground font-medium bg-secondary/50 p-3 rounded-lg border border-border/50">
@@ -158,7 +158,7 @@ export function ProfileForm({
             </div>
           </div>
 
-          <div className="space-y-6">
+          <div className="space-y-5 sm:space-y-6">
             <div>
               <label className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-2 block" htmlFor="company-description">Company Description</label>
               {isEditing ? (

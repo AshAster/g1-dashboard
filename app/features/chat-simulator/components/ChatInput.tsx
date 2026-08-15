@@ -13,8 +13,8 @@ interface ChatInputProps {
 
 export function ChatInput({ input, setInput, isLoading, sendMessage }: ChatInputProps) {
   return (
-    <div className="p-3 md:p-4 border-t border-border bg-card">
-      <div className="flex items-end gap-2 max-w-4xl mx-auto">
+    <div className="p-2.5 sm:p-3 md:p-4 border-t border-border bg-card pb-[max(0.625rem,env(safe-area-inset-bottom))]">
+      <div className="flex items-end gap-2 max-w-4xl mx-auto w-full">
         <textarea
           value={input}
           onChange={(e) => setInput(e.target.value)}
@@ -26,7 +26,7 @@ export function ChatInput({ input, setInput, isLoading, sendMessage }: ChatInput
           }}
           placeholder="Ask me anything..."
           rows={1}
-          className="flex-1 px-3.5 py-2.5 bg-background border border-border rounded-xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 resize-none text-sm"
+          className="flex-1 min-w-0 px-3 sm:px-3.5 py-2.5 bg-background border border-border rounded-xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 resize-none text-base sm:text-sm"
           style={{ minHeight: "44px", maxHeight: "160px" }}
         />
         <div className="flex items-center gap-2 flex-shrink-0">
@@ -37,7 +37,7 @@ export function ChatInput({ input, setInput, isLoading, sendMessage }: ChatInput
             onClick={() => sendMessage()}
             disabled={!input.trim() || isLoading}
             className={cn(
-              "p-2.5 rounded-xl font-medium transition-all shadow-xs shrink-0 flex items-center justify-center",
+              "h-11 w-11 sm:h-auto sm:w-auto sm:p-2.5 rounded-xl font-medium transition-all shadow-xs shrink-0 flex items-center justify-center",
               input.trim() && !isLoading
                 ? "bg-primary text-primary-foreground hover:opacity-90 hover:scale-102"
                 : "bg-muted text-muted-foreground cursor-not-allowed border border-border/40"

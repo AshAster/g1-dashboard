@@ -56,14 +56,14 @@ export default function ChangePasswordPage() {
   }
 
   return (
-    <div className="flex min-h-[80vh] items-center justify-center relative overflow-hidden px-4">
+    <div className="flex min-h-[80vh] items-center justify-center relative overflow-x-hidden px-4 py-8 sm:py-12">
       {/* Background effects */}
-      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-accent-blue/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-accent-purple/5 rounded-full blur-3xl" />
+      <div className="absolute top-0 left-1/4 w-[min(500px,90vw)] h-[min(500px,90vw)] bg-accent-blue/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 right-1/4 w-[min(500px,90vw)] h-[min(500px,90vw)] bg-accent-purple/5 rounded-full blur-3xl" />
 
       <div className="relative z-10 w-full max-w-[420px]">
         {/* Card */}
-        <div className="bg-bg-secondary/80 backdrop-blur-xl rounded-2xl border border-border p-8 shadow-2xl shadow-black/20">
+        <div className="bg-bg-secondary/80 backdrop-blur-xl rounded-2xl border border-border p-5 sm:p-8 shadow-2xl shadow-black/20">
           <div className="mb-8">
             <h1 className="text-2xl font-bold text-text-primary mb-1.5">
               Change Password

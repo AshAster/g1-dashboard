@@ -20,8 +20,8 @@ export function ConfigModal({
   if (!integration) return null;
 
   return (
-    <div className="fixed inset-0 bg-background/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div role="dialog" aria-modal="true" aria-labelledby="config-modal-title" className="bg-card border border-border w-full max-w-lg shadow-2xl flex flex-col max-h-[90dvh]">
+    <div className="fixed inset-0 bg-background/80 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-4 overscroll-contain">
+      <div role="dialog" aria-modal="true" aria-labelledby="config-modal-title" className="bg-card border border-border w-full max-w-lg shadow-2xl flex flex-col max-h-[88dvh] overscroll-contain">
         <div className="p-6 border-b border-border flex justify-between items-center">
           <div>
             <h3 id="config-modal-title" className="font-bold text-lg uppercase tracking-wide">Configuration</h3>
@@ -105,7 +105,7 @@ export function ConfigModal({
                     value={formValues[key] || ''}
                     onChange={(e) => onFormChange(key, e.target.value)}
                     placeholder={schema.description}
-                    className="w-full px-4 py-2 bg-background border border-border rounded text-sm font-mono focus:outline-none focus:border-primary transition-colors"
+                    className="w-full min-h-11 px-4 py-2 bg-background border border-border rounded text-base sm:text-sm font-mono focus:outline-none focus:border-primary transition-colors"
                   />
                 </div>
               ))}

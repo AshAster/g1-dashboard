@@ -16,7 +16,7 @@ export function RollbackModule() {
       <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
           <div>
-            <h3 className="text-xl font-bold uppercase tracking-wide">System Rollback</h3>
+            <h3 className="text-base sm:text-lg lg:text-xl font-bold uppercase tracking-wide">System Rollback</h3>
             <p className="text-sm text-muted-foreground font-mono mt-1">Restore robot configuration from previous snapshots.</p>
           </div>
           <button className="w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2 border border-border text-foreground font-mono text-xs uppercase tracking-wider rounded shadow hover:bg-card/50 shrink-0">

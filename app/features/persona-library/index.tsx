@@ -56,18 +56,18 @@ export function PersonaLibraryModule() {
   return (
     <>
       <section className="pt-8 border-t border-border">
-        <div className="flex items-center gap-4 mb-8">
+        <div className="flex items-center gap-2.5 sm:gap-4 mb-5 sm:mb-8 min-w-0">
           <span className="text-primary font-mono text-sm">[LIB]</span>
-          <h2 className="text-xl font-bold uppercase tracking-wide text-foreground">Personal Persona Library</h2>
+          <h2 className="text-base sm:text-lg lg:text-xl font-bold uppercase tracking-wide text-foreground">Personal Persona Library</h2>
         </div>
         
         {personas.filter(p => !p.isTemplate).length === 0 ? (
-          <p className="text-muted-foreground text-sm font-mono p-8 border border-dashed border-border text-center">No personal personas found. Create one using the Role Builder or select a Template.</p>
+          <p className="text-muted-foreground text-xs sm:text-sm font-mono p-5 sm:p-8 border border-dashed border-border text-center text-balance">No personal personas found. Create one using the Role Builder or select a Template.</p>
         ) : (
-          <div className="w-full border border-border rounded-xl overflow-hidden bg-card/30">
+          <div className="w-full border border-border rounded-xl overflow-x-auto overscroll-x-contain bg-card/30 [scrollbar-width:thin]">
             {/* Table Header */}
             <div 
-              className="grid gap-4 p-4 border-b border-border bg-muted/50 text-xs font-mono text-muted-foreground uppercase tracking-wider"
+              className="grid min-w-[720px] gap-3 sm:gap-4 p-3 sm:p-4 border-b border-border bg-muted/50 text-[10px] sm:text-xs font-mono text-muted-foreground uppercase tracking-wider"
               style={{ gridTemplateColumns: "2fr 1.5fr 1.5fr 1fr 120px" }}
             >
               <div>Profile Name</div>
@@ -78,7 +78,7 @@ export function PersonaLibraryModule() {
             </div>
 
             {/* Table Body */}
-            <div ref={containerRef} className="flex flex-col">
+            <div ref={containerRef} className="flex flex-col min-w-[720px]">
               {personas.filter(p => !p.isTemplate).map((p) => (
                 <div 
                   key={p.id}
@@ -87,7 +87,7 @@ export function PersonaLibraryModule() {
                     setActiveDialog("library_details");
                   }}
                   style={{ gridTemplateColumns: "2fr 1.5fr 1.5fr 1fr 120px" }}
-                  className={`persona-row grid gap-4 p-4 items-center border-b border-border/50 cursor-pointer transition-all duration-200 hover:scale-[1.01] active:scale-[0.99] ${
+                  className={`persona-row grid min-w-[720px] gap-3 sm:gap-4 p-3 sm:p-4 items-center border-b border-border/50 cursor-pointer transition-all duration-200 hover:scale-[1.01] active:scale-[0.99] ${
                     p.isActive ? 'border-l-4 border-l-primary bg-primary/10' : 'border-l-4 border-l-transparent hover:border-l-primary/60 hover:bg-primary/10'
                   }`}
                 >
@@ -142,11 +142,11 @@ export function PersonaLibraryModule() {
 
       {/* Details Dialog */}
       {activeDialog === "library_details" && selectedPersona && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 sm:p-8">
-          <div role="dialog" aria-modal="true" aria-labelledby="persona-detail-title" className="bg-background border border-border w-full max-w-3xl max-h-full overflow-y-auto rounded-xl shadow-2xl flex flex-col relative">
-            <div className="sticky top-0 bg-background/95 backdrop-blur z-10 border-b border-border p-6 flex items-center justify-between">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-3 sm:p-6 lg:p-8 overscroll-contain">
+          <div role="dialog" aria-modal="true" aria-labelledby="persona-detail-title" className="bg-background border border-border w-full max-w-3xl max-h-full overflow-y-auto overscroll-contain rounded-xl shadow-2xl flex flex-col relative">
+            <div className="sticky top-0 bg-background/95 backdrop-blur z-10 border-b border-border p-4 sm:p-6 flex items-center justify-between gap-3">
               <div>
-                <h2 id="persona-detail-title" className="text-2xl font-bold uppercase tracking-wider">{selectedPersona.name}</h2>
+                <h2 id="persona-detail-title" className="text-lg sm:text-2xl font-bold uppercase tracking-wider break-words">{selectedPersona.name}</h2>
                 <div className="flex gap-2 mt-2">
                   {selectedPersona.isActive && <span className="bg-primary text-primary-foreground text-xs uppercase tracking-wider px-2 py-1 rounded font-bold">Currently Active on Robot</span>}
                   {selectedPersona.isTemplate && <span className="bg-secondary text-secondary-foreground text-xs uppercase tracking-wider px-2 py-1 rounded font-bold">Template</span>}
@@ -161,8 +161,8 @@ export function PersonaLibraryModule() {
               </button>
             </div>
             
-            <div className="p-6 sm:p-10 space-y-8">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm font-mono">
+            <div className="p-4 sm:p-6 lg:p-10 space-y-6 sm:space-y-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 text-xs sm:text-sm font-mono">
                 <div><span className="text-muted-foreground block mb-1">Robot Name</span>{selectedPersona.robotName || '-'}</div>
                 <div><span className="text-muted-foreground block mb-1">Role</span>{selectedPersona.robotRole || '-'}</div>
                 <div><span className="text-muted-foreground block mb-1">Company</span>{selectedPersona.robotCompany || '-'}</div>
@@ -194,7 +194,7 @@ export function PersonaLibraryModule() {
               </div>
             </div>
             
-            <div className="sticky bottom-0 bg-background/95 backdrop-blur z-10 border-t border-border p-6 flex justify-between items-center">
+            <div className="sticky bottom-0 bg-background/95 backdrop-blur z-10 border-t border-border p-4 sm:p-6 flex flex-col-reverse sm:flex-row sm:justify-between sm:items-center gap-3">
               <div>
                 {!selectedPersona.isTemplate && (
                   <FeatureGate featureKey="personaChange">
@@ -222,7 +222,7 @@ export function PersonaLibraryModule() {
                 <button 
                   onClick={() => handleDeploy(selectedPersona.id)}
                   disabled={saving || selectedPersona.isActive}
-                  className="flex items-center gap-2 px-8 py-3 bg-primary text-primary-foreground font-semibold uppercase tracking-wider text-sm hover:opacity-90 transition-opacity disabled:opacity-50 shadow-lg hover:-translate-y-0.5"
+                  className="w-full sm:w-auto min-h-11 flex items-center justify-center gap-2 px-6 sm:px-8 py-3 bg-primary text-primary-foreground font-semibold uppercase tracking-wider text-xs sm:text-sm hover:opacity-90 transition-opacity disabled:opacity-50 shadow-lg hover:-translate-y-0.5"
                 >
                   {saving ? <FiRefreshCw className="animate-spin" /> : (selectedPersona.isActive ? <FiCheckCircle /> : <FiSave />)}
                   {selectedPersona.isActive ? "Already Active" : "Deploy to Robot"}

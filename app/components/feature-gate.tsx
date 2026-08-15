@@ -73,7 +73,7 @@ export function FeatureGate({ featureKey, children, hideWhenDisabled = false }: 
       {/* Disclaimer Modal */}
       {showDisclaimer && (
         <div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm p-4"
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm p-3 sm:p-4 overscroll-contain"
           onClick={() => setShowDisclaimer(false)}
         >
           <div

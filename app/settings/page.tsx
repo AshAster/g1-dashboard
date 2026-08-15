@@ -269,8 +269,8 @@ export default function Settings() {
 
   return (
     <div className="flex-1 bg-background">
-      <div className="max-w-7xl mx-auto pt-8 pb-32">
-        <h1 className="text-2xl sm:text-3xl font-bold text-foreground mb-6">Settings</h1>
+      <div className="max-w-7xl mx-auto w-full pb-20 sm:pb-28 lg:pb-32 pt-2 sm:pt-4 lg:pt-6">
+        <h1 className="text-2xl sm:text-3xl font-bold text-foreground mb-4 sm:mb-6">Settings</h1>
 
         <div className="flex flex-col md:flex-row gap-4 sm:gap-6">
           {/* Sidebar */}
@@ -304,35 +304,35 @@ export default function Settings() {
             {activeTab === "general" && (
               <div className="bg-card border border-border rounded-2xl p-5 sm:p-6 lg:p-8 space-y-6 sm:space-y-8">
                 <div>
-                  <h2 className="text-xl font-semibold text-card-foreground mb-1">General Settings</h2>
-                  <p className="text-muted-foreground">Configure system-wide preferences</p>
+                  <h2 className="text-lg sm:text-xl font-semibold text-card-foreground mb-1">General Settings</h2>
+                  <p className="text-xs sm:text-sm text-muted-foreground">Configure system-wide preferences</p>
                 </div>
                 <div className="space-y-6">
                   <div className="flex items-center justify-between gap-4 py-4 border-b border-border">
                     <div className="min-w-0 flex-1">
-                      <p className="font-medium text-card-foreground">Auto-save conversations</p>
-                      <p className="text-sm text-muted-foreground">Automatically save chat history</p>
+                      <p className="text-sm sm:text-base font-medium text-card-foreground">Auto-save conversations</p>
+                      <p className="text-xs sm:text-sm text-muted-foreground">Automatically save chat history</p>
                     </div>
                     <Toggle checked={autoSave} onChange={() => setAutoSave(!autoSave)} />
                   </div>
                   <div className="flex items-center justify-between gap-4 py-4 border-b border-border">
                     <div className="min-w-0 flex-1">
-                      <p className="font-medium text-card-foreground">Show source citations</p>
-                      <p className="text-sm text-muted-foreground">Display document references in AI responses</p>
+                      <p className="text-sm sm:text-base font-medium text-card-foreground">Show source citations</p>
+                      <p className="text-xs sm:text-sm text-muted-foreground">Display document references in AI responses</p>
                     </div>
                     <Toggle checked={showSources} onChange={() => setShowSources(!showSources)} />
                   </div>
                   <div className="flex items-center justify-between gap-4 py-4 border-b border-border">
                     <div className="min-w-0 flex-1">
-                      <p className="font-medium text-card-foreground">Enable streaming responses</p>
-                      <p className="text-sm text-muted-foreground">Stream AI responses in real-time</p>
+                      <p className="text-sm sm:text-base font-medium text-card-foreground">Enable streaming responses</p>
+                      <p className="text-xs sm:text-sm text-muted-foreground">Stream AI responses in real-time</p>
                     </div>
                     <Toggle checked={streamingEnabled} onChange={() => setStreamingEnabled(!streamingEnabled)} />
                   </div>
                   <div className="flex items-center justify-between gap-4 py-4">
                     <div className="min-w-0 flex-1">
-                      <p className="font-medium text-card-foreground">Default to dark mode</p>
-                      <p className="text-sm text-muted-foreground">Use dark theme by default</p>
+                      <p className="text-sm sm:text-base font-medium text-card-foreground">Default to dark mode</p>
+                      <p className="text-xs sm:text-sm text-muted-foreground">Use dark theme by default</p>
                     </div>
                     <Toggle checked={darkModeDefault} onChange={() => setDarkModeDefault(!darkModeDefault)} />
                   </div>
@@ -343,8 +343,8 @@ export default function Settings() {
             {activeTab === "security" && (
               <div className="bg-card border border-border rounded-2xl p-5 sm:p-6 lg:p-8 space-y-6 sm:space-y-8">
                 <div>
-                  <h2 className="text-xl font-semibold text-card-foreground mb-1">Security</h2>
-                  <p className="text-muted-foreground">Manage your account credentials</p>
+                  <h2 className="text-lg sm:text-xl font-semibold text-card-foreground mb-1">Security</h2>
+                  <p className="text-xs sm:text-sm text-muted-foreground">Manage your account credentials</p>
                 </div>
                 
                 <form onSubmit={handleChangePassword} className="space-y-6 max-w-md">
@@ -367,7 +367,7 @@ export default function Settings() {
                       value={oldPassword} 
                       onChange={(e) => setOldPassword(e.target.value)} 
                       placeholder="••••••••"
-                      className="w-full px-4 py-2.5 bg-background border border-border rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20" 
+                      className="w-full min-h-11 px-3.5 sm:px-4 py-2.5 bg-background border border-border rounded-xl text-base sm:text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20" 
                     />
                   </div>
                   <div className="space-y-2">
@@ -378,7 +378,7 @@ export default function Settings() {
                       value={changeNewPassword} 
                       onChange={(e) => setChangeNewPassword(e.target.value)} 
                       placeholder="••••••••"
-                      className="w-full px-4 py-2.5 bg-background border border-border rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20" 
+                      className="w-full min-h-11 px-3.5 sm:px-4 py-2.5 bg-background border border-border rounded-xl text-base sm:text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20" 
                     />
                   </div>
 
@@ -396,14 +396,14 @@ export default function Settings() {
             {activeTab === "embedding" && (
               <div className="bg-card border border-border rounded-2xl p-5 sm:p-6 lg:p-8 space-y-6 sm:space-y-8">
                 <div>
-                  <h2 className="text-xl font-semibold text-card-foreground mb-1">Embedding Configuration</h2>
-                  <p className="text-muted-foreground">Configure document embedding settings</p>
+                  <h2 className="text-lg sm:text-xl font-semibold text-card-foreground mb-1">Embedding Configuration</h2>
+                  <p className="text-xs sm:text-sm text-muted-foreground">Configure document embedding settings</p>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-card-foreground" htmlFor="provider">Provider</label>
                     <select id="provider" value={embeddingProvider} onChange={(e) => setEmbeddingProvider(e.target.value)}
-                      className="w-full px-4 py-2.5 bg-background border border-border rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20">
+                      className="w-full min-h-11 px-3.5 sm:px-4 py-2.5 bg-background border border-border rounded-xl text-base sm:text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20">
                       <option value="ollama">Ollama (Local)</option>
                       <option value="openai">OpenAI</option>
                       <option value="cohere">Cohere</option>
@@ -413,7 +413,7 @@ export default function Settings() {
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-card-foreground" htmlFor="embedding-model">Embedding Model</label>
                     <select id="embedding-model" value={embeddingModel} onChange={(e) => setEmbeddingModel(e.target.value)}
-                      className="w-full px-4 py-2.5 bg-background border border-border rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20">
+                      className="w-full min-h-11 px-3.5 sm:px-4 py-2.5 bg-background border border-border rounded-xl text-base sm:text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20">
                       <option value="nomic-embed-text:latest">Nomic Embed Text</option>
                       <option value="all-minilm:latest">All-MiniLM</option>
                       <option value="mxbai-embed-large:latest">MXBAI Embed Large</option>
@@ -423,7 +423,7 @@ export default function Settings() {
                     <label className="text-sm font-medium text-card-foreground" htmlFor="dimensions">Dimensions</label>
                     <input id="dimensions" type="number" value={embeddingDimension} onChange={(e) => setEmbeddingDimension(parseInt(e.target.value))}
                       min="128" max="4096"
-                      className="w-full px-4 py-2.5 bg-background border border-border rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20" />
+                      className="w-full min-h-11 px-3.5 sm:px-4 py-2.5 bg-background border border-border rounded-xl text-base sm:text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20" />
                   </div>
                 </div>
               </div>
@@ -432,14 +432,14 @@ export default function Settings() {
             {activeTab === "chunking" && (
               <div className="bg-card border border-border rounded-2xl p-5 sm:p-6 lg:p-8 space-y-6 sm:space-y-8">
                 <div>
-                  <h2 className="text-xl font-semibold text-card-foreground mb-1">Chunking Configuration</h2>
-                  <p className="text-muted-foreground">Configure how documents are split for indexing</p>
+                  <h2 className="text-lg sm:text-xl font-semibold text-card-foreground mb-1">Chunking Configuration</h2>
+                  <p className="text-xs sm:text-sm text-muted-foreground">Configure how documents are split for indexing</p>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-card-foreground" htmlFor="chunking-strategy">Chunking Strategy</label>
                     <select id="chunking-strategy" value={chunkingStrategy} onChange={(e) => setChunkingStrategy(e.target.value)}
-                      className="w-full px-4 py-2.5 bg-background border border-border rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20">
+                      className="w-full min-h-11 px-3.5 sm:px-4 py-2.5 bg-background border border-border rounded-xl text-base sm:text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20">
                       <option value="semantic">Semantic (Recommended)</option>
                       <option value="fixed">Fixed Size</option>
                       <option value="recursive">Recursive</option>
@@ -450,7 +450,7 @@ export default function Settings() {
                     <label className="text-sm font-medium text-card-foreground" htmlFor="batch-size">Batch Size</label>
                     <input id="batch-size" type="number" value={batchSize} onChange={(e) => setBatchSize(parseInt(e.target.value))}
                       min="1" max="100"
-                      className="w-full px-4 py-2.5 bg-background border border-border rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20" />
+                      className="w-full min-h-11 px-3.5 sm:px-4 py-2.5 bg-background border border-border rounded-xl text-base sm:text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20" />
                     <p className="text-xs text-muted-foreground">Chunks to process in parallel</p>
                   </div>
                   <div className="space-y-2">
@@ -468,7 +468,7 @@ export default function Settings() {
                 </div>
                 <div className="bg-accent/50 rounded-xl p-4 border border-border">
                   <p className="text-sm text-card-foreground font-medium mb-1">Estimated chunks per document</p>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-xs sm:text-sm text-muted-foreground">
                     A 5000 token document will create approximately {Math.ceil(5000 / (chunkSize - chunkOverlap))} chunks with these settings.
                   </p>
                 </div>
@@ -478,14 +478,14 @@ export default function Settings() {
             {activeTab === "database" && (
               <div className="bg-card border border-border rounded-2xl p-5 sm:p-6 lg:p-8 space-y-6 sm:space-y-8">
                 <div>
-                  <h2 className="text-xl font-semibold text-card-foreground mb-1">Vector Database</h2>
-                  <p className="text-muted-foreground">Configure vector search and storage</p>
+                  <h2 className="text-lg sm:text-xl font-semibold text-card-foreground mb-1">Vector Database</h2>
+                  <p className="text-xs sm:text-sm text-muted-foreground">Configure vector search and storage</p>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-card-foreground" htmlFor="vector-database">Vector Database</label>
                     <select id="vector-database" value={vectorDb} onChange={(e) => setVectorDb(e.target.value)}
-                      className="w-full px-4 py-2.5 bg-background border border-border rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20">
+                      className="w-full min-h-11 px-3.5 sm:px-4 py-2.5 bg-background border border-border rounded-xl text-base sm:text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20">
                       <option value="chroma">ChromaDB</option>
                       <option value="qdrant">Qdrant</option>
                       <option value="pinecone">Pinecone</option>
@@ -507,8 +507,8 @@ export default function Settings() {
                 </div>
                 <div className="flex items-center justify-between gap-4 py-4 border-t border-border">
                   <div className="min-w-0 flex-1">
-                    <p className="font-medium text-card-foreground">Auto-optimize indices</p>
-                    <p className="text-sm text-muted-foreground">Automatically optimize vector indices periodically</p>
+                    <p className="text-sm sm:text-base font-medium text-card-foreground">Auto-optimize indices</p>
+                    <p className="text-xs sm:text-sm text-muted-foreground">Automatically optimize vector indices periodically</p>
                   </div>
                   <Toggle checked={true} onChange={() => {}} />
                 </div>
@@ -518,32 +518,32 @@ export default function Settings() {
             {activeTab === "api" && (
               <div className="bg-card border border-border rounded-2xl p-5 sm:p-6 lg:p-8 space-y-6 sm:space-y-8">
                 <div>
-                  <h2 className="text-xl font-semibold text-card-foreground mb-1">API Keys</h2>
-                  <p className="text-muted-foreground">Manage your API credentials for external services</p>
+                  <h2 className="text-lg sm:text-xl font-semibold text-card-foreground mb-1">API Keys</h2>
+                  <p className="text-xs sm:text-sm text-muted-foreground">Manage your API credentials for external services</p>
                 </div>
                 <div className="space-y-6">
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-card-foreground" htmlFor="openai-api-key">OpenAI API Key</label>
                     <input id="openai-api-key" type="password" value={openaiKey} onChange={(e) => setOpenaiKey(e.target.value)} placeholder="sk-..."
-                      className="w-full px-4 py-2.5 bg-background border border-border rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20" />
+                      className="w-full min-h-11 px-3.5 sm:px-4 py-2.5 bg-background border border-border rounded-xl text-base sm:text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20" />
                     <p className="text-xs text-muted-foreground">Required for OpenAI models and embeddings</p>
                   </div>
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-card-foreground" htmlFor="anthropic-api-key">Anthropic API Key</label>
                     <input id="anthropic-api-key" type="password" value={anthropicKey} onChange={(e) => setAnthropicKey(e.target.value)} placeholder="sk-ant-..."
-                      className="w-full px-4 py-2.5 bg-background border border-border rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20" />
+                      className="w-full min-h-11 px-3.5 sm:px-4 py-2.5 bg-background border border-border rounded-xl text-base sm:text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20" />
                     <p className="text-xs text-muted-foreground">Required for Claude models</p>
                   </div>
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-card-foreground" htmlFor="cohere-api-key">Cohere API Key</label>
                     <input id="cohere-api-key" type="password" value={cohereKey} onChange={(e) => setCohereKey(e.target.value)} placeholder="..."
-                      className="w-full px-4 py-2.5 bg-background border border-border rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20" />
+                      className="w-full min-h-11 px-3.5 sm:px-4 py-2.5 bg-background border border-border rounded-xl text-base sm:text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20" />
                     <p className="text-xs text-muted-foreground">Required for Cohere models and embeddings</p>
                   </div>
                 </div>
                 <div className="bg-primary/10 rounded-xl p-4 border border-primary/20">
                   <p className="text-sm text-primary font-medium mb-1">Security Note</p>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-xs sm:text-sm text-muted-foreground">
                     API keys are stored locally and never sent to our servers.
                   </p>
                 </div>
@@ -556,8 +556,8 @@ export default function Settings() {
             {activeTab === "voice" && (
               <div className="bg-card border border-border rounded-2xl p-5 sm:p-6 lg:p-8 space-y-6 sm:space-y-8">
                 <div>
-                  <h2 className="text-xl font-semibold text-card-foreground mb-1">Voice Settings</h2>
-                  <p className="text-muted-foreground">Configure acoustic parameters and speech synthesis</p>
+                  <h2 className="text-lg sm:text-xl font-semibold text-card-foreground mb-1">Voice Settings</h2>
+                  <p className="text-xs sm:text-sm text-muted-foreground">Configure acoustic parameters and speech synthesis</p>
                 </div>
                 <VoiceSettingsModule />
               </div>

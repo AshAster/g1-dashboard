@@ -17,11 +17,11 @@ export function LiveProgress({
   if (!activeJob) return null;
 
   return (
-    <section id="progress" className="border-t border-border pt-8 scroll-mt-28">
+    <section id="progress" className="border-t border-border pt-6 sm:pt-8 scroll-mt-32 sm:scroll-mt-36">
       <div className="flex items-center justify-between mb-8">
         <div className="flex items-center gap-4">
-          <span className="text-primary font-mono text-sm">[03]</span>
-          <h2 className="text-xl font-bold uppercase tracking-wide text-foreground">live progress</h2>
+          <span className="text-primary font-mono text-xs sm:text-sm shrink-0">[03]</span>
+          <h2 className="text-base sm:text-lg lg:text-xl font-bold uppercase tracking-wide text-foreground">live progress</h2>
         </div>
         <div className="flex items-center gap-3">
           {activeJob.backend === "local_agx" && (
@@ -41,7 +41,7 @@ export function LiveProgress({
         </div>
       </div>
 
-      <div className="border border-border bg-card/50 p-6 space-y-5">
+      <div className="border border-border bg-card/50 p-4 sm:p-5 lg:p-6 space-y-5">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <StatusDot s={activeJob.status} />

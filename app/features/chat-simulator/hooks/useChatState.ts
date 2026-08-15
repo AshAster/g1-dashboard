@@ -1,6 +1,15 @@
 import { useState, useRef, useEffect } from "react";
 import { api } from "@/lib/api";
 import { Message } from "../types";
+import {
+  StoredSession,
+  readSessions,
+  writeSessions,
+  readActiveSessionId,
+  writeActiveSessionId,
+  createSessionId,
+  titleFromMessage,
+} from "../storage";
 
 export function useChatState() {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -27,20 +36,81 @@ export function useChatState() {
   const [enableQueryProcessing, setEnableQueryProcessing] = useState(true);
   const [useExtractedFilters, setUseExtractedFilters] = useState(true);
 
-  const [sessions, setSessions] = useState<any[]>([]);
+  const [sessions, setSessions] = useState<StoredSession[]>([]);
   const [activeSessionId, setActiveSessionId] = useState<string | null>(null);
-  
-  // Load sessions
-  const loadSessions = async () => {
-    try {
-      const res = await api.getSessions();
-      if (res.data) setSessions(res.data as any[]);
-    } catch (e) {}
+
+  // Sessions live in the browser only (localStorage) — no backend, no database.
+  // Kept in a ref as well so async send/stream callbacks always persist against
+  // the latest list rather than a stale render closure.
+  const sessionsRef = useRef<StoredSession[]>([]);
+  const activeSessionIdRef = useRef<string | null>(null);
+
+  const commitSessions = (next: StoredSession[]) => {
+    sessionsRef.current = next;
+    setSessions(next);
+    writeSessions(next);
   };
-  
+
+  const selectSessionId = (id: string | null) => {
+    activeSessionIdRef.current = id;
+    setActiveSessionId(id);
+    writeActiveSessionId(id);
+  };
+
+  /** Persist a transcript against a saved session. */
+  const persistMessages = (sessionId: string, msgs: Message[]) => {
+    const next = sessionsRef.current.map((s) =>
+      s.id === sessionId
+        ? {
+            ...s,
+            messages: msgs.map((m) => ({ ...m, isStreaming: false })),
+            updated_at: new Date().toISOString(),
+          }
+        : s
+    );
+    commitSessions(next);
+  };
+
+  // Restore previous chats on mount.
+  const hydrated = useRef(false);
   useEffect(() => {
-    loadSessions();
+    const stored = readSessions();
+    sessionsRef.current = stored;
+    setSessions(stored);
+
+    const lastActive = readActiveSessionId();
+    const restored = stored.find((s) => s.id === lastActive);
+    if (restored) {
+      activeSessionIdRef.current = restored.id;
+      setActiveSessionId(restored.id);
+      setMessages(restored.messages);
+    }
+    hydrated.current = true;
   }, []);
+
+  // Save the transcript whenever it changes. Doing this in an effect (rather
+  // than inside a setState updater) keeps writes out of the render phase so no
+  // update is dropped, and the short debounce coalesces the rapid per-chunk
+  // updates while a reply streams in. It deliberately does NOT wait for the
+  // reply to finish — a message the user sent is saved even if the model call
+  // is slow, fails, or the user navigates away mid-request.
+  useEffect(() => {
+    if (!hydrated.current) return;
+    const id = activeSessionIdRef.current;
+    if (!id) return;
+    const session = sessionsRef.current.find((s) => s.id === id);
+    if (!session) return;
+    // Skip no-op writes so merely opening an old chat doesn't bump its position.
+    const same =
+      session.messages.length === messages.length &&
+      session.messages.every(
+        (m, i) => m.id === messages[i]?.id && m.content === messages[i]?.content
+      );
+    if (same) return;
+
+    const timer = setTimeout(() => persistMessages(id, messages), 300);
+    return () => clearTimeout(timer);
+  }, [messages, activeSessionId]);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -74,21 +144,28 @@ export function useChatState() {
     const text = promptText || input;
     if (!text.trim() || isLoading) return;
 
-    let currentSessionId = activeSessionId;
+    // A chat is saved to "Previous Chats" the moment the first message is sent,
+    // and that first message becomes its title.
+    let currentSessionId = activeSessionIdRef.current;
     if (!currentSessionId) {
-      try {
-        const res = await api.createSession(text.substring(0, 50));
-        if (res.data) {
-          currentSessionId = (res.data as any).id;
-          setActiveSessionId(currentSessionId);
-          await loadSessions();
-        }
-      } catch (e) {}
+      const now = new Date().toISOString();
+      const newSession: StoredSession = {
+        id: createSessionId(),
+        title: titleFromMessage(text),
+        created_at: now,
+        updated_at: now,
+        messages: [],
+      };
+      currentSessionId = newSession.id;
+      commitSessions([newSession, ...sessionsRef.current]);
+      selectSessionId(currentSessionId);
     } else if (messages.length === 0) {
-      try {
-        await api.updateSession(currentSessionId, text.substring(0, 50));
-        loadSessions(); // Update the sidebar title asynchronously
-      } catch (e) {}
+      // Fresh chat that already had an id (e.g. restored empty) — title it now.
+      commitSessions(
+        sessionsRef.current.map((s) =>
+          s.id === currentSessionId ? { ...s, title: titleFromMessage(text) } : s
+        )
+      );
     }
 
     const userMessage: Message = {
@@ -115,7 +192,8 @@ export function useChatState() {
 
     try {
       const res = await api.sendMessage(text, selectedDocIds.length > 0 ? selectedDocIds : undefined, {
-        sessionId: currentSessionId || undefined,
+        // No sessionId: chat history is stored in the browser, so there is no
+        // server-side session to attach this message to.
         enableQueryProcessing,
         useExtractedFilters,
         sectionPath: sectionPath || undefined,
@@ -171,53 +249,41 @@ export function useChatState() {
   };
 
 
-  const handleSelectSession = async (id: string) => {
-    setActiveSessionId(id);
-    try {
-      const res = await api.getSessionMessages(id);
-      if (res.data) {
-        setMessages((res.data as any[]).map((m: any) => ({
-          id: m.id.toString(),
-          role: m.role,
-          content: m.content,
-          timestamp: new Date(m.created_at)
-        })));
-      }
-    } catch (e) {
-      console.error("Failed to load messages", e);
-    }
+  const handleSelectSession = (id: string) => {
+    const session = sessionsRef.current.find((s) => s.id === id);
+    if (!session) return;
+    selectSessionId(id);
+    setMessages(session.messages);
+    setShowSources(null);
   };
 
-  const handleNewChat = async () => {
-    try {
-      const res = await api.createSession("New Chat");
-      if (res.data) {
-        setActiveSessionId((res.data as any).id);
-        await loadSessions();
-      } else {
-        setActiveSessionId(null);
-      }
-    } catch (e) {
-      console.error("Failed to create new session", e);
-      setActiveSessionId(null);
-    }
+  /**
+   * Start a blank chat. Nothing is written to "Previous Chats" yet — the entry
+   * appears (titled with the message) as soon as the first message is sent, so
+   * abandoned empty chats never clutter the list.
+   */
+  const handleNewChat = () => {
+    selectSessionId(null);
     setMessages([]);
     setShowSources(null);
   };
 
-  const handleDeleteSession = async (id: string) => {
-    try {
-      await api.deleteSession(id);
-      if (activeSessionId === id) handleNewChat();
-      await loadSessions();
-    } catch (e) {
-      console.error("Failed to delete session", e);
+  const handleDeleteSession = (id: string) => {
+    commitSessions(sessionsRef.current.filter((s) => s.id !== id));
+    if (activeSessionIdRef.current === id) {
+      selectSessionId(null);
+      setMessages([]);
+      setShowSources(null);
     }
   };
 
+  /** Empty the current transcript but keep the saved chat itself. */
   const clearChat = () => {
     setMessages([]);
     setShowSources(null);
+    if (activeSessionIdRef.current) {
+      persistMessages(activeSessionIdRef.current, []);
+    }
   };
 
   return {

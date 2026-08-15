@@ -167,48 +167,48 @@ export function NavigationModule() {
 
   return (
     <FeatureGate featureKey="navigation">
-      <div className="max-w-7xl mx-auto space-y-16 pb-32 pt-8">
+      <div className="max-w-7xl mx-auto w-full space-y-10 sm:space-y-12 lg:space-y-16 pb-20 sm:pb-28 lg:pb-32 pt-2 sm:pt-4 lg:pt-6">
         
-        <div className="flex items-center justify-between border-b border-border pb-6">
-          <div>
-            <h1 className="text-4xl font-bold tracking-tighter uppercase text-foreground">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border pb-4 sm:pb-6">
+          <div className="min-w-0">
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tighter uppercase text-foreground">
               Navigation
             </h1>
-            <p className="text-sm font-mono text-muted-foreground mt-2 uppercase tracking-widest">
+            <p className="text-[10px] sm:text-sm font-mono text-muted-foreground mt-2 uppercase tracking-widest">
               Live SLAM Mapping & Waypoint Control
             </p>
           </div>
           
           <button 
             onClick={handleEmergencyStop}
-            className="flex items-center gap-2 px-8 py-4 bg-destructive/20 text-destructive border border-destructive/50 hover:bg-destructive hover:text-white transition-all rounded-lg font-bold uppercase tracking-widest"
+            className="w-full sm:w-auto shrink-0 flex items-center justify-center gap-2 px-5 sm:px-8 py-3 sm:py-4 bg-destructive/20 text-destructive border border-destructive/50 hover:bg-destructive hover:text-white transition-all rounded-lg font-bold text-xs sm:text-sm uppercase tracking-widest"
           >
-            <Square className="w-5 h-5 fill-current" />
+            <Square className="w-4 h-4 sm:w-5 sm:h-5 shrink-0 fill-current" />
             Emergency Stop
           </button>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
           
           {/* Mapping Controls */}
-          <div className="lg:col-span-1 space-y-8">
-            <div className="border border-border p-6 rounded-xl bg-background/50 backdrop-blur">
-              <h2 className="text-xl font-bold uppercase mb-6 flex items-center gap-2">
-                <Map className="w-5 h-5 text-primary" /> Map Generation
+          <div className="lg:col-span-1 space-y-4 sm:space-y-6 lg:space-y-8">
+            <div className="border border-border p-4 sm:p-5 lg:p-6 rounded-xl bg-background/50 backdrop-blur">
+              <h2 className="text-base sm:text-lg lg:text-xl font-bold uppercase mb-4 sm:mb-6 flex items-center gap-2">
+                <Map className="w-4 h-4 sm:w-5 sm:h-5 shrink-0 text-primary" /> Map Generation
               </h2>
               
               {!isMapping ? (
                 <button
                   disabled={slamBusy}
                   onClick={handleStartMapping}
-                  className="w-full py-4 rounded bg-success/10 text-success border border-success/30 hover:bg-success/20 font-bold tracking-widest transition-all flex justify-center items-center gap-2"
+                  className="w-full min-h-11 py-3 sm:py-4 rounded text-sm bg-success/10 text-success border border-success/30 hover:bg-success/20 font-bold tracking-widest transition-all flex justify-center items-center gap-2"
                 >
                   <Play className="w-4 h-4" /> Start New Map
                 </button>
               ) : (
                 <div className="space-y-4 animate-in fade-in zoom-in duration-300">
-                  <div className="p-4 bg-blue-500/10 border border-blue-500/30 rounded text-sm font-mono text-blue-400 flex items-center gap-3">
-                    <span className="w-3 h-3 rounded-full bg-blue-500 animate-pulse" />
+                  <div className="p-3 sm:p-4 bg-blue-500/10 border border-blue-500/30 rounded text-xs sm:text-sm font-mono text-blue-400 flex items-start sm:items-center gap-3">
+                    <span className="w-3 h-3 shrink-0 mt-0.5 sm:mt-0 rounded-full bg-blue-500 animate-pulse" />
                     Mapping in progress. Walk the robot around via remote.
                   </div>
                   <input 
@@ -216,12 +216,12 @@ export function NavigationModule() {
                     placeholder="Enter Map Name (e.g. Office_F1)"
                     value={newMapName}
                     onChange={e => setNewMapName(e.target.value)}
-                    className="w-full bg-background border border-border p-3 rounded font-mono text-sm"
+                    className="w-full min-h-11 bg-background border border-border p-3 rounded font-mono text-base sm:text-sm"
                   />
                   <button
                     disabled={slamBusy || !newMapName.trim()}
                     onClick={handleStopMapping}
-                    className="w-full py-4 rounded bg-blue-500/10 text-blue-500 border border-blue-500/30 hover:bg-blue-500/20 font-bold tracking-widest transition-all flex justify-center items-center gap-2"
+                    className="w-full min-h-11 py-3 sm:py-4 rounded text-sm bg-blue-500/10 text-blue-500 border border-blue-500/30 hover:bg-blue-500/20 font-bold tracking-widest transition-all flex justify-center items-center gap-2"
                   >
                     <Square className="w-4 h-4" /> Stop & Save Map
                   </button>
@@ -230,25 +230,25 @@ export function NavigationModule() {
             </div>
 
             {/* Saved Maps List */}
-            <div className="border border-border p-6 rounded-xl bg-background/50 backdrop-blur h-[400px] overflow-y-auto">
-              <h2 className="text-xl font-bold uppercase mb-6 flex items-center gap-2">
-                <MapPin className="w-5 h-5 text-primary" /> Saved Maps
+            <div className="border border-border p-4 sm:p-5 lg:p-6 rounded-xl bg-background/50 backdrop-blur max-h-[340px] sm:max-h-[400px] overflow-y-auto overscroll-contain">
+              <h2 className="text-base sm:text-lg lg:text-xl font-bold uppercase mb-4 sm:mb-6 flex items-center gap-2">
+                <MapPin className="w-4 h-4 sm:w-5 sm:h-5 shrink-0 text-primary" /> Saved Maps
               </h2>
               {maps.length === 0 ? (
                 <p className="text-muted-foreground text-sm font-mono italic">No maps found in database.</p>
               ) : (
                 <div className="space-y-3">
                   {maps.map(map => (
-                    <div key={map.id} className={`p-4 rounded border ${activeMap?.id === map.id ? 'border-primary bg-primary/5' : 'border-border bg-background'} flex flex-col gap-3 transition-colors`}>
+                    <div key={map.id} className={`p-3 sm:p-4 rounded border ${activeMap?.id === map.id ? 'border-primary bg-primary/5' : 'border-border bg-background'} flex flex-col gap-3 transition-colors`}>
                       <div className="flex justify-between items-center">
-                        <span className="font-mono font-bold">{map.name}</span>
-                        <button onClick={() => handleDeleteMap(map.id)} className="text-muted-foreground hover:text-destructive p-1">
+                        <span className="font-mono font-bold text-sm break-words min-w-0">{map.name}</span>
+                        <button onClick={() => handleDeleteMap(map.id)} className="text-muted-foreground hover:text-destructive p-2 -m-1 shrink-0">
                           <Trash2 className="w-4 h-4" />
                         </button>
                       </div>
                       <button 
                         onClick={() => handleInitPose(map)}
-                        className="w-full py-2 bg-foreground/5 hover:bg-foreground/10 text-xs font-bold uppercase tracking-widest rounded border border-border flex justify-center items-center gap-2"
+                        className="w-full min-h-10 py-2 bg-foreground/5 hover:bg-foreground/10 text-[10px] sm:text-xs font-bold uppercase tracking-widest rounded border border-border flex justify-center items-center gap-2"
                       >
                         <Crosshair className="w-3 h-3" /> Initialize Pose Here
                       </button>
@@ -260,44 +260,44 @@ export function NavigationModule() {
           </div>
 
           {/* Navigation Canvas / Log */}
-          <div className="lg:col-span-2 space-y-8">
-            <div className="border border-border p-6 rounded-xl bg-background/50 backdrop-blur min-h-[300px]">
-              <div className="flex justify-between items-center mb-6">
-                <h2 className="text-xl font-bold uppercase flex items-center gap-2">
-                  <Navigation className="w-5 h-5 text-primary" /> Live Telemetry
+          <div className="lg:col-span-2 space-y-4 sm:space-y-6 lg:space-y-8">
+            <div className="border border-border p-4 sm:p-5 lg:p-6 rounded-xl bg-background/50 backdrop-blur min-h-[260px] sm:min-h-[300px]">
+              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 mb-4 sm:mb-6">
+                <h2 className="text-base sm:text-lg lg:text-xl font-bold uppercase flex items-center gap-2">
+                  <Navigation className="w-4 h-4 sm:w-5 sm:h-5 shrink-0 text-primary" /> Live Telemetry
                 </h2>
-                <div className="font-mono text-sm px-3 py-1 bg-background border border-border rounded">
+                <div className="font-mono text-xs sm:text-sm px-3 py-1.5 bg-background border border-border rounded self-start sm:self-auto break-words">
                   Active Map: {activeMap ? <span className="text-primary font-bold">{activeMap.name}</span> : <span className="text-muted-foreground italic">None</span>}
                 </div>
               </div>
               
-              <div className="p-8 border border-border border-dashed rounded-lg bg-background flex flex-col items-center justify-center gap-4 text-center">
+              <div className="p-5 sm:p-8 border border-border border-dashed rounded-lg bg-background flex flex-col items-center justify-center gap-3 sm:gap-4 text-center">
                 {currentPose ? (
                   <>
-                    <Target className="w-12 h-12 text-primary animate-pulse" />
+                    <Target className="w-9 h-9 sm:w-12 sm:h-12 text-primary animate-pulse" />
                     <div>
-                      <div className="text-3xl font-bold font-mono tracking-tighter">
+                      <div className="text-lg sm:text-2xl lg:text-3xl font-bold font-mono tracking-tighter break-words">
                         X: {currentPose.x.toFixed(3)} <span className="text-muted-foreground">|</span> Y: {currentPose.y.toFixed(3)}
                       </div>
-                      <p className="text-sm text-muted-foreground mt-2 uppercase tracking-widest">Real-time coordinates</p>
+                      <p className="text-[10px] sm:text-sm text-muted-foreground mt-2 uppercase tracking-widest">Real-time coordinates</p>
                     </div>
                   </>
                 ) : (
                   <>
-                    <Map className="w-12 h-12 text-muted-foreground/30" />
-                    <p className="text-sm text-muted-foreground font-mono">Telemetry not available. Is SLAM running?</p>
+                    <Map className="w-9 h-9 sm:w-12 sm:h-12 text-muted-foreground/30" />
+                    <p className="text-xs sm:text-sm text-muted-foreground font-mono text-balance">Telemetry not available. Is SLAM running?</p>
                   </>
                 )}
               </div>
               
               {activeMap && (
-                <div className="mt-6 pt-6 border-t border-border">
+                <div className="mt-5 sm:mt-6 pt-5 sm:pt-6 border-t border-border">
                   <h3 className="text-sm font-bold uppercase tracking-widest mb-4">Waypoint Navigation</h3>
-                  <div className="flex gap-4">
-                    <button onClick={() => handleNavigateTo(currentPose?.x ? currentPose.x + 0.2 : 0.2, currentPose?.y || 0)} className="flex-1 py-3 bg-primary/10 text-primary border border-primary/30 hover:bg-primary/20 rounded font-bold text-xs uppercase tracking-widest">
+                  <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                    <button onClick={() => handleNavigateTo(currentPose?.x ? currentPose.x + 0.2 : 0.2, currentPose?.y || 0)} className="flex-1 min-h-11 py-3 bg-primary/10 text-primary border border-primary/30 hover:bg-primary/20 rounded font-bold text-xs uppercase tracking-widest">
                       Walk Forward (0.2m)
                     </button>
-                    <button onClick={() => handleNavigateTo(0, 0)} className="flex-1 py-3 bg-secondary/10 text-secondary border border-secondary/30 hover:bg-secondary/20 rounded font-bold text-xs uppercase tracking-widest">
+                    <button onClick={() => handleNavigateTo(0, 0)} className="flex-1 min-h-11 py-3 bg-secondary/10 text-secondary border border-secondary/30 hover:bg-secondary/20 rounded font-bold text-xs uppercase tracking-widest">
                       Return to Origin (0,0)
                     </button>
                   </div>
@@ -306,17 +306,17 @@ export function NavigationModule() {
             </div>
 
             {/* Terminal Logs */}
-            <div className="border border-border rounded-xl bg-background/50 backdrop-blur overflow-hidden flex flex-col h-[300px]">
+            <div className="border border-border rounded-xl bg-background/50 backdrop-blur overflow-hidden flex flex-col h-[240px] sm:h-[300px]">
               <div className="px-4 py-2 border-b border-border bg-background flex items-center gap-3">
                 <span className="w-2 h-2 rounded-full bg-success animate-pulse"></span>
                 <span className="text-xs font-mono font-bold tracking-widest uppercase">System Logs</span>
               </div>
-              <div className="flex-1 p-4 font-mono text-xs overflow-y-auto space-y-2">
+              <div className="flex-1 p-3 sm:p-4 font-mono text-[10px] sm:text-xs overflow-y-auto overscroll-contain space-y-2">
                 {logs.length === 0 ? (
                   <div className="text-muted-foreground italic">Waiting for events...</div>
                 ) : (
                   logs.map((log, i) => (
-                    <div key={i} className="flex gap-3">
+                    <div key={i} className="flex gap-2 sm:gap-3 break-words">
                       <span className="text-muted-foreground shrink-0">[{log.ts}]</span>
                       <span className={`
                         ${log.type === "error" ? "text-destructive" : ""}

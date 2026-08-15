@@ -59,32 +59,32 @@ export function RagModule() {
 
   return (
     <FeatureGate featureKey="rag">
-      <div className="max-w-7xl mx-auto space-y-16 pb-32 pt-8">
-        <div className="border-b border-border pb-6">
-          <h1 className="text-4xl font-bold tracking-tighter uppercase text-foreground">
+      <div className="max-w-7xl mx-auto w-full space-y-10 sm:space-y-12 lg:space-y-16 pb-20 sm:pb-28 lg:pb-32 pt-2 sm:pt-4 lg:pt-6">
+        <div className="border-b border-border pb-4 sm:pb-6">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tighter uppercase text-foreground">
             Knowledge Hub
           </h1>
-          <p className="text-xs font-mono text-muted-foreground mt-2 uppercase tracking-widest">
+          <p className="text-[10px] sm:text-xs font-mono text-muted-foreground mt-2 uppercase tracking-widest break-words">
             SYS.CONFIG // Configure system parameters and operational protocols
           </p>
         </div>
 
-        <section id="document" className="min-h-[50vh] border-t border-border pt-8 scroll-mt-28">
-          <div className="flex items-center justify-between mb-8">
-            <div className="flex items-center gap-4">
-              <span className="text-primary font-mono text-sm">[01]</span>
-              <h2 className="text-xl font-bold uppercase tracking-wide text-foreground">Document Library</h2>
+        <section id="document" className="min-h-[50vh] border-t border-border pt-6 sm:pt-8 scroll-mt-32 sm:scroll-mt-36">
+          <div className="flex items-center justify-between mb-5 sm:mb-8">
+            <div className="flex items-center gap-2.5 sm:gap-4 min-w-0">
+              <span className="text-primary font-mono text-xs sm:text-sm shrink-0">[01]</span>
+              <h2 className="text-base sm:text-lg lg:text-xl font-bold uppercase tracking-wide text-foreground">Document Library</h2>
             </div>
           </div>
           
-          <div className="border border-border bg-card/50 p-6">
-            <p className="text-xs font-mono text-muted-foreground uppercase mb-6">
+          <div className="border border-border bg-card/50 p-4 sm:p-5 lg:p-6">
+            <p className="text-[10px] sm:text-xs font-mono text-muted-foreground uppercase mb-4 sm:mb-6 break-words">
               // Manage your documents and knowledge base
             </p>
 
             <RagStats documents={documents} formatFileSize={formatFileSize} />
 
-            <div className="mb-8">
+            <div className="mb-6 sm:mb-8">
               <UploadDropZone 
                 isDragging={isDragging}
                 onDragOver={handleDragOver}
@@ -95,18 +95,18 @@ export function RagModule() {
               />
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 mb-6">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-5 sm:mb-6">
               <input
                 type="text"
                 placeholder="Search documents..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="flex-1 bg-background border border-border px-4 py-2 text-sm font-mono focus:outline-none focus:border-primary transition-colors"
+                className="flex-1 min-w-0 bg-background border border-border px-3 sm:px-4 py-2.5 sm:py-2 min-h-11 text-base sm:text-sm font-mono focus:outline-none focus:border-primary transition-colors"
               />
               <select
                 value={selectedStatus}
                 onChange={(e) => setSelectedStatus(e.target.value)}
-                className="bg-background border border-border px-4 py-2 text-sm font-mono focus:outline-none focus:border-primary transition-colors"
+                className="bg-background border border-border px-3 sm:px-4 py-2.5 sm:py-2 min-h-11 text-base sm:text-sm font-mono focus:outline-none focus:border-primary transition-colors"
               >
                 <option value="all">All Status</option>
                 <option value="indexed">Indexed</option>

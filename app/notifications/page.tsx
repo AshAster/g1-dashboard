@@ -29,33 +29,33 @@ export default function NotificationsPage() {
   }, []);
 
   return (
-    <div className="max-w-7xl mx-auto space-y-16 pb-32 pt-8">
-      <div className="border-b border-border pb-6">
-        <h1 className="text-4xl font-bold tracking-tighter text-foreground flex items-center gap-3">
+    <div className="max-w-7xl mx-auto w-full space-y-10 sm:space-y-12 lg:space-y-16 pb-20 sm:pb-28 lg:pb-32 pt-2 sm:pt-4 lg:pt-6">
+      <div className="border-b border-border pb-4 sm:pb-6">
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tighter text-foreground flex items-center gap-2.5 sm:gap-3">
           <FiBell className="text-primary" /> Notifications
         </h1>
-        <p className="text-xs font-mono text-muted-foreground mt-2 uppercase tracking-widest">
+        <p className="text-[10px] sm:text-xs font-mono text-muted-foreground mt-2 uppercase tracking-widest break-words">
           SYS.NOTIFICATIONS // View recent system alerts and updates
         </p>
       </div>
 
-      <div className="space-y-4">
+      <div className="space-y-3 sm:space-y-4">
         {notifications.length === 0 ? (
-          <div className="text-center text-muted-foreground py-12">No new notifications.</div>
+          <div className="text-center text-sm text-muted-foreground py-10 sm:py-12">No new notifications.</div>
         ) : (
           notifications.map((notif, index) => (
             <div
               key={notif.id}
-              className="p-4 rounded-xl bg-card border border-border flex items-start gap-4 hover:shadow-md transition-shadow"
+              className="p-3 sm:p-4 rounded-xl bg-card border border-border flex items-start gap-3 sm:gap-4 hover:shadow-md transition-shadow"
             >
-              <div className="p-2 bg-background rounded-lg shadow-sm border border-border">
+              <div className="p-2 shrink-0 bg-background rounded-lg shadow-sm border border-border">
                 {notif.type === "info" && <FiInfo className="text-blue-500" />}
                 {notif.type === "success" && <FiCheckCircle className="text-success" />}
                 {notif.type === "warning" && <FiAlertCircle className="text-warning" />}
               </div>
-              <div className="flex-1">
-                <p className="text-sm font-medium text-foreground">{notif.message}</p>
-                <p className="text-xs text-muted-foreground mt-1">{notif.date}</p>
+              <div className="flex-1 min-w-0">
+                <p className="text-xs sm:text-sm font-medium text-foreground break-words">{notif.message}</p>
+                <p className="text-[10px] sm:text-xs text-muted-foreground mt-1">{notif.date}</p>
               </div>
             </div>
           ))

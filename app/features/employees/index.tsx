@@ -144,30 +144,30 @@ export function EmployeesModule() {
 
   return (
     <FeatureGate featureKey="frs">
-      <div className="max-w-7xl mx-auto space-y-16 pb-32 pt-8">
+      <div className="max-w-7xl mx-auto w-full space-y-10 sm:space-y-12 lg:space-y-16 pb-20 sm:pb-28 lg:pb-32 pt-2 sm:pt-4 lg:pt-6">
         {/* Header */}
-        <div className="border-b border-border pb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="border-b border-border pb-4 sm:pb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-3xl sm:text-4xl font-bold tracking-tighter uppercase text-foreground">Employees</h1>
-            <p className="text-xs font-mono text-muted-foreground mt-1.5 uppercase tracking-widest">Manage employee face enrollment for robot recognition</p>
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tighter uppercase text-foreground">Employees</h1>
+            <p className="text-[10px] sm:text-xs font-mono text-muted-foreground mt-1.5 uppercase tracking-widest break-words">Manage employee face enrollment for robot recognition</p>
           </div>
           <div className="flex gap-2 w-full sm:w-auto">
             <button onClick={() => { setShowBulk(true); setError(""); setBulkResult(null); }}
-              className="flex-1 sm:flex-none px-4 py-2.5 text-xs sm:text-sm rounded-lg border border-border hover:bg-muted transition-colors text-center font-medium">
+              className="flex-1 sm:flex-none min-h-11 flex items-center justify-center px-4 py-2.5 text-xs sm:text-sm rounded-lg border border-border hover:bg-muted transition-colors text-center font-medium">
               Bulk Import
             </button>
             <button onClick={() => { setShowForm(true); setError(""); setSuccess(""); }}
-              className="flex-1 sm:flex-none px-4 py-2.5 text-xs sm:text-sm rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors text-center font-medium">
+              className="flex-1 sm:flex-none min-h-11 flex items-center justify-center px-4 py-2.5 text-xs sm:text-sm rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors text-center font-medium">
               + Add Employee
             </button>
           </div>
         </div>
 
         {/* Alerts */}
-        {error && <div className="mb-4 p-3 rounded-lg bg-destructive/10 border border-destructive/20 text-destructive text-sm">{error}</div>}
-        {success && <div className="mb-4 p-3 rounded-lg bg-success/10 border border-success/20 text-success text-sm">{success}</div>}
+        {error && <div className="mb-4 p-3 rounded-lg bg-destructive/10 border border-destructive/20 text-destructive text-xs sm:text-sm break-words">{error}</div>}
+        {success && <div className="mb-4 p-3 rounded-lg bg-success/10 border border-success/20 text-success text-xs sm:text-sm break-words">{success}</div>}
         {bulkResult && (
-          <div className="mb-4 p-4 rounded-lg bg-card border border-border text-sm space-y-1">
+          <div className="mb-4 p-3 sm:p-4 rounded-lg bg-card border border-border text-xs sm:text-sm space-y-1 break-words">
             <p className="font-medium">Bulk import complete: {bulkResult.enrolled} enrolled, {bulkResult.failed} failed (total {bulkResult.total})</p>
             {bulkResult.errors?.length > 0 && (
               <ul className="mt-2 space-y-1 text-muted-foreground">
@@ -180,8 +180,8 @@ export function EmployeesModule() {
         )}
 
         {/* Table */}
-        <div className="hidden md:block rounded-xl border border-border bg-card overflow-hidden">
-          <table className="w-full text-sm">
+        <div className="hidden md:block rounded-xl border border-border bg-card overflow-x-auto">
+          <table className="w-full min-w-[760px] text-sm">
             <thead>
               <tr className="border-b border-border bg-muted/40">
                 <th className="text-left px-4 py-3 font-medium text-muted-foreground">Employee ID</th>
@@ -213,11 +213,11 @@ export function EmployeesModule() {
                   <td className="px-4 py-3">
                     <div className="flex gap-2">
                       <button onClick={() => { setPhotoTarget(emp); setError(""); }}
-                        className="text-xs px-2 py-1 rounded border border-border hover:bg-muted transition-colors">
+                        className="text-xs px-2.5 py-1.5 rounded border border-border hover:bg-muted transition-colors">
                         + Photos
                       </button>
                       <button onClick={() => handleDelete(emp)}
-                        className="text-xs px-2 py-1 rounded border border-destructive/30 text-destructive hover:bg-destructive/10 transition-colors">
+                        className="text-xs px-2.5 py-1.5 rounded border border-destructive/30 text-destructive hover:bg-destructive/10 transition-colors">
                         Delete
                       </button>
                     </div>
@@ -288,8 +288,8 @@ export function EmployeesModule() {
 
       {/* Add Employee Modal */}
       {showForm && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div role="dialog" aria-modal="true" aria-labelledby="add-employee-title" className="bg-card border border-border rounded-xl w-full max-w-md max-h-[90dvh] overflow-y-auto p-6">
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-4 overscroll-contain">
+          <div role="dialog" aria-modal="true" aria-labelledby="add-employee-title" className="bg-card border border-border rounded-xl w-full max-w-md max-h-[88dvh] overflow-y-auto overscroll-contain p-4 sm:p-6">
             <h2 id="add-employee-title" className="text-lg font-semibold mb-4">Add Employee</h2>
             <form ref={formRef} onSubmit={handleCreate} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -341,8 +341,8 @@ export function EmployeesModule() {
 
       {/* Bulk Import Modal */}
       {showBulk && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div role="dialog" aria-modal="true" aria-labelledby="bulk-import-title" className="bg-card border border-border rounded-xl w-full max-w-lg max-h-[90dvh] overflow-y-auto p-6">
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-4 overscroll-contain">
+          <div role="dialog" aria-modal="true" aria-labelledby="bulk-import-title" className="bg-card border border-border rounded-xl w-full max-w-lg max-h-[88dvh] overflow-y-auto overscroll-contain p-4 sm:p-6">
             <h2 id="bulk-import-title" className="text-lg font-semibold mb-2">Bulk Import (Excel)</h2>
             <p className="text-sm text-muted-foreground mb-4">
               Upload an <strong>.xlsx</strong> file with columns:<br />
@@ -370,8 +370,8 @@ export function EmployeesModule() {
 
       {/* Add Photos Modal */}
       {photoTarget && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div role="dialog" aria-modal="true" aria-labelledby="add-photos-title" className="bg-card border border-border rounded-xl w-full max-w-md max-h-[90dvh] overflow-y-auto p-6">
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-4 overscroll-contain">
+          <div role="dialog" aria-modal="true" aria-labelledby="add-photos-title" className="bg-card border border-border rounded-xl w-full max-w-md max-h-[88dvh] overflow-y-auto overscroll-contain p-4 sm:p-6">
             <h2 id="add-photos-title" className="text-lg font-semibold mb-1">Add Photos</h2>
             <p className="text-sm text-muted-foreground mb-4">
               {photoTarget.username.replace(/_/g, " ")} — currently {photoTarget.photo_count} photo(s)

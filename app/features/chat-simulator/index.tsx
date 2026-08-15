@@ -19,7 +19,7 @@ export function ChatSimulatorModule() {
 
   return (
     <FeatureGate featureKey="chatSimulator">
-      <div className="flex-1 flex flex-col md:flex-row bg-background h-[calc(100dvh-7rem)] overflow-hidden relative">
+      <div className="flex-1 flex flex-col md:flex-row bg-background h-[calc(100dvh-9rem)] sm:h-[calc(100dvh-10.5rem)] lg:h-[calc(100dvh-11.5rem)] min-h-[420px] overflow-hidden relative rounded-xl border border-border/60">
         {isHistoryOpen && (
           <div 
             className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 md:hidden animate-fade-in"
@@ -43,7 +43,7 @@ export function ChatSimulatorModule() {
           onClose={() => setIsHistoryOpen(false)}
         />
         
-        <div className="flex-1 flex flex-col max-w-4xl mx-auto w-full border-x border-border">
+        <div className="flex-1 flex flex-col max-w-4xl mx-auto w-full min-w-0 md:border-x border-border">
           <ChatHeader
             selectedModel={selectedModel}
             setSelectedModel={setSelectedModel}

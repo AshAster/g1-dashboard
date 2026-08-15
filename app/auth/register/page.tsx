@@ -42,7 +42,7 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="flex min-h-dvh items-center justify-center relative overflow-hidden px-4">
+    <div className="flex min-h-dvh items-center justify-center relative overflow-x-hidden px-4 py-8 sm:py-12">
       {/* Local Video Background */}
       <video 
         autoPlay 
@@ -81,9 +81,9 @@ export default function RegisterPage() {
         </div>
 
         {/* Card */}
-        <div className="bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 p-8 shadow-2xl shadow-black/40">
+        <div className="bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 p-5 sm:p-8 shadow-2xl shadow-black/40">
           <div className="mb-8 text-center">
-            <h1 className="text-3xl font-bold text-white mb-2 tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2 tracking-tight">
               Sign Up
             </h1>
             <p className="text-sm text-gray-300">

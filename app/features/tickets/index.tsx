@@ -167,7 +167,7 @@ export function SupportTicketsModule() {
 
   return (
     <FeatureGate featureKey="tickets">
-      <div className="max-w-7xl mx-auto space-y-16 pb-32 pt-8">
+      <div className="max-w-7xl mx-auto w-full space-y-10 sm:space-y-12 lg:space-y-16 pb-20 sm:pb-28 lg:pb-32 pt-2 sm:pt-4 lg:pt-6">
         {/* Toast Notification */}
         <AnimatePresence>
           {toast.visible && (
@@ -175,7 +175,7 @@ export function SupportTicketsModule() {
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              className="fixed top-8 left-1/2 -translate-x-1/2 z-[200] bg-primary text-primary-foreground px-6 py-3 rounded-full shadow-lg font-medium flex items-center gap-3"
+              className="fixed top-4 sm:top-8 left-1/2 -translate-x-1/2 z-[200] w-[calc(100vw-2rem)] max-w-sm sm:w-auto justify-center bg-primary text-primary-foreground px-5 sm:px-6 py-3 rounded-full shadow-lg text-sm font-medium flex items-center gap-2.5 sm:gap-3"
             >
               <FiLifeBuoy className="text-xl" />
               {toast.message}
@@ -183,9 +183,9 @@ export function SupportTicketsModule() {
           )}
         </AnimatePresence>
 
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-bold tracking-tight flex items-center gap-3">
+            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight flex items-center gap-2.5 sm:gap-3">
               <FiLifeBuoy className="text-primary" />
               Support Tickets
             </h1>
@@ -195,20 +195,20 @@ export function SupportTicketsModule() {
           </div>
           <button
             onClick={() => setIsModalOpen(true)}
-            className="flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-lg font-medium shadow hover:bg-primary/90 transition-colors"
+            className="w-full sm:w-auto shrink-0 min-h-11 flex items-center justify-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-lg text-sm font-medium shadow hover:bg-primary/90 transition-colors"
           >
             <FiPlus /> Raise a ticket
           </button>
         </div>
 
         {loading ? (
-          <div className="flex justify-center py-20">
+          <div className="flex justify-center py-14 sm:py-20">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
           </div>
         ) : tickets.length === 0 ? (
-          <div className="text-center py-20 bg-card rounded-2xl border border-border">
-            <FiLifeBuoy className="w-12 h-12 text-muted-foreground/30 mx-auto mb-4" />
-            <h3 className="text-xl font-medium">No Tickets Yet</h3>
+          <div className="text-center py-12 sm:py-20 px-4 bg-card rounded-2xl border border-border">
+            <FiLifeBuoy className="w-10 h-10 sm:w-12 sm:h-12 text-muted-foreground/30 mx-auto mb-4" />
+            <h3 className="text-lg sm:text-xl font-medium">No Tickets Yet</h3>
             <p className="text-muted-foreground max-w-sm mx-auto mt-2">
               You have not submitted any support requests. If you encounter an issue, feel free to open a new ticket.
             </p>
@@ -216,22 +216,22 @@ export function SupportTicketsModule() {
         ) : (
           <div className="space-y-4">
             {tickets.map(ticket => (
-              <div key={ticket.id} className="bg-card rounded-2xl border border-border p-6 shadow-sm hover:shadow-md transition-shadow">
+              <div key={ticket.id} className="bg-card rounded-2xl border border-border p-4 sm:p-5 lg:p-6 shadow-sm hover:shadow-md transition-shadow">
                 <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
                   <div>
-                    <h3 className="text-lg font-semibold">{ticket.subject}</h3>
-                    <div className="flex items-center gap-3 mt-1.5 text-sm text-muted-foreground">
+                    <h3 className="text-base sm:text-lg font-semibold break-words">{ticket.subject}</h3>
+                    <div className="flex flex-wrap items-center gap-2 sm:gap-3 mt-1.5 text-xs sm:text-sm text-muted-foreground">
                       <span>ID: {ticket.id.slice(0, 8)}</span>
                       <span>•</span>
                       <span>{new Date(ticket.createdAt).toLocaleString()}</span>
                     </div>
                   </div>
-                  <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border ${getStatusColor(ticket.status)}`}>
+                  <span className={`self-start shrink-0 px-2.5 sm:px-3 py-1 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider border ${getStatusColor(ticket.status)}`}>
                     {ticket.status}
                   </span>
                 </div>
-                <div className="mt-4 pt-4 border-t border-border/50">
-                  <p className="text-sm whitespace-pre-wrap opacity-80">{ticket.description}</p>
+                <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-border/50">
+                  <p className="text-xs sm:text-sm whitespace-pre-wrap break-words opacity-80">{ticket.description}</p>
                 </div>
               </div>
             ))}
@@ -241,7 +241,7 @@ export function SupportTicketsModule() {
         {/* New Ticket Modal */}
         <AnimatePresence>
           {isModalOpen && (
-            <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-background/80 backdrop-blur-sm">
+            <div className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-4 bg-background/80 backdrop-blur-sm overscroll-contain">
               <motion.div
                 initial={{ opacity: 0, scale: 0.95, y: 10 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -249,16 +249,16 @@ export function SupportTicketsModule() {
                 role="dialog"
                 aria-modal="true"
                 aria-labelledby="new-ticket-title"
-                className="bg-card w-full max-w-lg max-h-[90dvh] rounded-2xl border border-border shadow-2xl overflow-y-auto"
+                className="bg-card w-full max-w-lg max-h-[88dvh] rounded-2xl border border-border shadow-2xl overflow-y-auto overscroll-contain"
               >
-                <div className="flex items-center justify-between p-6 border-b border-border bg-muted/30">
-                  <h2 id="new-ticket-title" className="text-xl font-semibold">Create Support Ticket</h2>
-                  <button onClick={() => setIsModalOpen(false)} aria-label="Close" className="p-2 rounded-lg hover:bg-accent text-muted-foreground">
+                <div className="flex items-center justify-between gap-3 p-4 sm:p-6 border-b border-border bg-muted/30">
+                  <h2 id="new-ticket-title" className="text-base sm:text-xl font-semibold">Create Support Ticket</h2>
+                  <button onClick={() => setIsModalOpen(false)} aria-label="Close" className="p-2.5 shrink-0 rounded-lg hover:bg-accent text-muted-foreground">
                     <FiX />
                   </button>
                 </div>
                 
-                <form onSubmit={handleSubmit} className="p-6 space-y-5">
+                <form onSubmit={handleSubmit} className="p-4 sm:p-6 space-y-4 sm:space-y-5">
                   <div className="space-y-2">
                     <label className="text-sm font-medium" htmlFor="subject">Subject</label>
                     <input id="subject"
@@ -267,7 +267,7 @@ export function SupportTicketsModule() {
                       value={subject}
                       onChange={e => setSubject(e.target.value)}
                       placeholder="Brief description of the issue"
-                      className="w-full bg-background border border-input rounded-lg px-4 py-2.5 outline-none focus:border-primary transition-colors"
+                      className="w-full min-h-11 bg-background border border-input rounded-lg px-3.5 sm:px-4 py-2.5 text-base sm:text-sm outline-none focus:border-primary transition-colors"
                     />
                   </div>
                   
@@ -279,22 +279,22 @@ export function SupportTicketsModule() {
                       value={description}
                       onChange={e => setDescription(e.target.value)}
                       placeholder="Provide details about the bug or your request..."
-                      className="w-full bg-background border border-input rounded-lg px-4 py-2.5 outline-none focus:border-primary transition-colors resize-none"
+                      className="w-full bg-background border border-input rounded-lg px-3.5 sm:px-4 py-2.5 text-base sm:text-sm outline-none focus:border-primary transition-colors resize-none"
                     />
                   </div>
 
-                  <div className="pt-4 flex justify-end gap-3">
+                  <div className="pt-2 sm:pt-4 flex flex-col-reverse sm:flex-row sm:justify-end gap-2.5 sm:gap-3">
                     <button
                       type="button"
                       onClick={() => setIsModalOpen(false)}
-                      className="px-4 py-2 rounded-lg font-medium hover:bg-accent transition-colors"
+                      className="min-h-11 px-4 py-2 rounded-lg text-sm font-medium hover:bg-accent transition-colors"
                     >
                       Cancel
                     </button>
                     <button
                       type="submit"
                       disabled={submitting}
-                      className="px-6 py-2 bg-primary text-primary-foreground rounded-lg font-medium shadow hover:bg-primary/90 transition-colors disabled:opacity-50 flex items-center gap-2"
+                      className="min-h-11 px-6 py-2 bg-primary text-primary-foreground rounded-lg text-sm font-medium shadow hover:bg-primary/90 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
                     >
                       {submitting ? (
                         <div className="w-4 h-4 rounded-full border-2 border-white/30 border-t-white animate-spin" />

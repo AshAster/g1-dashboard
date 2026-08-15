@@ -24,12 +24,12 @@ const AnimatedButton = ({ onClick, text, isPro }: { onClick: () => void, text: s
   return (
     <button 
       onClick={(e) => { e.stopPropagation(); onClick(); }}
-      className={`group flex justify-center items-center px-3 gap-2 h-[36px] w-full max-w-[140px] mx-auto border-none rounded-[20px] cursor-pointer transition-colors ${
+      className={`group flex justify-center items-center px-2.5 sm:px-3 gap-1.5 sm:gap-2 h-9 sm:h-[36px] w-full max-w-[140px] mx-auto border-none rounded-[20px] cursor-pointer transition-colors ${
         isPro ? 'bg-warning/20 hover:bg-warning/30 text-warning' : 'bg-[#5e41de33] hover:bg-[#5e41de4d] text-[#5D41DE]'
       }`}
     >
       {isPro ? (
-        <CreditCard className="w-[18px] h-[18px] group-hover:scale-110 transition-transform" />
+        <CreditCard className="w-4 h-4 sm:w-[18px] sm:h-[18px] shrink-0 group-hover:scale-110 transition-transform" />
       ) : (
         <svg xmlns="http://www.w3.org/2000/svg" width={18} viewBox="0 0 20 20" height={18} fill="none" className="group-hover:animate-[spin_2s_linear_infinite]">
           <g strokeWidth="1.5" strokeLinecap="round" stroke="currentColor">
@@ -38,14 +38,14 @@ const AnimatedButton = ({ onClick, text, isPro }: { onClick: () => void, text: s
           </g>
         </svg>
       )}
-      <span className="leading-5 text-[13px] font-sans tracking-[1px] whitespace-nowrap">{text}</span>
+      <span className="leading-5 text-[11px] sm:text-[13px] font-sans tracking-[0.5px] sm:tracking-[1px] whitespace-nowrap">{text}</span>
     </button>
   );
 };
 
 export function IntegrationCard({ integration, onToggle, onConfigure }: IntegrationCardProps) {
   const getBrandIcon = (name: string, isEnabled: boolean) => {
-    const iconClass = `w-12 h-12 transition-all ${isEnabled ? 'opacity-100 scale-105' : 'opacity-80 group-hover:opacity-100 group-hover:scale-110'}`;
+    const iconClass = `w-10 h-10 sm:w-11 sm:h-11 lg:w-12 lg:h-12 transition-all ${isEnabled ? 'opacity-100 scale-105' : 'opacity-80 group-hover:opacity-100 group-hover:scale-110'}`;
     const n = name.toLowerCase();
 
     // Specific exact matches based on DB names
@@ -124,22 +124,22 @@ export function IntegrationCard({ integration, onToggle, onConfigure }: Integrat
 
   return (
     <div 
-      className={`mcp-card relative group flex flex-col justify-between aspect-square rounded-[2rem] border ${
+      className={`mcp-card relative group flex flex-col justify-between min-h-[220px] sm:min-h-0 sm:aspect-square rounded-3xl sm:rounded-[2rem] border ${
         integration.is_active 
           ? 'border-primary/50 bg-background shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:shadow-[0_12px_40px_rgb(0,0,0,0.16)]' 
           : 'border-border bg-card/40 shadow-sm hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] hover:border-primary/30 hover:bg-background'
-      } p-5 transition-all duration-300 hover:-translate-y-1`}
+      } p-3.5 sm:p-4 lg:p-5 transition-all duration-300 hover:-translate-y-1`}
     >
       {/* Corner gradient flair */}
-      <div className="absolute inset-0 rounded-[2rem] overflow-hidden pointer-events-none">
+      <div className="absolute inset-0 rounded-3xl sm:rounded-[2rem] overflow-hidden pointer-events-none">
         <div className="absolute -top-12 -right-12 w-32 h-32 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/10 transition-all"></div>
       </div>
 
       {/* Top Row: Crown (Left) and Name (Right) */}
-      <div className="flex justify-between items-start z-10">
+      <div className="flex justify-between items-start gap-2 z-10">
         <div>
           {tier === "PRO" && (
-            <div className="group/crown relative inline-flex items-center justify-center p-2 rounded-xl bg-warning/10 text-warning border border-warning/20 cursor-help">
+            <div className="group/crown relative inline-flex items-center justify-center p-1.5 sm:p-2 rounded-xl bg-warning/10 text-warning border border-warning/20 cursor-help">
               <Crown className="w-4 h-4" />
               {/* Tooltip */}
               <div className="absolute bottom-full left-0 mb-2 whitespace-nowrap bg-transparent text-warning font-medium px-2 py-1 text-xs tracking-wide opacity-0 group-hover/crown:opacity-100 transition-opacity pointer-events-none z-50 drop-shadow-sm backdrop-blur-[2px] rounded-md">
@@ -148,12 +148,12 @@ export function IntegrationCard({ integration, onToggle, onConfigure }: Integrat
             </div>
           )}
           {tier === "BASIC" && (
-            <span className="text-xs uppercase tracking-widest font-mono bg-blue-500/10 text-blue-500 px-2 py-1 rounded-full border border-blue-500/20">
+            <span className="text-[9px] sm:text-xs uppercase tracking-widest font-mono bg-blue-500/10 text-blue-500 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full border border-blue-500/20">
               BASIC
             </span>
           )}
         </div>
-        <h3 className="text-sm font-bold text-foreground text-right leading-tight max-w-[60%]">
+        <h3 className="text-xs sm:text-sm font-bold text-foreground text-right leading-tight max-w-[65%] break-words">
           {integration.name}
         </h3>
       </div>
@@ -171,8 +171,8 @@ export function IntegrationCard({ integration, onToggle, onConfigure }: Integrat
       </div>
 
       {/* Bottom: Description & Action */}
-      <div className="mt-auto z-10 flex flex-col gap-4">
-        <p className="text-xs leading-relaxed text-muted-foreground line-clamp-2 text-center opacity-85 group-hover:opacity-100 transition-opacity">
+      <div className="mt-auto z-10 flex flex-col gap-2.5 sm:gap-4">
+        <p className="text-[10px] sm:text-xs leading-relaxed text-muted-foreground line-clamp-2 text-center opacity-85 group-hover:opacity-100 transition-opacity">
           {integration.description || `Connect your agent to ${integration.name} for extended capabilities.`}
         </p>
 
@@ -187,7 +187,7 @@ export function IntegrationCard({ integration, onToggle, onConfigure }: Integrat
               {integration.is_active && (
                 <button
                   onClick={(e) => { e.stopPropagation(); onToggle(integration.id, integration.is_active); }}
-                  className="w-[36px] h-[36px] flex-shrink-0 flex items-center justify-center rounded-[20px] bg-destructive/10 text-destructive hover:bg-destructive hover:text-white transition-colors"
+                  className="w-9 h-9 sm:w-[36px] sm:h-[36px] flex-shrink-0 flex items-center justify-center rounded-[20px] bg-destructive/10 text-destructive hover:bg-destructive hover:text-white transition-colors"
                   title="Disable"
                 >
                   <X className="w-4 h-4" />

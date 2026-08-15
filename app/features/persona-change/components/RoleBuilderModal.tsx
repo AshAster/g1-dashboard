@@ -24,12 +24,12 @@ export function RoleBuilderModal({
   if (!isRoleBuilderOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 sm:p-8">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm p-3 sm:p-6 lg:p-8 overscroll-contain">
       <div role="dialog" aria-modal="true" aria-labelledby="role-builder-title" className="bg-background border border-border w-full max-w-5xl max-h-full overflow-y-auto rounded-xl shadow-2xl flex flex-col relative">
-        <div className="sticky top-0 bg-background/95 backdrop-blur z-10 border-b border-border p-6 flex items-center justify-between">
+        <div className="sticky top-0 bg-background/95 backdrop-blur z-10 border-b border-border p-4 sm:p-6 flex items-center justify-between gap-3">
           <div>
-            <h2 id="role-builder-title" className="text-2xl font-bold uppercase tracking-wider">{editForm.id ? "Edit Persona" : "Role Builder"}</h2>
-            <p className="text-xs font-mono text-muted-foreground uppercase">{editForm.id ? "Update configuration" : "Create new configuration"}</p>
+            <h2 id="role-builder-title" className="text-lg sm:text-2xl font-bold uppercase tracking-wider break-words">{editForm.id ? "Edit Persona" : "Role Builder"}</h2>
+            <p className="text-[10px] sm:text-xs font-mono text-muted-foreground uppercase break-words">{editForm.id ? "Update configuration" : "Create new configuration"}</p>
           </div>
           <button
             onClick={closeRoleBuilder}
@@ -52,9 +52,9 @@ export function RoleBuilderModal({
           </section>
 
           <section id="identity">
-            <div className="flex items-center gap-4 mb-8">
-              <span className="text-primary font-mono text-sm">[01]</span>
-              <h2 className="text-xl font-bold uppercase tracking-wide text-foreground">Core Identity</h2>
+            <div className="flex items-center gap-2.5 sm:gap-4 mb-5 sm:mb-8 min-w-0">
+              <span className="text-primary font-mono text-xs sm:text-sm shrink-0">[01]</span>
+              <h2 className="text-base sm:text-lg lg:text-xl font-bold uppercase tracking-wide text-foreground">Core Identity</h2>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6 border border-border bg-card/20">
@@ -133,9 +133,9 @@ export function RoleBuilderModal({
           </section>
 
           <section id="system-prompt">
-            <div className="flex items-center gap-4 mb-8">
-              <span className="text-primary font-mono text-sm">[02]</span>
-              <h2 className="text-xl font-bold uppercase tracking-wide text-foreground">Base System Prompt</h2>
+            <div className="flex items-center gap-2.5 sm:gap-4 mb-5 sm:mb-8 min-w-0">
+              <span className="text-primary font-mono text-xs sm:text-sm shrink-0">[02]</span>
+              <h2 className="text-base sm:text-lg lg:text-xl font-bold uppercase tracking-wide text-foreground">Base System Prompt</h2>
             </div>
             
             <div className="p-6 border border-border bg-card/20">
@@ -151,9 +151,9 @@ export function RoleBuilderModal({
           </section>
 
           <section id="rules">
-            <div className="flex items-center gap-4 mb-8">
-              <span className="text-primary font-mono text-sm">[03]</span>
-              <h2 className="text-xl font-bold uppercase tracking-wide text-foreground">Conversation Rules</h2>
+            <div className="flex items-center gap-2.5 sm:gap-4 mb-5 sm:mb-8 min-w-0">
+              <span className="text-primary font-mono text-xs sm:text-sm shrink-0">[03]</span>
+              <h2 className="text-base sm:text-lg lg:text-xl font-bold uppercase tracking-wide text-foreground">Conversation Rules</h2>
             </div>
             
             <div className="p-6 border border-border bg-card/20 space-y-4">

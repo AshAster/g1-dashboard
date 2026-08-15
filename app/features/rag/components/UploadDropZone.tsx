@@ -17,30 +17,30 @@ export function UploadDropZone({
       onDragOver={onDragOver}
       onDragLeave={onDragLeave}
       onDrop={onDrop}
-      className={`border-2 border-dashed p-12 text-center transition-all ${
+      className={`border-2 border-dashed p-6 sm:p-9 lg:p-12 text-center transition-all ${
         isDragging
           ? "border-primary bg-primary/5 scale-[1.02]"
           : "border-border hover:border-primary/50 hover:bg-card/50"
       }`}
     >
-      <div className="w-16 h-16 mx-auto mb-6 bg-secondary/50 flex items-center justify-center text-muted-foreground">
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div className="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-4 sm:mb-6 bg-secondary/50 flex items-center justify-center text-muted-foreground">
+        <svg className="w-6 h-6 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
         </svg>
       </div>
-      <h3 className="text-xl font-bold uppercase tracking-wide mb-2">Initialize Data Transfer</h3>
-      <p className="text-sm text-muted-foreground mb-6 font-mono">
+      <h3 className="text-base sm:text-lg lg:text-xl font-bold uppercase tracking-wide mb-2">Initialize Data Transfer</h3>
+      <p className="text-[11px] sm:text-sm text-muted-foreground mb-4 sm:mb-6 font-mono break-words">
         // Supported formats: PDF, DOCX, TXT, MD, CSV, JSON
       </p>
       
-      <div className="flex items-center justify-center gap-4">
+      <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
         <button 
           onClick={() => fileInputRef.current?.click()}
-          className="px-6 py-3 bg-primary text-primary-foreground text-sm uppercase font-mono tracking-wider hover:opacity-90 transition-opacity"
+          className="w-full sm:w-auto min-h-11 px-6 py-3 bg-primary text-primary-foreground text-sm uppercase font-mono tracking-wider hover:opacity-90 transition-opacity"
         >
           Select Files
         </button>
-        <span className="text-xs font-mono text-muted-foreground uppercase">or drag and drop</span>
+        <span className="text-[10px] sm:text-xs font-mono text-muted-foreground uppercase">or drag and drop</span>
       </div>
       
       <input

@@ -10,7 +10,7 @@ export function CommunicationGesturesModule() {
       <div className="space-y-8 pt-8 border-t border-border">
         <div className="flex items-center gap-4 mb-6">
           <span className="text-primary font-mono text-sm">[COM]</span>
-          <h2 className="text-xl font-bold uppercase tracking-wide text-foreground">Communication Gestures</h2>
+          <h2 className="text-base sm:text-lg lg:text-xl font-bold uppercase tracking-wide text-foreground">Communication Gestures</h2>
         </div>
         
         <div className="p-8 border border-border bg-card/20 rounded-xl flex flex-col items-center justify-center text-center gap-4">

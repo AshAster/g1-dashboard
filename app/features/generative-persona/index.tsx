@@ -57,14 +57,14 @@ export function GenerativePersonaModule() {
       </FeatureGate>
 
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 sm:p-8">
-          <div role="dialog" aria-modal="true" aria-labelledby="gen-persona-title" className="bg-background border border-border w-full max-w-2xl max-h-full overflow-y-auto rounded-xl shadow-2xl flex flex-col relative">
-            <div className="sticky top-0 bg-background/95 backdrop-blur z-10 border-b border-border p-6 flex items-center justify-between">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-3 sm:p-6 lg:p-8 overscroll-contain">
+          <div role="dialog" aria-modal="true" aria-labelledby="gen-persona-title" className="bg-background border border-border w-full max-w-2xl max-h-full overflow-y-auto overscroll-contain rounded-xl shadow-2xl flex flex-col relative">
+            <div className="sticky top-0 bg-background/95 backdrop-blur z-10 border-b border-border p-4 sm:p-6 flex items-center justify-between gap-3">
               <div>
                 <h2 id="gen-persona-title" className="text-2xl font-bold uppercase tracking-wider text-primary flex items-center gap-2">
                   <FiCpu /> Generative Persona
                 </h2>
-                <p className="text-xs font-mono text-muted-foreground uppercase">Powered by Qwen2.5:7b</p>
+                <p className="text-[10px] sm:text-xs font-mono text-muted-foreground uppercase break-words">Powered by Qwen2.5:7b</p>
               </div>
               <button
                 onClick={() => setIsOpen(false)}
@@ -152,7 +152,7 @@ export function GenerativePersonaModule() {
               <button 
                 onClick={handleGenerate}
                 disabled={generating || !genForm.name || !genForm.context}
-                className="flex items-center gap-2 px-8 py-3 bg-primary text-primary-foreground font-semibold uppercase tracking-wider text-sm hover:opacity-90 transition-opacity disabled:opacity-50 shadow-lg hover:-translate-y-0.5"
+                className="w-full sm:w-auto min-h-11 flex items-center justify-center gap-2 px-6 sm:px-8 py-3 bg-primary text-primary-foreground font-semibold uppercase tracking-wider text-xs sm:text-sm hover:opacity-90 transition-opacity disabled:opacity-50 shadow-lg hover:-translate-y-0.5"
               >
                 {generating ? <FiRefreshCw className="animate-spin" /> : <FiCpu />}
                 {generating ? "Generating..." : "Generate with AI"}

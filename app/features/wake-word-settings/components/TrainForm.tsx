@@ -22,14 +22,14 @@ export function TrainForm({
   activeJob, backend, maintStatus, submitting, submitMsg, startTraining
 }: TrainFormProps) {
   return (
-    <section id="train" className="border-t border-border pt-8 scroll-mt-28">
-      <div className="flex items-center gap-4 mb-8">
-        <span className="text-primary font-mono text-sm">[02]</span>
-        <h2 className="text-xl font-bold uppercase tracking-wide text-foreground">train new wake word</h2>
+    <section id="train" className="border-t border-border pt-6 sm:pt-8 scroll-mt-32 sm:scroll-mt-36">
+      <div className="flex items-center gap-2.5 sm:gap-4 mb-5 sm:mb-8 min-w-0">
+        <span className="text-primary font-mono text-xs sm:text-sm shrink-0">[02]</span>
+        <h2 className="text-base sm:text-lg lg:text-xl font-bold uppercase tracking-wide text-foreground">train new wake word</h2>
       </div>
 
-      <div className="border border-border bg-card/50 p-6 space-y-6">
-        <p className="text-xs font-mono text-muted-foreground uppercase">// training configuration</p>
+      <div className="border border-border bg-card/50 p-4 sm:p-5 lg:p-6 space-y-6">
+        <p className="text-[10px] sm:text-xs font-mono text-muted-foreground uppercase break-words">// training configuration</p>
 
         <div>
           <label className="block text-xs font-mono text-muted-foreground uppercase mb-2" htmlFor="wake-phrase">
@@ -41,7 +41,7 @@ export function TrainForm({
             onChange={e => setPhrase(e.target.value)}
             placeholder="e.g. hey jai"
             disabled={!!activeJob}
-            className="w-full bg-background border border-border px-4 py-3 font-mono text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary disabled:opacity-40 uppercase"
+            className="w-full min-h-11 bg-background border border-border px-3 sm:px-4 py-3 font-mono text-base sm:text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary disabled:opacity-40 uppercase"
           />
           <p className="text-xs font-mono text-muted-foreground mt-1">
             2-3 words work best. Avoid common phrases.
@@ -52,7 +52,7 @@ export function TrainForm({
           <label className="block text-xs font-mono text-muted-foreground uppercase mb-3">
             Training Quality
           </label>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3">
             {(["draft", "standard", "production"] as const).map(q => {
               const info = qualityInfo[q];
               const time = backend === "local_agx" ? 
@@ -63,7 +63,7 @@ export function TrainForm({
                   key={q}
                   onClick={() => setQuality(q)}
                   disabled={!!activeJob}
-                  className={`border p-4 text-left transition-colors disabled:opacity-40 disabled:cursor-not-allowed
+                  className={`border p-3 sm:p-4 text-left transition-colors disabled:opacity-40 disabled:cursor-not-allowed
                     ${quality === q
                       ? "border-primary bg-primary/10 text-primary"
                       : "border-border hover:border-primary/50 text-muted-foreground hover:text-foreground"
@@ -83,7 +83,7 @@ export function TrainForm({
           <label className="block text-xs font-mono text-muted-foreground uppercase mb-2" htmlFor="sample-upload">
             Audio Samples (optional but recommended)
           </label>
-          <div className="border border-dashed border-border/50 p-6 text-center">
+          <div className="border border-dashed border-border/50 p-4 sm:p-6 text-center">
             <input
               type="file"
               accept=".wav,.mp3,.m4a"
@@ -124,11 +124,11 @@ export function TrainForm({
           </div>
         )}
 
-        <div className="flex items-center gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
           <button
             onClick={startTraining}
             disabled={submitting || !!activeJob || (backend === "local_agx" && !maintStatus?.maintenance_mode)}
-            className="px-6 py-3 border border-primary text-primary font-mono text-xs uppercase hover:bg-primary/10 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+            className="w-full sm:w-auto min-h-11 px-6 py-3 border border-primary text-primary font-mono text-xs uppercase hover:bg-primary/10 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
           >
             {submitting ? "[ STARTING... ]" : "[ START TRAINING ]"}
           </button>

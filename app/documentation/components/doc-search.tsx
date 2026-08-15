@@ -43,7 +43,7 @@ export function DocSearch() {
   };
 
   return (
-    <div ref={containerRef} className="relative w-full min-w-[300px] md:min-w-[400px] max-w-md z-50">
+    <div ref={containerRef} className="relative w-full sm:min-w-[300px] md:min-w-[400px] max-w-full sm:max-w-md z-50">
       <div className="relative group">
         <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
           <Search className="h-4 w-4 text-muted-foreground group-focus-within:text-primary transition-colors" />
@@ -81,7 +81,7 @@ export function DocSearch() {
                 <button
                   key={result.id}
                   onClick={() => handleSelect(result.id)}
-                  className="w-full text-left px-4 py-3 hover:bg-muted flex items-center justify-between group transition-colors border-b border-border/50 last:border-0"
+                  className="w-full text-left px-3.5 sm:px-4 py-3 hover:bg-muted flex items-center justify-between gap-2 group transition-colors border-b border-border/50 last:border-0 text-sm"
                 >
                   <div>
                     <div className="font-medium text-foreground group-hover:text-primary transition-colors">

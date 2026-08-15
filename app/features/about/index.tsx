@@ -25,7 +25,7 @@ export const AboutFeature = () => {
             <FiCpu size={32} />
           </div>
           <h3 className="text-xl font-bold mb-3">Edge Intelligence</h3>
-          <p className="text-muted-foreground">
+          <p className="text-xs sm:text-sm text-muted-foreground">
             Fully localized RAG and LLM processing ensures zero latency and total data privacy during robotic operations.
           </p>
         </motion.div>
@@ -40,7 +40,7 @@ export const AboutFeature = () => {
             <FiShield size={32} />
           </div>
           <h3 className="text-xl font-bold mb-3">Enterprise Security</h3>
-          <p className="text-muted-foreground">
+          <p className="text-xs sm:text-sm text-muted-foreground">
             Multi-tenant isolation using PASETO v4 encryption guarantees that your proprietary data remains yours.
           </p>
         </motion.div>
@@ -55,7 +55,7 @@ export const AboutFeature = () => {
             <FiGlobe size={32} />
           </div>
           <h3 className="text-xl font-bold mb-3">Universal Control</h3>
-          <p className="text-muted-foreground">
+          <p className="text-xs sm:text-sm text-muted-foreground">
             Manage your entire fleet of G1 units from anywhere in the world with real-time DDS telemetry bridging.
           </p>
         </motion.div>

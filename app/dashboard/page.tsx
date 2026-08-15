@@ -117,29 +117,29 @@ export default function ClientDashboardPage() {
   }, []);
 
   return (
-    <div ref={containerRef} className="max-w-7xl mx-auto pt-8 pb-32 flex flex-col gap-8">
+    <div ref={containerRef} className="max-w-7xl mx-auto w-full pb-20 sm:pb-28 lg:pb-32 pt-2 sm:pt-4 lg:pt-6 flex flex-col gap-6 sm:gap-8">
       {/* Page Header */}
-      <div className="dash-header flex flex-col md:flex-row md:items-start justify-between gap-6">
-        <div>
-          <h1 className="text-3xl md:text-4xl font-bold text-foreground tracking-tight">
+      <div className="dash-header flex flex-col lg:flex-row lg:items-start justify-between gap-4 sm:gap-6">
+        <div className="min-w-0">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground tracking-tight">
             VEDA Control Center
           </h1>
-          <p className="text-muted-foreground mt-2">{today} — Central Administration</p>
+          <p className="text-xs sm:text-sm text-muted-foreground mt-1.5 sm:mt-2">{today} — Central Administration</p>
         </div>
-        
+
         {/* Health Status Rows */}
-        <div className="flex flex-col gap-3 min-w-[240px]">
-          <div className="flex items-center justify-between p-3.5 rounded-xl bg-card border border-border shadow-sm">
-            <span className="text-sm font-semibold text-foreground">AGX Health Status</span>
-            <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-bold ${agxStatus === 'online' ? 'bg-success/10 text-success' : 'bg-destructive/10 text-destructive'}`}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2.5 sm:gap-3 w-full lg:w-auto lg:min-w-[260px] shrink-0">
+          <div className="flex items-center justify-between gap-2 p-3 sm:p-3.5 rounded-xl bg-card border border-border shadow-sm">
+            <span className="text-xs sm:text-sm font-semibold text-foreground truncate">AGX Health Status</span>
+            <div className={`flex items-center gap-1.5 px-2 sm:px-2.5 py-1 rounded-md text-[10px] sm:text-xs font-bold shrink-0 ${agxStatus === 'online' ? 'bg-success/10 text-success' : 'bg-destructive/10 text-destructive'}`}>
               <span className={`w-1.5 h-1.5 rounded-full ${agxStatus === 'online' ? 'bg-success animate-pulse' : 'bg-destructive'}`}></span>
               {agxStatus === 'online' ? 'ONLINE' : 'OFFLINE'}
             </div>
           </div>
           
-          <div className="flex items-center justify-between p-3.5 rounded-xl bg-card border border-border shadow-sm">
-            <span className="text-sm font-semibold text-foreground">Robot Health Status</span>
-            <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-bold ${robotStatus === 'online' ? 'bg-success/10 text-success' : 'bg-destructive/10 text-destructive'}`}>
+          <div className="flex items-center justify-between gap-2 p-3 sm:p-3.5 rounded-xl bg-card border border-border shadow-sm">
+            <span className="text-xs sm:text-sm font-semibold text-foreground truncate">Robot Health Status</span>
+            <div className={`flex items-center gap-1.5 px-2 sm:px-2.5 py-1 rounded-md text-[10px] sm:text-xs font-bold shrink-0 ${robotStatus === 'online' ? 'bg-success/10 text-success' : 'bg-destructive/10 text-destructive'}`}>
               <span className={`w-1.5 h-1.5 rounded-full ${robotStatus === 'online' ? 'bg-success animate-pulse' : 'bg-destructive'}`}></span>
               {robotStatus === 'online' ? 'ONLINE' : 'OFFLINE'}
             </div>
@@ -148,9 +148,9 @@ export default function ClientDashboardPage() {
       </div>
 
       {/* Modules Hub */}
-      <section className="dash-widget mt-4">
-        <h2 className="text-xl font-bold tracking-tight text-foreground mb-6">Preview panel</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      <section className="dash-widget mt-2 sm:mt-4">
+        <h2 className="text-lg sm:text-xl font-bold tracking-tight text-foreground mb-4 sm:mb-6">Preview panel</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 sm:gap-5 lg:gap-6">
           
           <FeatureStatusCard
             title="Knowledge Base (RAG)"

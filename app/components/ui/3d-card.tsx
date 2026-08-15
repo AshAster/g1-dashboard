@@ -53,18 +53,18 @@ export const Floating3DCard: React.FC<Floating3DCardProps> = ({
         ref={cardRef}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        className="group relative w-full rounded-xl border border-border bg-card p-6 shadow-lg transition-transform duration-300 ease-out hover:shadow-2xl hover:border-primary/50"
+        className="group relative w-full rounded-xl border border-border bg-card p-4 sm:p-5 lg:p-6 shadow-lg transition-transform duration-300 ease-out hover:shadow-2xl hover:border-primary/50"
         style={{ transformStyle: "preserve-3d" }}
       >
         <h2
-          className="text-xl font-bold text-foreground sm:text-2xl"
+          className="text-lg font-bold text-foreground sm:text-xl lg:text-2xl"
           style={{ transform: "translateZ(50px)" }}
         >
           {title}
         </h2>
 
         <p
-          className="mt-2 text-sm text-muted-foreground sm:text-base min-h-[60px]"
+          className="mt-2 text-xs sm:text-sm lg:text-base text-muted-foreground min-h-0 sm:min-h-[60px]"
           style={{ transform: "translateZ(60px)" }}
         >
           {description}
@@ -74,21 +74,21 @@ export const Floating3DCard: React.FC<Floating3DCardProps> = ({
         </p>
 
         <div
-          className="mt-6 w-full"
+          className="mt-4 sm:mt-6 w-full"
           style={{ transform: "translateZ(80px)" }}
         >
           <img
             src={imageSrc}
             alt={title}
-            className="h-40 w-full rounded-lg object-cover transition-shadow duration-300 sm:h-48 group-hover:shadow-xl opacity-90 group-hover:opacity-100"
+            className="h-32 sm:h-40 lg:h-48 w-full rounded-lg object-cover transition-shadow duration-300 group-hover:shadow-xl opacity-90 group-hover:opacity-100"
           />
         </div>
 
-        <div className="mt-8 flex items-center justify-end relative z-50">
+        <div className="mt-5 sm:mt-8 flex items-center justify-end relative z-50">
           <button
             onPointerDown={(e) => { e.stopPropagation(); onButtonClick?.(); }}
             onClick={(e) => { e.stopPropagation(); onButtonClick?.(); }}
-            className="relative z-50 rounded-lg bg-primary px-6 py-2.5 text-sm font-bold text-primary-foreground transition-all duration-300 hover:bg-primary/90 shadow-md hover:shadow-lg hover:-translate-y-0.5 cursor-pointer"
+            className="relative z-50 w-full sm:w-auto min-h-11 rounded-lg bg-primary px-6 py-2.5 text-sm font-bold text-primary-foreground transition-all duration-300 hover:bg-primary/90 shadow-md hover:shadow-lg hover:-translate-y-0.5 cursor-pointer"
           >
             {buttonText}
           </button>

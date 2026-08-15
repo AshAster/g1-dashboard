@@ -76,9 +76,9 @@ export function DocSidebar() {
   return (
     <nav
       ref={navRef}
-      className="w-full lg:w-auto flex-shrink-0 block static lg:sticky lg:top-[104px] h-auto lg:max-h-[calc(100vh-18rem)] overflow-y-visible lg:overflow-y-auto pb-6 mb-6 lg:mb-0 pt-2"
+      className="w-full lg:w-auto flex-shrink-0 block static lg:sticky lg:top-[104px] h-auto lg:max-h-[calc(100dvh-18rem)] overflow-y-visible lg:overflow-y-auto pb-5 sm:pb-6 mb-5 sm:mb-6 lg:mb-0 pt-2"
     >
-      <div className="space-y-6">
+      <div className="space-y-5 sm:space-y-6">
         {docCategories.map((category) => (
           <div key={category.id} className="sidebar-group">
             <h3 className="text-xs font-bold text-foreground uppercase tracking-widest mb-2 px-2">
@@ -99,7 +99,7 @@ export function DocSidebar() {
                     <a
                       href={`#${sectionId}`}
                       onClick={(e) => handleClick(e, sectionId)}
-                      className={`block px-3 py-1.5 text-sm rounded-md transition-all duration-200 ${
+                      className={`block px-3 py-2 lg:py-1.5 text-sm rounded-md transition-all duration-200 ${
                         isActive 
                           ? 'bg-primary/10 text-primary font-semibold' 
                           : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'

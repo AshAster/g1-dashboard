@@ -26,7 +26,7 @@ export function HeaderActions({ isLoggedIn = false, tenant }: { isLoggedIn?: boo
   const tenantName = tenant?.name || "User Profile";
 
   return (
-    <div className="absolute top-4 right-4 md:top-6 md:right-6 z-50 flex items-center gap-2 md:gap-3 scale-90 md:scale-100 origin-top-right">
+    <div className="absolute top-3 right-3 sm:top-4 sm:right-4 md:top-6 md:right-6 z-50 flex items-center gap-2 md:gap-3 scale-90 md:scale-100 origin-top-right">
       {/* Notification bell */}
       {!isAuthPage && isLoggedIn && (
         <button
@@ -53,7 +53,7 @@ export function HeaderActions({ isLoggedIn = false, tenant }: { isLoggedIn?: boo
             className="rounded-full hover:ring-2 hover:ring-primary/40 transition-all"
             title="Profile"
           >
-            <Avatar className="h-11 w-11 rounded-full border-2 border-border shadow-sm cursor-pointer hover:border-primary transition-colors">
+            <Avatar className="h-10 w-10 sm:h-11 sm:w-11 rounded-full border-2 border-border shadow-sm cursor-pointer hover:border-primary transition-colors">
               {logo ? <AvatarImage src={logo} alt={tenantName} className="object-cover rounded-full" /> : null}
               <AvatarFallback className="bg-primary text-primary-foreground font-semibold text-[15px] rounded-full">
                 {initial}
@@ -63,7 +63,7 @@ export function HeaderActions({ isLoggedIn = false, tenant }: { isLoggedIn?: boo
         ) : (
           <Link
             href="/sign-in"
-            className="px-4 py-2 text-sm bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-colors shadow-md shadow-primary/20"
+            className="px-3.5 sm:px-4 py-2.5 text-xs sm:text-sm bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-colors shadow-md shadow-primary/20 whitespace-nowrap"
           >
             Login
           </Link>

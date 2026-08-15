@@ -51,12 +51,12 @@ export function PrebuiltPersonasModule() {
       </FeatureGate>
 
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 sm:p-8">
-          <div role="dialog" aria-modal="true" aria-labelledby="persona-templates-title" className="bg-background border border-border w-full max-w-4xl max-h-full overflow-y-auto rounded-xl shadow-2xl flex flex-col relative">
-            <div className="sticky top-0 bg-background/95 backdrop-blur z-10 border-b border-border p-6 flex items-center justify-between">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-3 sm:p-6 lg:p-8 overscroll-contain">
+          <div role="dialog" aria-modal="true" aria-labelledby="persona-templates-title" className="bg-background border border-border w-full max-w-4xl max-h-full overflow-y-auto overscroll-contain rounded-xl shadow-2xl flex flex-col relative">
+            <div className="sticky top-0 bg-background/95 backdrop-blur z-10 border-b border-border p-4 sm:p-6 flex items-center justify-between gap-3">
               <div>
-                <h2 id="persona-templates-title" className="text-2xl font-bold uppercase tracking-wider">Persona Templates</h2>
-                <p className="text-xs font-mono text-muted-foreground uppercase">Select a template to clone into your Personal Library</p>
+                <h2 id="persona-templates-title" className="text-lg sm:text-2xl font-bold uppercase tracking-wider break-words">Persona Templates</h2>
+                <p className="text-[10px] sm:text-xs font-mono text-muted-foreground uppercase break-words">Select a template to clone into your Personal Library</p>
               </div>
               <button
                 onClick={() => setIsOpen(false)}
@@ -67,10 +67,10 @@ export function PrebuiltPersonasModule() {
               </button>
             </div>
             
-            <div className="p-6 sm:p-10">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="p-4 sm:p-6 lg:p-10">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                 {personas.filter(p => p.isTemplate).map(t => (
-                  <div key={t.id} className="p-6 rounded-xl border border-border bg-card/50 flex flex-col justify-between">
+                  <div key={t.id} className="p-4 sm:p-5 lg:p-6 rounded-xl border border-border bg-card/50 flex flex-col justify-between">
                     <div>
                       <h3 className="font-bold text-lg mb-2">{t.name}</h3>
                       <p className="text-xs text-muted-foreground font-mono mb-4">{t.systemPrompt.substring(0, 100)}...</p>

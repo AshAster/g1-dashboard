@@ -175,13 +175,13 @@ export const DesktopSidebar = ({
         /*
          * Width — hover-to-expand
          */
-        "w-[60px] hover:w-[220px]",
+        "w-[60px] hover:w-[220px] xl:w-[68px] xl:hover:w-[248px]",
 
         /*
          * Layout
          */
         "px-2",
-        "py-4",
+        "py-4 xl:py-5",
 
         /*
          * Background
@@ -302,8 +302,9 @@ export const MobileSidebar = ({
                  * Size
                  */
                 "h-full",
-                "w-[85%]",
-                "max-w-[320px]",
+                "w-[84%]",
+                "max-w-[300px]",
+                "sm:max-w-[340px]",
 
                 /*
                  * Layout
@@ -315,7 +316,12 @@ export const MobileSidebar = ({
                 /*
                  * Spacing
                  */
-                "p-6",
+                "p-5",
+                "sm:p-6",
+                "pt-[max(1.25rem,env(safe-area-inset-top))]",
+                "pb-[max(1.25rem,env(safe-area-inset-bottom))]",
+                "overflow-y-auto",
+                "overscroll-contain",
 
                 /*
                  * Background
@@ -345,15 +351,15 @@ export const MobileSidebar = ({
               <div
                 className="
                   absolute
-                  right-4
-                  top-4
+                  right-3
+                  top-3
                   z-50
 
                   text-sidebar-foreground
 
                   cursor-pointer
 
-                  p-2
+                  p-2.5
 
                   hover:bg-sidebar-accent
 
@@ -447,7 +453,8 @@ export const SidebarLink = ({
         /*
          * Spacing
          */
-        "py-2",
+        "py-2.5",
+        "md:py-2",
         "px-2",
 
         /*

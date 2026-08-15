@@ -33,13 +33,13 @@ export function DocHeader() {
 
   return (
     <div
-      className={`sticky top-0 z-40 bg-background pb-4 pt-4 border-b border-border/50 mb-8 transition-transform duration-300 ${
+      className={`sticky top-0 z-40 bg-background/85 supports-[backdrop-filter]:bg-background/70 backdrop-blur-xl pb-3 sm:pb-4 pt-3 sm:pt-4 border-b border-border/50 mb-6 sm:mb-8 transition-transform duration-300 ${
         isVisible ? "translate-y-0" : "-translate-y-full"
       }`}
     >
-      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 sm:gap-4">
         <div>
-          <h1 className="text-3xl md:text-4xl font-bold text-foreground tracking-tight">Documentation</h1>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground tracking-tight">Documentation</h1>
           <p className="text-muted-foreground mt-1">Complete guide to the VEDA platform</p>
         </div>
         

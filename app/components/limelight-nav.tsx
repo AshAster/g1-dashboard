@@ -29,16 +29,16 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/app/components/ui/avatar"
 
 // --- Dropdown Contents ---
 const PersonaMenu = () => (
-  <div className="w-[min(300px,90vw)]">
+  <div className="w-[min(300px,calc(100vw-3rem))]">
     <h3 className="mb-3 text-sm font-semibold text-foreground border-b border-border pb-2">Persona Manager</h3>
     <div className="flex flex-col gap-1">
-      <Link href="/persona#templates" className="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm text-muted-foreground hover:bg-accent hover:text-primary transition-colors">
+      <Link href="/persona#templates" className="flex items-center gap-2.5 px-2.5 py-2.5 rounded-md text-sm text-muted-foreground hover:bg-accent hover:text-primary active:bg-accent transition-colors">
         <FiBox className="text-lg" /> Persona Templates
       </Link>
-      <Link href="/persona#generative" className="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm text-muted-foreground hover:bg-accent hover:text-primary transition-colors">
+      <Link href="/persona#generative" className="flex items-center gap-2.5 px-2.5 py-2.5 rounded-md text-sm text-muted-foreground hover:bg-accent hover:text-primary active:bg-accent transition-colors">
         <FiSmile className="text-lg" /> Generative Persona
       </Link>
-      <Link href="/persona#role-builder" className="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm text-muted-foreground hover:bg-accent hover:text-primary transition-colors">
+      <Link href="/persona#role-builder" className="flex items-center gap-2.5 px-2.5 py-2.5 rounded-md text-sm text-muted-foreground hover:bg-accent hover:text-primary active:bg-accent transition-colors">
         <FiUser className="text-lg" /> Role Builder
       </Link>
     </div>
@@ -46,13 +46,13 @@ const PersonaMenu = () => (
 );
 
 const RagMenu = () => (
-  <div className="w-[min(240px,90vw)]">
+  <div className="w-[min(240px,calc(100vw-3rem))]">
     <h3 className="mb-3 text-sm font-semibold text-foreground border-b border-border pb-2">Knowledge Hub</h3>
     <div className="flex flex-col gap-1">
-      <Link href="/rag#document" className="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm text-muted-foreground hover:bg-accent hover:text-primary transition-colors">
+      <Link href="/rag#document" className="flex items-center gap-2.5 px-2.5 py-2.5 rounded-md text-sm text-muted-foreground hover:bg-accent hover:text-primary active:bg-accent transition-colors">
         <FiDatabase className="text-lg" /> Document RAG
       </Link>
-      <Link href="/rag#web" className="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm text-muted-foreground hover:bg-accent hover:text-primary transition-colors">
+      <Link href="/rag#web" className="flex items-center gap-2.5 px-2.5 py-2.5 rounded-md text-sm text-muted-foreground hover:bg-accent hover:text-primary active:bg-accent transition-colors">
         <FiCpu className="text-lg" /> Web RAG
       </Link>
     </div>
@@ -60,13 +60,13 @@ const RagMenu = () => (
 );
 
 const GestureMenu = () => (
-  <div className="w-[min(240px,90vw)]">
+  <div className="w-[min(240px,calc(100vw-3rem))]">
     <h3 className="mb-3 text-sm font-semibold text-foreground border-b border-border pb-2">Gesture Settings</h3>
     <div className="flex flex-col gap-1">
-      <Link href="/gesture#custom" className="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm text-muted-foreground hover:bg-accent hover:text-primary transition-colors">
+      <Link href="/gesture#custom" className="flex items-center gap-2.5 px-2.5 py-2.5 rounded-md text-sm text-muted-foreground hover:bg-accent hover:text-primary active:bg-accent transition-colors">
         <FiActivity className="text-lg" /> Custom Gesture
       </Link>
-      <Link href="/gesture#add" className="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm text-muted-foreground hover:bg-accent hover:text-primary transition-colors">
+      <Link href="/gesture#add" className="flex items-center gap-2.5 px-2.5 py-2.5 rounded-md text-sm text-muted-foreground hover:bg-accent hover:text-primary active:bg-accent transition-colors">
         <FiPlusCircle className="text-lg" /> Add Gesture
       </Link>
     </div>
@@ -74,10 +74,10 @@ const GestureMenu = () => (
 );
 
 const InventoryMenu = () => (
-  <div className="w-[min(240px,90vw)]">
+  <div className="w-[min(240px,calc(100vw-3rem))]">
     <h3 className="mb-3 text-sm font-semibold text-foreground border-b border-border pb-2">Robot Inventory</h3>
     <div className="flex flex-col gap-1">
-      <Link href="/inventory#health" className="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm text-muted-foreground hover:bg-accent hover:text-primary transition-colors">
+      <Link href="/inventory#health" className="flex items-center gap-2.5 px-2.5 py-2.5 rounded-md text-sm text-muted-foreground hover:bg-accent hover:text-primary active:bg-accent transition-colors">
         <FiHeart className="text-lg" /> Health Status
       </Link>
     </div>
@@ -93,16 +93,16 @@ export type NavItem = {
 };
 
 const NavigationMenu = () => (
-  <div className="p-3 w-[min(192px,90vw)]">
+  <div className="p-3 w-[min(200px,calc(100vw-3rem))]">
     <h3 className="mb-3 text-sm font-semibold text-foreground border-b border-border pb-2">Navigation</h3>
     <div className="space-y-1">
-      <Link href="/navigation#navigate" className="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm text-muted-foreground hover:bg-accent hover:text-primary transition-colors">
+      <Link href="/navigation#navigate" className="flex items-center gap-2.5 px-2.5 py-2.5 rounded-md text-sm text-muted-foreground hover:bg-accent hover:text-primary active:bg-accent transition-colors">
         <FiMapPin className="text-lg" /> Go to Location
       </Link>
-      <Link href="/navigation#mapping" className="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm text-muted-foreground hover:bg-accent hover:text-primary transition-colors">
+      <Link href="/navigation#mapping" className="flex items-center gap-2.5 px-2.5 py-2.5 rounded-md text-sm text-muted-foreground hover:bg-accent hover:text-primary active:bg-accent transition-colors">
         <FiMap className="text-lg" /> Mapping
       </Link>
-      <Link href="/navigation#status" className="flex items-center gap-2 px-2 py-1.5 rounded-md text-sm text-muted-foreground hover:bg-accent hover:text-primary transition-colors">
+      <Link href="/navigation#status" className="flex items-center gap-2.5 px-2.5 py-2.5 rounded-md text-sm text-muted-foreground hover:bg-accent hover:text-primary active:bg-accent transition-colors">
         <FiNavigation className="text-lg" /> Status
       </Link>
     </div>
@@ -271,6 +271,64 @@ export const LimelightNav = ({
 
           {/* Spacer keeps actions pinned right on every breakpoint */}
           <div className="flex-1 min-w-0" />
+
+          {/* Right Side: Header Actions */}
+          <div className="flex items-center gap-1.5 sm:gap-2 origin-right shrink-0">
+            {/* Notification bell */}
+            {isLoggedIn && (
+              <button
+                onClick={() => {
+                  console.log("[HeaderActions] Navigating to Notifications page");
+                  router.push("/notifications");
+                }}
+                className="p-2 sm:p-2.5 rounded-xl bg-card border border-border text-muted-foreground hover:text-foreground hover:bg-accent transition-colors relative shadow-sm"
+                title="Notifications"
+              >
+                <FiBell size={16} />
+                <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-primary rounded-full animate-pulse" />
+              </button>
+            )}
+
+            {/* Theme toggle */}
+            <ThemeToggle />
+
+            {/* Profile avatar (logged in) or Login button (logged out) */}
+            {isLoggedIn ? (
+              <Link
+                href="/profile"
+                className="rounded-full hover:ring-2 hover:ring-primary/40 transition-all"
+                title="Profile"
+              >
+                <Avatar className="h-8 w-8 sm:h-9 sm:w-9 rounded-full border border-border shadow-sm cursor-pointer hover:border-primary transition-colors">
+                  {tenant?.companyLogo ? <AvatarImage src={tenant.companyLogo} alt={tenant.name || "Profile"} className="object-cover rounded-full" /> : null}
+                  <AvatarFallback className="bg-primary text-primary-foreground font-semibold text-[13px] rounded-full">
+                    {tenant?.name ? tenant.name.charAt(0).toUpperCase() : "U"}
+                  </AvatarFallback>
+                </Avatar>
+              </Link>
+            ) : (
+              <Link
+                href="/sign-in"
+                className="px-3 py-2 text-xs bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-colors shadow-md shadow-primary/20"
+              >
+                Login
+              </Link>
+            )}
+          </div>
+
+        </div>
+
+        {/* Row 2 — translucent glass strip carrying the section tabs.
+            Lives in normal flow beneath the chrome bar, so it never covers content. */}
+        <div className="w-full border-t border-border/30 bg-card/40 supports-[backdrop-filter]:bg-card/20 backdrop-blur-xl shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)]">
+          <div
+            className="max-w-[1600px] mx-auto px-2 sm:px-4 lg:px-6 py-1.5 sm:py-2 flex justify-start md:justify-center"
+            onMouseLeave={() => handleSetHovered(null)}
+          >
+            <div className="relative max-w-full" ref={navWrapRef}>
+              <nav
+                className="relative flex items-center h-10 sm:h-11 rounded-xl bg-background/50 supports-[backdrop-filter]:bg-background/30 text-card-foreground border border-border/50 px-1 sm:px-1.5 backdrop-blur-md max-w-full overflow-x-auto no-scrollbar flex-nowrap scroll-smooth [mask-image:linear-gradient(to_right,transparent,black_12px,black_calc(100%-12px),transparent)] md:[mask-image:none]"
+              >
                 {visibleItems.map((item, index) => {
                   const isActive = activeIndex === index;
                   const isHovered = hoveredIndex === index;
@@ -299,17 +357,17 @@ export const LimelightNav = ({
                       }}
                       aria-haspopup={hasDropdown ? "menu" : undefined}
                       aria-expanded={hasDropdown ? isRevealed : undefined}
-                      className="relative z-20 flex items-center justify-center gap-1.5 px-3 py-1.5 cursor-pointer group shrink-0"
+                      className="relative z-20 flex items-center justify-center gap-1.5 px-2.5 sm:px-3 lg:px-4 py-2 cursor-pointer group shrink-0 rounded-lg"
                     >
                       {React.cloneElement(item.icon, {
-                        className: `w-3.5 h-3.5 transition-all duration-300 ease-in-out ${
+                        className: `w-4 h-4 sm:w-3.5 sm:h-3.5 shrink-0 transition-all duration-300 ease-in-out ${
                           isHighlighted
                             ? "text-primary scale-110"
                             : "text-muted-foreground group-hover:text-foreground"
                         }`,
                       } as any)}
                       <span
-                        className={`text-xs font-semibold whitespace-nowrap transition-all duration-300 ease-in-out ${
+                        className={`text-[11px] sm:text-xs font-semibold whitespace-nowrap transition-all duration-300 ease-in-out ${
                           isHighlighted
                             ? "text-primary opacity-100"
                             : "text-muted-foreground opacity-60 group-hover:text-foreground group-hover:opacity-100"
@@ -345,51 +403,6 @@ export const LimelightNav = ({
               </AnimatePresence>
             </div>
           </div>
-
-          {/* Right Side: Header Actions */}
-          <div className="flex items-center gap-2 origin-right shrink-0">
-            {/* Notification bell */}
-            {isLoggedIn && (
-              <button
-                onClick={() => {
-                  console.log("[HeaderActions] Navigating to Notifications page");
-                  router.push("/notifications");
-                }}
-                className="p-2 rounded-xl bg-card border border-border text-muted-foreground hover:text-foreground hover:bg-accent transition-colors relative shadow-sm"
-                title="Notifications"
-              >
-                <FiBell size={16} />
-                <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-primary rounded-full animate-pulse" />
-              </button>
-            )}
-
-            {/* Theme toggle */}
-            <ThemeToggle />
-
-            {/* Profile avatar (logged in) or Login button (logged out) */}
-            {isLoggedIn ? (
-              <Link
-                href="/profile"
-                className="rounded-full hover:ring-2 hover:ring-primary/40 transition-all"
-                title="Profile"
-              >
-                <Avatar className="h-9 w-9 rounded-full border border-border shadow-sm cursor-pointer hover:border-primary transition-colors">
-                  {tenant?.companyLogo ? <AvatarImage src={tenant.companyLogo} alt={tenant.name || "Profile"} className="object-cover rounded-full" /> : null}
-                  <AvatarFallback className="bg-primary text-primary-foreground font-semibold text-[13px] rounded-full">
-                    {tenant?.name ? tenant.name.charAt(0).toUpperCase() : "U"}
-                  </AvatarFallback>
-                </Avatar>
-              </Link>
-            ) : (
-              <Link
-                href="/sign-in"
-                className="px-3 py-1.5 text-xs bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-colors shadow-md shadow-primary/20"
-              >
-                Login
-              </Link>
-            )}
-          </div>
-
         </div>
       </header>
     </>
@@ -407,13 +420,13 @@ const DropdownContent = ({ selectedItem, dir, center }: any) => {
       animate={{ opacity: 1, y: 0, x: `calc(${center}px - 50%)` }}
       exit={{ opacity: 0, y: 8, x: `calc(${center}px - 50%)` }}
       transition={{ duration: 0.25, ease: "easeInOut" }}
-      className="absolute top-full mt-3 left-0 rounded-xl border border-border bg-card shadow-2xl z-50 w-fit"
+      className="absolute top-full mt-3 left-0 rounded-xl border border-border/60 bg-card/85 supports-[backdrop-filter]:bg-card/70 backdrop-blur-xl shadow-2xl z-50 w-fit max-w-[calc(100vw-1.5rem)]"
     >
       {/* Invisible bridge from nav bottom to dropdown top */}
       <div className="absolute -top-[12px] left-1/2 -translate-x-1/2 w-[200%] h-[12px]" />
       
       {/* Nub is always centered on the dropdown */}
-      <div className="absolute top-0 left-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rotate-45 rounded-tl border border-border bg-card" style={{ clipPath: "polygon(0 0, 100% 0, 50% 50%, 0% 100%)" }} />
+      <div className="absolute top-0 left-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rotate-45 rounded-tl border border-border/60 bg-card/85 backdrop-blur-xl" style={{ clipPath: "polygon(0 0, 100% 0, 50% 50%, 0% 100%)" }} />
 
       <div className="overflow-hidden rounded-xl">
         <motion.div

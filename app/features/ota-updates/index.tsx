@@ -9,7 +9,7 @@ export function OtaUpdatesModule() {
     <FeatureGate featureKey="otaUpdates">
       <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
         <div className="mb-6">
-          <h3 className="text-xl font-bold uppercase tracking-wide">Over-the-Air (OTA) Updates</h3>
+          <h3 className="text-base sm:text-lg lg:text-xl font-bold uppercase tracking-wide">Over-the-Air (OTA) Updates</h3>
           <p className="text-sm text-muted-foreground font-mono mt-1">Manage robot firmware and software patches.</p>
         </div>
 

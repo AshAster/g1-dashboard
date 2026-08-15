@@ -15,7 +15,7 @@ export function FeatureSuggestionsModule() {
           <h3 className="font-bold text-sm uppercase tracking-wide">AI Recommendations</h3>
         </div>
         <div className="space-y-4">
-          <p className="text-sm text-muted-foreground">Based on your recent usage, consider enabling:</p>
+          <p className="text-xs sm:text-sm text-muted-foreground">Based on your recent usage, consider enabling:</p>
           <div className="p-3 border border-border bg-background rounded-lg flex items-center justify-between">
             <span className="text-sm font-semibold">Generative Persona</span>
             <button className="text-xs font-mono uppercase tracking-widest text-primary hover:underline">Enable</button>
