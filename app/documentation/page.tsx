@@ -11,12 +11,12 @@ export const metadata = {
 
 export default function DocumentationPage() {
   return (
-    <div className="max-w-[1400px] mx-auto px-4 md:px-8">
-      
+    <div className="max-w-7xl mx-auto">
+
       {/* Top Header Row — client-component header that hides on scroll down */}
       <DocHeader />
-      
-      <div className="flex flex-col lg:flex-row gap-12 items-start relative">
+
+      <div className="flex flex-col lg:grid lg:grid-cols-[240px_1fr] gap-8 items-start relative">
         
         {/* Left Sidebar */}
         <DocSidebar />

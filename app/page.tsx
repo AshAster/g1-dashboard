@@ -98,28 +98,28 @@ export default function Home() {
   return (
     <div className="flex-1 flex flex-col">
       {/* Hero */}
-      <section className="flex-1 flex flex-col items-center justify-center px-4 py-10 lg:py-20 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
+      <section className="flex-1 flex flex-col items-center justify-center px-4 sm:px-6 py-10 lg:py-20 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 items-center relative z-10">
 
           {/* Left Content */}
-          <div className="text-left">
-            <div ref={badgeRef} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent border border-border mb-8">
+          <div className="text-center lg:text-left order-2 lg:order-1">
+            <div ref={badgeRef} className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full bg-accent border border-border mb-5 sm:mb-8">
               <span className="w-2 h-2 rounded-full bg-success animate-pulse" />
-              <span className="text-sm text-accent-foreground font-medium">System Online</span>
+              <span className="text-xs sm:text-sm text-accent-foreground font-medium">System Online</span>
             </div>
 
-            <h1 ref={headingRef} className="text-5xl md:text-6xl font-bold text-foreground mb-4 tracking-tight leading-tight">
+            <h1 ref={headingRef} className="text-4xl sm:text-5xl md:text-6xl font-bold text-foreground mb-3 sm:mb-4 tracking-tight leading-[1.1] text-balance">
               Robot In Your <span className="text-primary">Hands</span>
             </h1>
-            <p ref={subheadingRef} className="text-lg text-primary mb-3 font-bold uppercase tracking-widest">
+            <p ref={subheadingRef} className="text-sm sm:text-base lg:text-lg text-primary mb-3 font-bold uppercase tracking-[0.15em] sm:tracking-widest">
               Control your Unitree robots with VEDA
             </p>
 
-            <p ref={descRef} className="text-base text-muted-foreground mb-10 max-w-xl leading-relaxed">
+            <p ref={descRef} className="text-sm sm:text-base text-muted-foreground mb-8 sm:mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed text-pretty">
               The ultimate command center for your humanoid robotics fleet. Deploy advanced knowledge bases, configure real-time integrations, and seamlessly orchestrate robot actions from a single, powerful interface.
             </p>
 
-            <div ref={buttonRef} className="flex flex-col sm:flex-row items-center sm:items-start justify-start gap-4 mb-10">
+            <div ref={buttonRef} className="flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-4 mb-6 sm:mb-10">
               <Link href="/sign-in" className="w-full sm:w-auto">
                 <AnimatedArrowButton text="Sign In to Dashboard" />
               </Link>
@@ -127,11 +127,11 @@ export default function Home() {
           </div>
 
           {/* Right Spline 3D Model with Background Text */}
-          <div className="h-[400px] lg:h-[600px] w-full relative flex items-center justify-center">
+          <div className="h-[280px] sm:h-[400px] lg:h-[600px] w-full relative flex items-center justify-center order-1 lg:order-2">
 
             {/* Giant VEDA Background Text */}
-            <div ref={vedaRef} className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 -translate-y-12 lg:-translate-y-20">
-              <h2 className="text-[120px] lg:text-[220px] font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-foreground/20 dark:from-foreground/30 to-foreground/0 select-none leading-none">
+            <div ref={vedaRef} className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 -translate-y-8 sm:-translate-y-12 lg:-translate-y-20">
+              <h2 className="text-[26vw] sm:text-[120px] lg:text-[220px] font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-foreground/20 dark:from-foreground/30 to-foreground/0 select-none leading-none">
                 VEDA
               </h2>
             </div>
@@ -162,11 +162,11 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <div ref={footerRef} className="py-8 px-4 md:px-12 flex flex-col md:flex-row items-center justify-between border-t border-border gap-6 bg-background">
+      <div ref={footerRef} className="py-8 px-4 sm:px-6 md:px-12 flex flex-col md:flex-row items-center justify-between border-t border-border gap-6 bg-background">
         <div>
           <SocialCard />
         </div>
-        <div className="text-center md:text-right text-xs text-muted-foreground max-w-sm leading-relaxed">
+        <div className="text-center md:text-right text-[11px] sm:text-xs text-muted-foreground max-w-sm leading-relaxed text-pretty">
           <p className="font-semibold text-foreground mb-1">
             &copy; {new Date().getFullYear()} Bidyut Innovation Ltd.
           </p>

@@ -12,10 +12,10 @@ import { EmotionsModule } from "@/app/features/emotions";
 export default function PersonaManagerPage() {
   return (
     <PersonaProvider>
-      <div className="max-w-6xl mx-auto space-y-16 pb-32 pt-8">
+      <div className="max-w-7xl mx-auto space-y-16 pb-32 pt-8">
         <PersonaHeader />
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
           <PersonaChangeModule />
           <GenerativePersonaModule />
           <PrebuiltPersonasModule />

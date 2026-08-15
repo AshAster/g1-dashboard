@@ -144,7 +144,7 @@ export function EmployeesModule() {
 
   return (
     <FeatureGate featureKey="frs">
-      <div className="max-w-6xl mx-auto space-y-16 pb-32 pt-8">
+      <div className="max-w-7xl mx-auto space-y-16 pb-32 pt-8">
         {/* Header */}
         <div className="border-b border-border pb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>

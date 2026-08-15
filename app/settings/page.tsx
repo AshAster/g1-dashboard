@@ -268,8 +268,8 @@ export default function Settings() {
   const showSaveButton = !["users", "rbac", "rollback", "ota", "voice"].includes(activeTab);
 
   return (
-    <div className="flex-1 p-4 sm:p-6 lg:p-8 bg-background">
-      <div className="max-w-7xl mx-auto">
+    <div className="flex-1 bg-background">
+      <div className="max-w-7xl mx-auto pt-8 pb-32">
         <h1 className="text-2xl sm:text-3xl font-bold text-foreground mb-6">Settings</h1>
 
         <div className="flex flex-col md:flex-row gap-4 sm:gap-6">

@@ -167,7 +167,7 @@ export function SupportTicketsModule() {
 
   return (
     <FeatureGate featureKey="tickets">
-      <div className="h-full p-8 max-w-5xl mx-auto space-y-8 overflow-y-auto pb-32">
+      <div className="max-w-7xl mx-auto space-y-16 pb-32 pt-8">
         {/* Toast Notification */}
         <AnimatePresence>
           {toast.visible && (

@@ -29,7 +29,7 @@ export default function NotificationsPage() {
   }, []);
 
   return (
-    <div className="max-w-4xl mx-auto space-y-8 pb-32 pt-8">
+    <div className="max-w-7xl mx-auto space-y-16 pb-32 pt-8">
       <div className="border-b border-border pb-6">
         <h1 className="text-4xl font-bold tracking-tighter text-foreground flex items-center gap-3">
           <FiBell className="text-primary" /> Notifications

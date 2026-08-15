@@ -48,25 +48,25 @@ export default function SignInPage() {
   }
 
   return (
-    <div className="flex min-h-dvh items-center justify-center relative overflow-hidden px-4">
+    <div className="flex min-h-dvh items-center justify-center relative overflow-x-hidden px-4 py-8 sm:py-12">
       {/* Local Video Background */}
       <video 
         autoPlay 
         loop 
         muted 
         playsInline 
-        className="absolute inset-0 w-full h-full object-cover -z-20"
+        className="fixed inset-0 w-full h-full object-cover -z-20"
       >
         <source src="/bg.mp4" type="video/mp4" />
       </video>
 
       {/* Dark overlay for better text readability and glassmorphism contrast */}
-      <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px] -z-10"></div>
+      <div className="fixed inset-0 bg-black/40 backdrop-blur-[2px] -z-10"></div>
 
       <div className="relative z-10 w-full max-w-[420px]">
         {/* Logo */}
-        <div className="flex items-center justify-center gap-3 mb-10">
-          <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-accent-blue to-accent-purple flex items-center justify-center shadow-lg shadow-accent-blue/20">
+        <div className="flex items-center justify-center gap-2.5 sm:gap-3 mb-6 sm:mb-10">
+          <div className="w-10 h-10 sm:w-11 sm:h-11 shrink-0 rounded-xl bg-gradient-to-br from-accent-blue to-accent-purple flex items-center justify-center shadow-lg shadow-accent-blue/20">
             <svg
               width="24"
               height="24"
@@ -83,16 +83,16 @@ export default function SignInPage() {
               <path d="M9 15h6" />
             </svg>
           </div>
-          <span className="text-xl font-bold text-white">G1 Robot Platform</span>
+          <span className="text-lg sm:text-xl font-bold text-white">G1 Robot Platform</span>
         </div>
 
         {/* Card */}
-        <div className="bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 p-8 shadow-2xl shadow-black/40">
-          <div className="mb-8 text-center">
-            <h1 className="text-3xl font-bold text-white mb-2 tracking-tight">
+        <div className="bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 p-5 sm:p-8 shadow-2xl shadow-black/40">
+          <div className="mb-6 sm:mb-8 text-center">
+            <h1 className="text-2xl sm:text-3xl font-bold text-white mb-1.5 sm:mb-2 tracking-tight">
               Sign In
             </h1>
-            <p className="text-sm text-gray-300">
+            <p className="text-xs sm:text-sm text-gray-300">
               Enter your credentials to continue
             </p>
           </div>
@@ -109,7 +109,7 @@ export default function SignInPage() {
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-5">
+          <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
             {/* Email */}
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-200 mb-1.5">
@@ -123,7 +123,7 @@ export default function SignInPage() {
                 placeholder="admin@g1platform.com"
                 required
                 autoComplete="email"
-                className="w-full h-11 px-4 rounded-full bg-white/5 border border-white/10 text-base text-white placeholder:text-gray-400 focus:outline-none focus:border-white/40 focus:ring-1 focus:ring-white/30 transition-all backdrop-blur-sm"
+                className="w-full h-12 sm:h-11 px-4 rounded-full bg-white/5 border border-white/10 text-base text-white placeholder:text-gray-400 focus:outline-none focus:border-white/40 focus:ring-1 focus:ring-white/30 transition-all backdrop-blur-sm"
               />
             </div>
 
@@ -141,7 +141,7 @@ export default function SignInPage() {
                   placeholder="••••••••"
                   required
                   autoComplete="current-password"
-                  className="w-full h-11 px-4 pr-11 rounded-full bg-white/5 border border-white/10 text-base text-white placeholder:text-gray-400 focus:outline-none focus:border-white/40 focus:ring-1 focus:ring-white/30 transition-all backdrop-blur-sm"
+                  className="w-full h-12 sm:h-11 px-4 pr-12 rounded-full bg-white/5 border border-white/10 text-base text-white placeholder:text-gray-400 focus:outline-none focus:border-white/40 focus:ring-1 focus:ring-white/30 transition-all backdrop-blur-sm"
                 />
                 <button
                   type="button"
@@ -169,7 +169,7 @@ export default function SignInPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full h-11 rounded-full bg-white/20 hover:bg-white/30 border border-white/30 text-white text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-white/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer flex items-center justify-center gap-2 backdrop-blur-sm"
+              className="w-full h-12 sm:h-11 rounded-full bg-white/20 hover:bg-white/30 border border-white/30 text-white text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-white/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer flex items-center justify-center gap-2 backdrop-blur-sm"
             >
               {loading ? (
                 <>
@@ -184,7 +184,7 @@ export default function SignInPage() {
               )}
             </button>
             {/* Additional Links below button */}
-            <div className="flex justify-between items-center text-xs text-gray-300 pt-2">
+            <div className="flex flex-wrap gap-x-3 gap-y-2 justify-between items-center text-[11px] sm:text-xs text-gray-300 pt-2">
               <label className="flex items-center gap-1.5 cursor-pointer" htmlFor="remember-me">
                 <input id="remember-me" type="checkbox" className="rounded border-white/20 bg-white/10 text-white focus:ring-white/30" />
                 <span>Remember Me</span>

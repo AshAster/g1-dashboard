@@ -195,6 +195,33 @@ body::-webkit-scrollbar-thumb:hover {
   background-color: var(--muted-foreground);
 }
 
+/* Top app nav must always sit in normal document flow (never float over page
+   content) at every viewport size, especially on large desktop screens where
+   its rendered height can vary. Enforced here at the CSS layer so it holds
+   regardless of any positioning class left on the element itself. */
+header {
+  position: sticky !important;
+  top: 0 !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+}
+
+/* Fluid type scale: headings/body text grow smoothly between mobile and large
+   desktop viewports instead of jumping at fixed breakpoints or staying pinned
+   at one size, so text reads as a consistent, well-proportioned size on every
+   screen rather than looking too small on a big monitor or too large on a
+   small one. Bounds match each Tailwind size's original rem value at the low
+   end, so mobile is unaffected. */
+@layer utilities {
+  .text-5xl { font-size: clamp(2.25rem, 2.05rem + 0.8vw, 3rem); }
+  .text-4xl { font-size: clamp(1.875rem, 1.72rem + 0.6vw, 2.375rem); }
+  .text-3xl { font-size: clamp(1.5rem, 1.4rem + 0.4vw, 1.875rem); }
+  .text-2xl { font-size: clamp(1.25rem, 1.18rem + 0.25vw, 1.5rem); }
+  .text-xl { font-size: clamp(1.125rem, 1.08rem + 0.15vw, 1.25rem); }
+  .text-lg { font-size: clamp(1.0625rem, 1.03rem + 0.1vw, 1.125rem); }
+}
+
 @keyframes marquee-scroll {
   0%   { transform: translateX(0); }
   100% { transform: translateX(calc(-100% / 3)); }

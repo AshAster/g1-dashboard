@@ -76,12 +76,12 @@ export function DocSidebar() {
   return (
     <nav
       ref={navRef}
-      className="w-full lg:w-64 flex-shrink-0 block static lg:sticky top-0 h-auto lg:max-h-[calc(100vh-12rem)] overflow-y-visible lg:overflow-y-auto lg:pr-6 pb-6 mb-6 lg:mb-0 pt-2"
+      className="w-full lg:w-auto flex-shrink-0 block static lg:sticky lg:top-[104px] h-auto lg:max-h-[calc(100vh-18rem)] overflow-y-visible lg:overflow-y-auto pb-6 mb-6 lg:mb-0 pt-2"
     >
-      <div className="space-y-8">
+      <div className="space-y-6">
         {docCategories.map((category) => (
           <div key={category.id} className="sidebar-group">
-            <h3 className="text-xs font-bold text-foreground uppercase tracking-widest mb-3 px-2">
+            <h3 className="text-xs font-bold text-foreground uppercase tracking-widest mb-2 px-2">
               {category.name}
             </h3>
             <ul className="space-y-1">

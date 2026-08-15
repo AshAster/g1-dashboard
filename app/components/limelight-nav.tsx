@@ -250,33 +250,27 @@ export const LimelightNav = ({
         }
       `}} />
       <header
-        className={`absolute top-0 left-0 right-0 z-40 w-full bg-background/80 backdrop-blur-md border-b border-border/40 transition-transform duration-300 ${
+        className={`sticky top-0 z-40 w-full shrink-0 bg-background/70 supports-[backdrop-filter]:bg-background/55 backdrop-blur-xl border-b border-border/40 transition-transform duration-300 ${
           isVisible ? "translate-y-0" : "translate-y-0 md:-translate-y-full"
         }`}
       >
-        <div className="flex items-center justify-between px-4 py-3 max-w-[1600px] mx-auto gap-4">
-          
+        {/* Row 1 — chrome bar: menu + account actions */}
+        <div className="flex items-center justify-between px-3 sm:px-4 lg:px-6 py-2 sm:py-2.5 max-w-[1600px] mx-auto gap-3 sm:gap-4">
+
           {/* Left Side: Hamburger Menu Button on Mobile */}
           <div className="flex md:hidden items-center shrink-0">
             <button
               onClick={() => window.dispatchEvent(new Event("open-sidebar"))}
-              className="p-2 -ml-2 rounded-xl text-foreground hover:bg-accent transition-colors"
+              className="p-2.5 -ml-2 rounded-xl text-foreground hover:bg-accent active:bg-accent/70 transition-colors"
               aria-label="Open Sidebar"
               title="Open Sidebar"
             >
-              <FiMenu className="w-6 h-6" />
+              <FiMenu className="w-5 h-5 sm:w-6 sm:h-6" />
             </button>
           </div>
 
-          {/* Center Side: Limelight Navigation tabs (scrollable horizontally on mobile) */}
-          <div 
-            className="flex-1 flex justify-start md:justify-center overflow-x-auto no-scrollbar py-1"
-            onMouseLeave={() => handleSetHovered(null)}
-          >
-            <div className="relative" ref={navWrapRef}>
-              <nav
-                className="relative flex items-center h-11 rounded-xl bg-card/40 text-card-foreground border border-border/40 px-1.5 backdrop-blur-md max-w-[80vw] md:max-w-[95vw] overflow-x-auto sm:max-w-none no-scrollbar flex-nowrap scroll-smooth [mask-image:linear-gradient(to_right,transparent,black_12px,black_calc(100%-12px),transparent)]"
-              >
+          {/* Spacer keeps actions pinned right on every breakpoint */}
+          <div className="flex-1 min-w-0" />
                 {visibleItems.map((item, index) => {
                   const isActive = activeIndex === index;
                   const isHovered = hoveredIndex === index;

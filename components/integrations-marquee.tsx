@@ -76,28 +76,28 @@ const loopItems = [...integrations, ...integrations, ...integrations];
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <section className="w-full py-24 overflow-hidden flex flex-col justify-center">
+    <section className="w-full py-14 sm:py-20 lg:py-24 overflow-hidden flex flex-col justify-center">
       {/* Header — clean standard flow, no messy overlapping */}
-      <div className="w-full max-w-7xl mx-auto px-4 mb-8">
-        <h2 className="text-4xl md:text-5xl font-bold text-foreground tracking-tight">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 mb-6 sm:mb-8 text-center sm:text-left">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground tracking-tight">
           What you can{" "}
           <span className="text-primary">Connect?</span>
         </h2>
       </div>
 
       {/* Strip band */}
-      <div className="relative w-full border-y border-border bg-card/60 dark:bg-card/80 overflow-hidden py-8 shadow-sm"
+      <div className="relative w-full border-y border-border bg-card/60 dark:bg-card/80 overflow-hidden py-5 sm:py-8 shadow-sm"
         onMouseEnter={() => setHoveredIndex(hoveredIndex)} // just to capture mouse if needed
         onMouseLeave={() => setHoveredIndex(null)}
       >
         {/* Left fade mask */}
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-32 z-10 bg-gradient-to-r from-background to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-12 sm:w-24 lg:w-32 z-10 bg-gradient-to-r from-background to-transparent" />
         {/* Right fade mask */}
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-32 z-10 bg-gradient-to-l from-background to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-12 sm:w-24 lg:w-32 z-10 bg-gradient-to-l from-background to-transparent" />
 
         {/* Scrolling track */}
         <div
-          className="flex items-center gap-12 w-max"
+          className="flex items-center gap-6 sm:gap-9 lg:gap-12 w-max"
           style={{
             animation: "marquee-scroll 45s linear infinite",
             animationPlayState: hoveredIndex !== null ? "paused" : "running",
@@ -113,7 +113,7 @@ const loopItems = [...integrations, ...integrations, ...integrations];
               <div
                 key={i}
                 onMouseEnter={() => setHoveredIndex(realIndex)}
-                className="flex items-center gap-3 px-4 py-2 rounded-lg shrink-0 cursor-default select-none transition-all duration-300"
+                className="flex items-center gap-2 sm:gap-3 px-2 sm:px-4 py-2 rounded-lg shrink-0 cursor-default select-none transition-all duration-300"
                 style={{
                   opacity: isDimmed ? 0.2 : 1,
                   filter: isDimmed ? "grayscale(100%)" : "none",
@@ -122,6 +122,7 @@ const loopItems = [...integrations, ...integrations, ...integrations];
               >
                 <Icon
                   size={32}
+                  className="size-6 sm:size-8"
                   style={{
                     color: item.color,
                     transition: "color 0.3s ease",
@@ -129,7 +130,7 @@ const loopItems = [...integrations, ...integrations, ...integrations];
                   }}
                 />
                 <span
-                  className="text-lg md:text-xl font-bold whitespace-nowrap"
+                  className="text-base sm:text-lg md:text-xl font-bold whitespace-nowrap"
                   style={{
                     color: item.color,
                     transition: "color 0.3s ease",

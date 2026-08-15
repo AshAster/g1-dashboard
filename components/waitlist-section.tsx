@@ -45,13 +45,13 @@ export function WaitlistSection() {
   return (
     <form 
       onSubmit={handleSubmit}
-      className="w-full flex flex-col items-center justify-center py-24 pb-32 gap-8 relative"
+      className="w-full flex flex-col items-center justify-center px-4 py-16 pb-20 sm:py-24 sm:pb-32 gap-6 sm:gap-8 relative"
     >
       <div className="text-center mb-2">
-        <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4 tracking-tight">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-3 sm:mb-4 tracking-tight">
           Ready to deploy?
         </h2>
-        <p className="text-muted-foreground text-lg max-w-xl mx-auto">
+        <p className="text-muted-foreground text-sm sm:text-base md:text-lg max-w-xl mx-auto text-balance">
           Join the waitlist for early access to the VEDA operating system.
         </p>
       </div>
@@ -65,12 +65,12 @@ export function WaitlistSection() {
           disabled={isLoading}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="peer w-full h-16 bg-background border-2 border-border rounded-2xl px-6 pt-5 pb-1 text-foreground text-lg focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/20 transition-all duration-300 shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
+          className="peer w-full h-14 sm:h-16 bg-background border-2 border-border rounded-xl sm:rounded-2xl px-4 sm:px-6 pt-5 pb-1 text-foreground text-base sm:text-lg focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/20 transition-all duration-300 shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
         />
         <label
           htmlFor="waitlist-email"
-          className="absolute left-6 top-2 text-xs font-semibold text-muted-foreground transition-all duration-300 pointer-events-none
-            peer-placeholder-shown:top-5 peer-placeholder-shown:text-base peer-placeholder-shown:font-normal
+          className="absolute left-4 sm:left-6 top-2 text-xs font-semibold text-muted-foreground transition-all duration-300 pointer-events-none
+            peer-placeholder-shown:top-4 sm:peer-placeholder-shown:top-5 peer-placeholder-shown:text-sm sm:peer-placeholder-shown:text-base peer-placeholder-shown:font-normal
             peer-focus:top-2 peer-focus:text-xs peer-focus:font-semibold peer-focus:text-primary"
         >
           Enter your email address

@@ -33,7 +33,7 @@ export function DocHeader() {
 
   return (
     <div
-      className={`sticky top-0 z-30 bg-background pb-4 pt-4 border-b border-border/50 mb-8 transition-transform duration-300 ${
+      className={`sticky top-0 z-40 bg-background pb-4 pt-4 border-b border-border/50 mb-8 transition-transform duration-300 ${
         isVisible ? "translate-y-0" : "-translate-y-full"
       }`}
     >

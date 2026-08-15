@@ -49,7 +49,7 @@ export function McpModule() {
 
   return (
     <FeatureGate featureKey="mcp">
-      <div className="max-w-[1600px] mx-auto space-y-16 pb-32 pt-8 px-6 lg:px-12">
+      <div className="max-w-7xl mx-auto space-y-16 pb-32 pt-8">
         <McpHeader />
 
         <section id="integrations" ref={containerRef} className="scroll-mt-28 min-h-[50vh]">

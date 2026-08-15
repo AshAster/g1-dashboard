@@ -22,7 +22,7 @@ export function WakeWordSettingsModule() {
 
   return (
     <FeatureGate featureKey="wakeWordSettings">
-      <div className="max-w-6xl mx-auto space-y-16 pb-32 pt-8">
+      <div className="max-w-7xl mx-auto space-y-16 pb-32 pt-8">
         <div className="border-b border-border pb-6">
           <h1 className="text-4xl font-bold tracking-tighter uppercase text-foreground">
             Wake Word

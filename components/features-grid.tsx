@@ -91,20 +91,20 @@ const featuresData = [
 
 export function FeaturesGrid() {
   return (
-    <div className='w-full max-w-6xl mx-auto px-4 pt-40 pb-12 relative z-20'>
-      
+    <div className='w-full max-w-6xl mx-auto px-0 sm:px-4 pt-20 sm:pt-28 lg:pt-40 pb-12 relative z-20'>
+
       {/* Heading Section */}
-      <div className='flex flex-col items-center text-center mb-16'>
-        <h2 className='text-4xl md:text-5xl font-bold text-foreground tracking-tight mb-4'>
+      <div className='flex flex-col items-center text-center mb-10 sm:mb-14 lg:mb-16'>
+        <h2 className='text-3xl sm:text-4xl md:text-5xl font-bold text-foreground tracking-tight mb-3 sm:mb-4'>
           What features you get ?
         </h2>
-        <p className='text-muted-foreground text-lg max-w-2xl font-medium leading-relaxed'>
+        <p className='text-muted-foreground text-sm sm:text-base md:text-lg max-w-2xl font-medium leading-relaxed text-balance'>
           VEDA is packed with powerful capabilities to help you manage your robotic fleet, customize personas, and connect with your tools — without any overwhelming clutter.
         </p>
       </div>
 
       {/* Grid */}
-      <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 w-full'>
+      <div className='grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 w-full'>
         {featuresData.map((feature, index) => (
           <MorphingDialog
             key={index}
@@ -121,14 +121,14 @@ export function FeaturesGrid() {
               <MorphingDialogImage
                 src={feature.image}
                 alt={feature.title}
-                className='h-48 w-full object-cover'
+                className='h-32 sm:h-40 lg:h-48 w-full object-cover'
               />
-              <div className='flex grow flex-row items-end justify-between px-3 py-2'>
-                <div className="text-left">
-                  <MorphingDialogTitle className='text-foreground font-semibold'>
+              <div className='flex grow flex-row items-end justify-between gap-2 px-3 py-2.5'>
+                <div className="text-left min-w-0">
+                  <MorphingDialogTitle className='text-foreground font-semibold text-sm sm:text-base'>
                     {feature.title}
                   </MorphingDialogTitle>
-                  <MorphingDialogSubtitle className='text-muted-foreground text-sm'>
+                  <MorphingDialogSubtitle className='text-muted-foreground text-[11px] sm:text-sm leading-snug'>
                     {feature.subtitle}
                   </MorphingDialogSubtitle>
                 </div>
@@ -144,15 +144,15 @@ export function FeaturesGrid() {
             <MorphingDialogContainer>
               <MorphingDialogContent
                 style={{ borderRadius: '24px' }}
-                className='pointer-events-auto relative flex h-auto w-full flex-col overflow-hidden border border-border bg-card dark:bg-card sm:w-[500px]'
+                className='pointer-events-auto relative flex h-auto w-[calc(100vw-2rem)] max-h-[85dvh] flex-col overflow-y-auto overflow-x-hidden border border-border bg-card dark:bg-card sm:w-[500px]'
               >
                 <MorphingDialogImage
                   src={feature.image}
                   alt={feature.title}
                   className='h-full w-full object-cover'
                 />
-                <div className='p-6'>
-                  <MorphingDialogTitle className='text-2xl text-foreground font-bold'>
+                <div className='p-5 sm:p-6'>
+                  <MorphingDialogTitle className='text-xl sm:text-2xl text-foreground font-bold'>
                     {feature.title}
                   </MorphingDialogTitle>
                   <MorphingDialogSubtitle className='text-muted-foreground mt-1'>
